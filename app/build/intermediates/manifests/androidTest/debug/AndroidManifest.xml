@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="client.smrtms.com.smrtms_client.test">
+
+    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
+
+    <application>
+        <uses-library android:name="android.test.runner" />
+    </application>
+
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+                     android:targetPackage="client.smrtms.com.smrtms_client"
+                     android:handleProfiling="false"
+                     android:functionalTest="false"
+                     android:label="Tests for client.smrtms.com.smrtms_client"/>
+</manifest>
