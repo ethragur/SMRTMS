@@ -1,5 +1,7 @@
 package client.smrtms.com.smrtms_client;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -8,15 +10,45 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-
+    private OnSwipeTouchListener onSwipeTouchListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+
+
+
+
+        //swipe Controlls, created on start of each activity
+        onSwipeTouchListener = new OnSwipeTouchListener(MapsActivity.this) {
+            public void onSwipeTop() {
+
+            }
+            public void onSwipeRight() {
+                Intent myIntent = new Intent(MapsActivity.this,MainScreen.class);
+                MapsActivity.this.startActivity(myIntent);
+            }
+            public void onSwipeLeft() {
+
+            }
+            public void onSwipeBottom() {
+
+            }
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        };
+
+
     }
 
     @Override
