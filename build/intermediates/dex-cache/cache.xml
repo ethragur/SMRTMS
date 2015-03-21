@@ -2,39 +2,165 @@
 <items version="2" >
 
     <item
-        jar="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-7ed6fed3bdfac9cebacd0a6111d35c9ac29cc507.jar" />
-    </item>
-    <item
-        jar="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/pre-dexed/debug/classes-0782707fd9a31eeae401039ba1f03bd2dac708b2.jar" />
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-1093b9ecd3038c1022470be0d4c6502ed21a1b71.jar" />
     </item>
     <item
-        jar="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/pre-dexed/debug/classes-e3107eba129515579ee0fe6c444af83c5c29a61d.jar" />
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-cecf5e93372a402ed5bd8fda9a50ff294db3f4a8.jar" />
     </item>
     <item
-        jar="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/pre-dexed/debug/classes-e4bce0036943cf9a36ad4c4a337089e0d6e87480.jar" />
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-a5be8c1fa99617fe3de12f16f04f14dd164cc841.jar" />
     </item>
     <item
-        jar="/home/michael/Dokumente/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-0f5065161c3c3a21267f6e5260acf19a9e631099.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-a10c62e1d0fcb3e712f7d2de7822eb13cafea79f.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-475738550a201f05127de2db3d7a78475a526285.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-c715b1ac3cd4fdd663f9b0868baf90f3b6f93119.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-7f3bc3490e3139d7f696d9125a02004fba1ae478.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-98d40fbcc8fa6268c2f1d1a5fd67d131518cef16.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/home/michael/AndroidStudioProjects/SMRTMS_Client/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-cf50eb5490e98dccc0d658f3960ce3a766c0c6f4.jar" />
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-6d9f7510f70aca852d4d9b5b508f9259296609ee.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-c937a8986d8ac8387594a8031b51212aaba80297.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-48eadfc4e52f0d7a33aca37f1a8954a4a833e08c.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-5260a7c8717ef3c8e685fceb74f078f773e8c967.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-f09b0d48c0cd7894c7c52317cbabe01020042756.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-09b32a5d4c66a5c0ce2df3edced1de2114ce2ca2.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-ddde839c82ca6792266722897135ab28f2367956.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-6e469cc8f4481e18c00a6f5604c2a17e8104e755.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-f0c4387145de745a2131ce20af19d98615ae298a.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-a6d8e17a3176febd730d0050f80e106b6b837566.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-ea1beefdfca76efe998353289628e6b9d0778e1c.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-d7c0ad7a66ada9b8f19284a2df47b9bda08a36ae.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-be17fa6e3eea54c23f1d2f6d9ae54eadde446a62.jar" />
+    </item>
+    <item
+        jar="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="/home/effi/Android/Projects/SMRTMS/app/build/intermediates/pre-dexed/debug/classes-4cf7d676ec034ca2135fa7694c348646aaf918c3.jar" />
     </item>
 
 </items>
