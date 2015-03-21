@@ -64,4 +64,10 @@ public class MainScreen extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void changeToMaps(View view)
+    {
+        Intent myIntent = new Intent(MainScreen.this,MapsActivity.class);
+        MainScreen.this.startActivity(myIntent);
+    }
 }
