@@ -39,8 +39,8 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize|stateHidden" > <!-- The label of the first screen defines the name of the app in the launcher for some reason -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
