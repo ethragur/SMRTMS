@@ -1,5 +1,6 @@
 # SMRTMS
 Social Location Based Network for activities 
+
 Project for Software Development and Projectmanagemant(2015) at University of Innsbruck
 
 
