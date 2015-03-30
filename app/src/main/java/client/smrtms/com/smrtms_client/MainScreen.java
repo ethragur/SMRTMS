@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.firebase.androidchat.MainActivity;
+
 
 public class MainScreen extends ActionBarActivity {
     private OnSwipeTouchListener onSwipeTouchListener;
@@ -68,6 +70,12 @@ public class MainScreen extends ActionBarActivity {
     public void changeToMaps(View view)
     {
         Intent myIntent = new Intent(MainScreen.this,MapsActivity.class);
+        MainScreen.this.startActivity(myIntent);
+    }
+
+    public void changeToChat(View view)
+    {
+        Intent myIntent = new Intent(MainScreen.this, MainActivity.class);
         MainScreen.this.startActivity(myIntent);
     }
 }
