@@ -117,7 +117,7 @@ public class MainActivity extends ListActivity {
         if (mUsername == null) {
             Random r = new Random();
             // Assign a random user name if we don't have one saved.
-            mUsername = LoginUser.username;
+            mUsername = LoginUser.getInstance().username;
             prefs.edit().putString("username", mUsername).commit();
         }
     }

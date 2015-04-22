@@ -2,12 +2,18 @@ package client.smrtms.com.smrtms_client;
 
 /**
  * Created by effi on 4/13/15.
+ *
+ *
+ *
  */
 public class LoginUser
 {
-    public static String username;
-    private static String ID;
+    public String username;
+    private  String ID;
     private static LoginUser inst;
+
+    public Double longitude;
+    public Double latitude;
 
     public static LoginUser getInstance()
     {

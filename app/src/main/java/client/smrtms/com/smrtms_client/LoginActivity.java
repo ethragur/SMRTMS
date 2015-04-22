@@ -133,7 +133,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             cancel = true;
         }*/
 
-        LoginUser.username = email;
+        LoginUser.getInstance().username = email;
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first

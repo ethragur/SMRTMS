@@ -1,12 +1,16 @@
 package client.smrtms.com.smrtms_client;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.androidchat.MainActivity;
 
@@ -14,38 +18,28 @@ import com.firebase.androidchat.MainActivity;
 public class MainScreen extends ActionBarActivity {
     public OnSwipeTouchListener onSwipeTouchListener;
     LoginUser activeUser;
-
+    GPSTracker gps;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
 
-        //swipe Controlls, created on start of each activity
-        onSwipeTouchListener = new OnSwipeTouchListener(MainScreen.this)
-        {
-            public void onSwipeTop() {
+        gps = new GPSTracker(MainScreen.this);
 
-            }
+        // Check if GPS enabled
+        if(gps.canGetLocation()) {
 
-            public void onSwipeRight() {
-                Intent myIntent = new Intent(MainScreen.this, MapsActivity.class);
-                MainScreen.this.startActivity(myIntent);
-            }
+            LoginUser.getInstance().latitude = gps.getLatitude();
+            LoginUser.getInstance().longitude = gps.getLongitude();
 
-            public void onSwipeLeft() {
 
-            }
 
-            public void onSwipeBottom() {
+        }
 
-            }
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return gestureDetector.onTouchEvent(event);
-            }
-        };
+
     }
 
 

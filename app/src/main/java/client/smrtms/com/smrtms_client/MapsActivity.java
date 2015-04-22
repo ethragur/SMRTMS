@@ -92,6 +92,6 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(47.267222, 11.392778)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(LoginUser.getInstance().latitude, LoginUser.getInstance().longitude)).title("Marker"));
     }
 }
