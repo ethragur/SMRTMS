@@ -22,7 +22,6 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -58,10 +57,16 @@
         </activity>
         <activity
             android:name="com.firebase.androidchat.MainActivity"
-            android:label="because it doesn't matters" >
-
+            android:label="because it doesn&apos;t matters" >
         </activity>
-
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

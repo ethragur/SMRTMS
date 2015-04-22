@@ -303,6 +303,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
         }
     }
+
+    public void changeToRegister(View view) {
+        Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+        LoginActivity.this.startActivity(myIntent);
+    }
 }
 
 

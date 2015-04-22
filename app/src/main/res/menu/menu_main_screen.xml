@@ -2,6 +2,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="client.smrtms.com.smrtms_client.MainScreen">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item
+        android:id="@+id/maps"
+        android:title="Maps">
+    </item>
+    <item
+        android:id="@+id/chat"
+        android:title="Chat">
+    </item>
+    <item android:id="@+id/new_event"
+        android:title="New Event">
+    </item>
+    <item
+        android:id="@+id/settings"
+        android:title="Settings">
+    </item>
+    <item
+        android:id="@+id/logout"
+        android:title="Logout">
+    </item>
 </menu>

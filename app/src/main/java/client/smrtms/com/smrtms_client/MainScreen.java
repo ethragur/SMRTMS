@@ -21,22 +21,25 @@ public class MainScreen extends ActionBarActivity {
         setContentView(R.layout.activity_main_screen);
 
 
-
         //swipe Controlls, created on start of each activity
         onSwipeTouchListener = new OnSwipeTouchListener(MainScreen.this) {
             public void onSwipeTop() {
 
             }
+
             public void onSwipeRight() {
-                Intent myIntent = new Intent(MainScreen.this,MapsActivity.class);
+                Intent myIntent = new Intent(MainScreen.this, MapsActivity.class);
                 MainScreen.this.startActivity(myIntent);
             }
+
             public void onSwipeLeft() {
 
             }
+
             public void onSwipeBottom() {
 
             }
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return gestureDetector.onTouchEvent(event);
@@ -60,14 +63,46 @@ public class MainScreen extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.maps) {
+            Intent myIntent = new Intent(MainScreen.this,MapsActivity.class);
+            MainScreen.this.startActivity(myIntent);
+            return true;
+        }
+        if (id == R.id.chat) {
+            Intent myIntent = new Intent(this, MainActivity.class);
+            startActivity(myIntent);
+            return true;
+        }
+        if (id == R.id.settings) {
+            Intent myIntent = new Intent(this, SettingsActivity.class);
+            startActivity(myIntent);
+            return true;
+        }
+        if (id == R.id.logout) {
+            Intent myIntent = new Intent(this, LoginActivity.class);
+            startActivity(myIntent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void changeToMaps(View view)
+    /*@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }*/
+
+    /*public void changeToMaps()
     {
         Intent myIntent = new Intent(MainScreen.this,MapsActivity.class);
         MainScreen.this.startActivity(myIntent);
@@ -77,5 +112,5 @@ public class MainScreen extends ActionBarActivity {
     {
         Intent myIntent = new Intent(MainScreen.this, MainActivity.class);
         MainScreen.this.startActivity(myIntent);
-    }
+    }*/
 }
