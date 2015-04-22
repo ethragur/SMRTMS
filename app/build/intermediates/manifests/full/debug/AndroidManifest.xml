@@ -65,14 +65,6 @@
             android:name="com.firebase.androidchat.MainActivity"
             android:label="because it doesn&apos;t matters" >
         </activity>
-        <activity
-            android:name="client.smrtms.com.smrtms_client.RegisterActivity"
-            android:label="@string/title_activity_register" >
-        </activity>
-        <activity
-            android:name="client.smrtms.com.smrtms_client.SettingsActivity"
-            android:label="@string/title_activity_settings" >
-        </activity>
     </application>
 
 </manifest>

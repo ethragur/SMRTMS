@@ -2,25 +2,46 @@
 <items version="2" >
 
     <item
-        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.firebase/tubesock/0.0.11/d37cb67277928cf59344b4196af8d9cee1f1a27c/tubesock-0.0.11.jar"
+        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.2.2/285cb9c666f0f0f3dd8a1be04e1f457eb7b15113/jackson-annotations-2.2.2.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="d37cb67277928cf59344b4196af8d9cee1f1a27c">
-        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/tubesock-0.0.11-8b0580f778917b2b5ddded1057886d5c70cc8691.jar" />
+        sha1="285cb9c666f0f0f3dd8a1be04e1f457eb7b15113">
+        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/jackson-annotations-2.2.2-10c4cc3ae2a11aed2bf14a026b05bfc1a65cd583.jar" />
     </item>
     <item
-        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.2.3/e787a02a644f2681e4af82cdc88dd2f69877692b/firebase-client-jvm-2.2.3.jar"
+        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-android/2.0.3/1665cb30372ae93a46d9800adf5751bc48fa202f/firebase-client-android-2.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="e787a02a644f2681e4af82cdc88dd2f69877692b">
-        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/firebase-client-jvm-2.2.3-307392fc14c4da74ce488aa384c1deb5d9a7deae.jar" />
+        sha1="1665cb30372ae93a46d9800adf5751bc48fa202f">
+        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/firebase-client-android-2.0.3-2a57a50d9f5681be88e3968f52b1c6e1a3105858.jar" />
     </item>
     <item
-        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-android/2.2.3/682d0a8dce58e47bde57316aac7d6bb5618dee6b/firebase-client-android-2.2.3.jar"
+        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.firebase/tubesock/0.0.10/ddce2c65136c1de8000f8932d8b7ab16d5d336b9/tubesock-0.0.10.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="682d0a8dce58e47bde57316aac7d6bb5618dee6b">
-        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/firebase-client-android-2.2.3-79db9cecb3bcda3790c3212f5c1289abc46e1fa0.jar" />
+        sha1="ddce2c65136c1de8000f8932d8b7ab16d5d336b9">
+        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/tubesock-0.0.10-e3da62600ab6302c4f27a9be67dbb0fd9c9e5d04.jar" />
+    </item>
+    <item
+        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.2.2/d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b/jackson-core-2.2.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
+        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/jackson-core-2.2.2-fd69cb95ad262c8d942db679a0c00fc7c5f3e2b0.jar" />
+    </item>
+    <item
+        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.2.2/3c8f6018eaa72d43b261181e801e6f8676c16ef6/jackson-databind-2.2.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3c8f6018eaa72d43b261181e801e6f8676c16ef6">
+        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/jackson-databind-2.2.2-c9b0c81d530de08c28c6f0419cde06130ea48b9e.jar" />
+    </item>
+    <item
+        jar="/home/effi/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.0.3/81994bbc1bd46454616b733bf31fe4a22018e056/firebase-client-jvm-2.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81994bbc1bd46454616b733bf31fe4a22018e056">
+        <dex dex="/home/effi/Android/SMRTMS/app/build/intermediates/pre-dexed/debug/firebase-client-jvm-2.0.3-d1f92261b969c5fb2588ef022bb08cc9b05a6783.jar" />
     </item>
 
 </items>

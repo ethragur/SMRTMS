@@ -212,6 +212,9 @@
     <!-- From: file:/home/effi/Android/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="accept">Accept</string>
+    <!-- From: file:/home/effi/Android/SMRTMS/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_settings">Settings</string>
     <!-- From: file:/home/effi/Android/SMRTMS/app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="action_sign_in">Sign in or register</string>
@@ -269,6 +272,9 @@ available. Please contact the developer for assistance.</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyBD7k5-ueIS3NE2Z3NzqQmFzUabxYPlxFo
     </string>
+    <!-- From: file:/home/effi/Android/SMRTMS/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="hello_world">Hello world!</string>
     <!-- From: file:/home/effi/Android/SMRTMS/app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="prompt_email">Email</string>
@@ -284,8 +290,6 @@ available. Please contact the developer for assistance.</string>
     <eat-comment/>
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_register">Register</string>
-    <string name="title_activity_settings">Settings</string>
     <!-- From: file:/home/effi/Android/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/res/values/wallet_strings.xml -->
     <eat-comment/>
     <string name="wallet_buy_button_place_holder" translation_description="Text on a button that allows a user to make a payment with Google Wallet [CHAR LIMIT=30]">Buy with Google</string>
