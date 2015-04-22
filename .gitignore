@@ -6,3 +6,10 @@
 /build
 local.properties
 /.idea
+gradle.properties
+gradlew
+gradlew.bat
+settings.gradle
+/gradle
+/.gradle
+
