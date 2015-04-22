@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Query;
 
@@ -40,11 +41,13 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         String author = chat.getAuthor();
         TextView authorText = (TextView) view.findViewById(R.id.author);
         authorText.setText(author + ": ");
+
+        //Toast.makeText(su, "Tobi is scheisse", Toast.LENGTH_SHORT).show();
         // If the message was sent by this user, color it differently
         if (author != null && author.equals(mUsername)) {
-            authorText.setTextColor(Color.RED);
+            authorText.setTextColor(Color.GREEN);
         } else {
-            authorText.setTextColor(Color.BLUE);
+            authorText.setTextColor(Color.MAGENTA);
         }
         ((TextView) view.findViewById(R.id.message)).setText(chat.getMessage());
     }

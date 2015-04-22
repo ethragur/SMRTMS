@@ -19,6 +19,7 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.Random;
 
+import client.smrtms.com.smrtms_client.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 
 public class MainActivity extends ListActivity {
@@ -30,6 +31,8 @@ public class MainActivity extends ListActivity {
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
     private ChatListAdapter mChatListAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class MainActivity extends ListActivity {
         setTitle("Chatting as " + mUsername);
 
         // Setup our Firebase mFirebaseRef
-        mFirebaseRef = new Firebase(FIREBASE_URL).child("chat");
+        mFirebaseRef = new Firebase(FIREBASE_URL).child("Chat");
 
         // Setup our input methods. Enter key on the keyboard or pushing the send button
         EditText inputText = (EditText) findViewById(R.id.messageInput);
@@ -114,7 +117,7 @@ public class MainActivity extends ListActivity {
         if (mUsername == null) {
             Random r = new Random();
             // Assign a random user name if we don't have one saved.
-            mUsername = "JavaUser" + r.nextInt(100000);
+            mUsername = LoginUser.username;
             prefs.edit().putString("username", mUsername).commit();
         }
     }

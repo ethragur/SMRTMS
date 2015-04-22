@@ -2,4 +2,4 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:id="@+id/map" tools:context=".MapsActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment" />
-<!-- From: file:/home/effi/Android/Projects/SMRTMS/app/src/main/res/layout/activity_maps.xml -->
+<!-- From: file:/home/effi/Android/SMRTMS/app/src/main/res/layout/activity_maps.xml -->

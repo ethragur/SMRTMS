@@ -1,13 +1,74 @@
 package client.smrtms.com.smrtms_client;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
+import android.test.ActivityInstrumentationTestCase2;
 import android.test.ApplicationTestCase;
+import android.view.MotionEvent;
+import android.view.View;
+import client.smrtms.com.smrtms_client.OnSwipeTouchListener;
+//import org.junit.*;
 
-/**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
- */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    public ApplicationTest() {
-        super(Application.class);
+import com.firebase.androidchat.MainActivity;
+
+
+public class ApplicationTest extends ActivityInstrumentationTestCase2<MainScreen> {
+
+
+    public ApplicationTest()
+    {
+        super(MainScreen.class);
     }
+
+
+
+    public void testActivitySwitch()
+    {
+        Activity ac = getActivity();
+        Intent myIntent = new Intent(ac, MainActivity.class);
+
+        assertNotNull(myIntent);
+
+
+        ac.startActivity(myIntent);
+    }
+
+    public void testSwipeActivies()
+    {
+        Activity ac = getActivity();
+        OnSwipeTouchListener onSwipeTouchListener = new OnSwipeTouchListener(ac) {
+            public void onSwipeTop() {
+
+            }
+            public void onSwipeRight() {
+
+            }
+            public void onSwipeLeft() {
+
+            }
+            public void onSwipeBottom() {
+
+            }
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        };
+
+        assertNotNull(onSwipeTouchListener);
+
+    }
+
+
+    public void succLogin()
+    {
+        assertNotNull(LoginUser.getInstance());
+    }
+
+
+
+
+
+
 }

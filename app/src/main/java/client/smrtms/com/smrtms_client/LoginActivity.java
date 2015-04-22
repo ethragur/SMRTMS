@@ -126,11 +126,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        }
+        /*else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
-        }
+        }*/
+
+        LoginUser.username = email;
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -272,10 +275,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
+                /*if (pieces[0].equals(mEmail)) {
+                    // Account exists, return true if the password matches.*/
                     return pieces[1].equals(mPassword);
-                }
+                //}
             }
 
             // TODO: register the new account here.

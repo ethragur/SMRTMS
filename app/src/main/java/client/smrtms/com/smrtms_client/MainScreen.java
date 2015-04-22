@@ -12,8 +12,8 @@ import com.firebase.androidchat.MainActivity;
 
 
 public class MainScreen extends ActionBarActivity {
-    private OnSwipeTouchListener onSwipeTouchListener;
-
+    public OnSwipeTouchListener onSwipeTouchListener;
+    LoginUser activeUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,8 @@ public class MainScreen extends ActionBarActivity {
 
 
         //swipe Controlls, created on start of each activity
-        onSwipeTouchListener = new OnSwipeTouchListener(MainScreen.this) {
+        onSwipeTouchListener = new OnSwipeTouchListener(MainScreen.this)
+        {
             public void onSwipeTop() {
 
             }

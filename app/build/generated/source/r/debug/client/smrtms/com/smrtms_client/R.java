@@ -1857,12 +1857,14 @@ containing a value of this type.
         public static final int activity_main_screen=0x7f040018;
         public static final int activity_maps=0x7f040019;
         public static final int activity_register=0x7f04001a;
-        public static final int chat_message=0x7f04001b;
-        public static final int support_simple_spinner_dropdown_item=0x7f04001c;
+        public static final int activity_settings=0x7f04001b;
+        public static final int chat_message=0x7f04001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f04001d;
     }
     public static final class menu {
         public static final int menu_main_screen=0x7f0e0000;
         public static final int menu_register=0x7f0e0001;
+        public static final int menu_settings=0x7f0e0002;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -1930,15 +1932,15 @@ containing a value of this type.
         public static final int error_invalid_email=0x7f0c0038;
         public static final int error_invalid_password=0x7f0c0039;
         public static final int google_maps_key=0x7f0c003a;
-        public static final int hello_world=0x7f0c003b;
-        public static final int prompt_email=0x7f0c003c;
-        public static final int prompt_password=0x7f0c003d;
-        public static final int store_picture_message=0x7f0c003e;
-        public static final int store_picture_title=0x7f0c003f;
-        public static final int title_activity_login=0x7f0c0040;
-        public static final int title_activity_main_screen=0x7f0c0041;
-        public static final int title_activity_maps=0x7f0c0042;
-        public static final int title_activity_register=0x7f0c0043;
+        public static final int prompt_email=0x7f0c003b;
+        public static final int prompt_password=0x7f0c003c;
+        public static final int store_picture_message=0x7f0c003d;
+        public static final int store_picture_title=0x7f0c003e;
+        public static final int title_activity_login=0x7f0c003f;
+        public static final int title_activity_main_screen=0x7f0c0040;
+        public static final int title_activity_maps=0x7f0c0041;
+        public static final int title_activity_register=0x7f0c0042;
+        public static final int title_activity_settings=0x7f0c0043;
         public static final int wallet_buy_button_place_holder=0x7f0c0044;
     }
     public static final class style {
