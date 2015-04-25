@@ -38,7 +38,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden" > <!-- The label of the first screen defines the name of the app in the launcher for some reason -->
             <intent-filter>
@@ -48,23 +48,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapsActivity"
+            android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
-            android:name=".MainScreen"
+            android:name=".activity.MainScreen"
             android:label="@string/title_activity_main_screen" >
         </activity>
         <activity
-            android:name="com.firebase.androidchat.MainActivity"
+            android:name="com.firebase.androidchat.ChatActivity"
             android:label="because it doesn&apos;t matters" >
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".activity.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".activity.StartActivity"
             android:label="@string/title_activity_settings" >
         </activity>
     </application>

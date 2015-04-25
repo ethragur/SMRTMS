@@ -1,11 +1,10 @@
-package client.smrtms.com.smrtms_client;
+package client.smrtms.com.smrtms_client.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -29,6 +28,9 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import client.smrtms.com.smrtms_client.LoginUser;
+import client.smrtms.com.smrtms_client.R;
 
 
 /**
@@ -292,7 +294,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
                 finish();
-                Intent myIntent = new Intent(LoginActivity.this,MainScreen.class);
+                Intent myIntent = new Intent(LoginActivity.this,StartActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

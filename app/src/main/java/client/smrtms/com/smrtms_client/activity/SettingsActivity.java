@@ -1,9 +1,11 @@
-package client.smrtms.com.smrtms_client;
+package client.smrtms.com.smrtms_client.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import client.smrtms.com.smrtms_client.R;
 
 
 public class SettingsActivity extends ActionBarActivity {

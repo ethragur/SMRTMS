@@ -1,4 +1,4 @@
-package client.smrtms.com.smrtms_client;
+package client.smrtms.com.smrtms_client.activity;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -12,7 +12,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
+import client.smrtms.com.smrtms_client.OnSwipeTouchListener;
+import client.smrtms.com.smrtms_client.LoginUser;
+import client.smrtms.com.smrtms_client.R;
 
 public class MapsActivity extends FragmentActivity {
 
