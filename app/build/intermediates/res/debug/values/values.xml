@@ -277,6 +277,12 @@ available. Please contact the developer for assistance.</string>
     <eat-comment/>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>
     <string name="store_picture_title">Save image</string>
+    <!-- From: file:/home/effi/Android/SMRTMS/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="tab_chat">Chat</string>
+    <string name="tab_contacts">Contacts</string>
+    <string name="tab_events">Events</string>
+    <string name="tab_map">Map</string>
     <!-- From: file:/home/effi/Android/SMRTMS/app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="title_activity_login">Sign in</string>
