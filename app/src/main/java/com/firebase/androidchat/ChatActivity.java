@@ -22,7 +22,7 @@ import java.util.Random;
 import client.smrtms.com.smrtms_client.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 
-public class MainActivity extends ListActivity {
+public class ChatActivity extends ListActivity {
 
     // TODO: change this to your own Firebase URL
     private static final String FIREBASE_URL = "https://flickering-heat-823.firebaseIO.com";
@@ -91,9 +91,9 @@ public class MainActivity extends ListActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 boolean connected = (Boolean) dataSnapshot.getValue();
                 if (connected) {
-                    Toast.makeText(MainActivity.this, "Connected to Firebase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatActivity.this, "Connected to Firebase", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "Disconnected from Firebase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatActivity.this, "Disconnected from Firebase", Toast.LENGTH_SHORT).show();
                 }
             }
 

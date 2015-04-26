@@ -1,18 +1,19 @@
-package client.smrtms.com.smrtms_client;
+package client.smrtms.com.smrtms_client.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
 
-import com.firebase.androidchat.MainActivity;
+import com.firebase.androidchat.ChatActivity;
+
+import client.smrtms.com.smrtms_client.GPSTracker;
+import client.smrtms.com.smrtms_client.LoginUser;
+import client.smrtms.com.smrtms_client.OnSwipeTouchListener;
+import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.fragment.TabsFragment;
 
 
 public class MainScreen extends ActionBarActivity {
@@ -25,6 +26,15 @@ public class MainScreen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+
+        if (savedInstanceState == null) {
+
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            TabsFragment fragment = new TabsFragment();
+            transaction.replace(R.id.content_fragment, fragment);
+            transaction.commit();
+        }
 
         gps = new GPSTracker(MainScreen.this);
 
@@ -64,7 +74,7 @@ public class MainScreen extends ActionBarActivity {
             return true;
         }
         if (id == R.id.chat) {
-            Intent myIntent = new Intent(this, MainActivity.class);
+            Intent myIntent = new Intent(this, ChatActivity.class);
             startActivity(myIntent);
             return true;
         }
