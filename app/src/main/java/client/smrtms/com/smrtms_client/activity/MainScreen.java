@@ -9,8 +9,8 @@ import android.view.MenuItem;
 
 import com.firebase.androidchat.ChatActivity;
 
-import client.smrtms.com.smrtms_client.GPSTracker;
-import client.smrtms.com.smrtms_client.LoginUser;
+import client.smrtms.com.smrtms_client.controller.GPSTracker;
+import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.OnSwipeTouchListener;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.fragment.TabsFragment;
@@ -34,18 +34,6 @@ public class MainScreen extends ActionBarActivity {
             TabsFragment fragment = new TabsFragment();
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
-        }
-
-        gps = new GPSTracker(MainScreen.this);
-
-        // Check if GPS enabled
-        if(gps.canGetLocation()) {
-
-            LoginUser.getInstance().latitude = gps.getLatitude();
-            LoginUser.getInstance().longitude = gps.getLongitude();
-
-
-
         }
 
 

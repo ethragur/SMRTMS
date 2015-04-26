@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import client.smrtms.com.smrtms_client.activity.MainScreen;
+import client.smrtms.com.smrtms_client.controller.LoginUser;
 //import org.junit.*;
 
 import com.firebase.androidchat.ChatActivity;

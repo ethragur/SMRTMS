@@ -3,11 +3,11 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
+build/
 local.properties
-/.idea
-/.gradle
+.gradle/
 /gradle
 /gradlew
 /gradlew.bat
 /gradle.properties
+/app/build/

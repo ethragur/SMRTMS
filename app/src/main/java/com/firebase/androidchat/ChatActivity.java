@@ -19,7 +19,7 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.Random;
 
-import client.smrtms.com.smrtms_client.LoginUser;
+import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 
 public class ChatActivity extends ListActivity {
@@ -117,7 +117,7 @@ public class ChatActivity extends ListActivity {
         if (mUsername == null) {
             Random r = new Random();
             // Assign a random user name if we don't have one saved.
-            mUsername = LoginUser.getInstance().username;
+            mUsername = LoginUser.getInstance().getUsername();
             prefs.edit().putString("username", mUsername).commit();
         }
     }

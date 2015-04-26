@@ -1,10 +1,10 @@
 package client.smrtms.com.smrtms_client.activity;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -13,8 +13,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.view.MotionEvent;
 import android.view.View;
 import client.smrtms.com.smrtms_client.OnSwipeTouchListener;
-import client.smrtms.com.smrtms_client.LoginUser;
+import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.controller.User;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -93,7 +94,15 @@ public class MapsActivity extends FragmentActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(LoginUser.getInstance().latitude, LoginUser.getInstance().longitude)).title("Marker"));
+    private void setUpMap()
+    {
+        mMap.addMarker(new MarkerOptions().position(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude())).title("Your Position"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude())));
+        //draw map for each Friend
+        for(User friend: LoginUser.getInstance().getFriendList())
+        {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getUsername()));
+        }
     }
+
 }

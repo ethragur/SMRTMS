@@ -29,7 +29,7 @@ import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 
-import client.smrtms.com.smrtms_client.LoginUser;
+import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 
 
@@ -135,7 +135,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             cancel = true;
         }*/
 
-        LoginUser.getInstance().username = email;
+        LoginUser.createInstance(email, "0001", LoginActivity.this);
+
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
