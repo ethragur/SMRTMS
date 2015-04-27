@@ -1737,7 +1737,6 @@ containing a value of this type.
         public static final int buyButton=0x7f0a0029;
         public static final int buy_now=0x7f0a002d;
         public static final int buy_with_google=0x7f0a002e;
-        public static final int chat=0x7f0a006f;
         public static final int checkbox=0x7f0a003e;
         public static final int classic=0x7f0a0030;
         public static final int collapseActionView=0x7f0a001d;
@@ -1774,16 +1773,14 @@ containing a value of this type.
         public static final int login=0x7f0a0059;
         public static final int login_form=0x7f0a0055;
         public static final int login_progress=0x7f0a0054;
-        public static final int logout=0x7f0a0072;
+        public static final int logout=0x7f0a006f;
         public static final int map=0x7f0a0061;
-        public static final int maps=0x7f0a006e;
         public static final int match_parent=0x7f0a002b;
         public static final int message=0x7f0a006b;
         public static final int messageInput=0x7f0a005d;
         public static final int middle=0x7f0a0016;
         public static final int monochrome=0x7f0a0032;
         public static final int never=0x7f0a001f;
-        public static final int new_event=0x7f0a0070;
         public static final int none=0x7f0a000e;
         public static final int normal=0x7f0a000a;
         public static final int password=0x7f0a0058;
@@ -1808,7 +1805,7 @@ containing a value of this type.
         public static final int search_voice_btn=0x7f0a0053;
         public static final int selectionDetails=0x7f0a002a;
         public static final int sendButton=0x7f0a005e;
-        public static final int settings=0x7f0a0071;
+        public static final int settings=0x7f0a006e;
         public static final int shortcut=0x7f0a003f;
         public static final int showCustom=0x7f0a000f;
         public static final int showHome=0x7f0a0010;

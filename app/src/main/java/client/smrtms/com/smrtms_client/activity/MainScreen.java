@@ -28,18 +28,12 @@ public class MainScreen extends ActionBarActivity {
 
 
         if (savedInstanceState == null) {
-
-
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             TabsFragment fragment = new TabsFragment();
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
         }
-
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,17 +49,6 @@ public class MainScreen extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.maps) {
-            Intent myIntent = new Intent(MainScreen.this,MapsActivity.class);
-            MainScreen.this.startActivity(myIntent);
-            return true;
-        }
-        if (id == R.id.chat) {
-            Intent myIntent = new Intent(this, ChatActivity.class);
-            startActivity(myIntent);
-            return true;
-        }
         if (id == R.id.settings) {
             Intent myIntent = new Intent(this, SettingsActivity.class);
             startActivity(myIntent);
