@@ -3,7 +3,7 @@
   <!-- Configure the database connection here -->
   <jdbc>
     <driver>com.mysql.jdbc.Driver</driver>
-    <url>jdbc:mysql://localhost:3306/library</url>
+    <url>jdbc:mysql://localhost:3306/SMRTMS</url>
     <user>root</user>
     <password></password>
   </jdbc>
@@ -20,7 +20,7 @@
 
       <!-- The database schema (or in the absence of schema support, in your RDBMS this
            can be the owner, user, database name) to be generated -->
-      <inputSchema>library</inputSchema>
+      <inputSchema>SMRTMS</inputSchema>
 
       <!-- All elements that are generated from your schema
            (A Java regular expression. Use the pipe to separate several expressions)

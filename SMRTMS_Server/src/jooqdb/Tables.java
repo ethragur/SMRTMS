@@ -6,11 +6,14 @@ package jooqdb;
 
 import javax.annotation.Generated;
 
-import jooqdb.tables.Author;
+import jooqdb.tables.Event;
+import jooqdb.tables.EventAttendees;
+import jooqdb.tables.User;
+import jooqdb.tables.UserFriends;
 
 
 /**
- * Convenience access to all tables in library
+ * Convenience access to all tables in SMRTMS
  */
 @Generated(
 	value = {
@@ -23,7 +26,22 @@ import jooqdb.tables.Author;
 public class Tables {
 
 	/**
-	 * The table library.author
+	 * The table SMRTMS.Event
 	 */
-	public static final Author AUTHOR = jooqdb.tables.Author.AUTHOR;
+	public static final Event EVENT = jooqdb.tables.Event.EVENT;
+
+	/**
+	 * The table SMRTMS.Event_Attendees
+	 */
+	public static final EventAttendees EVENT_ATTENDEES = jooqdb.tables.EventAttendees.EVENT_ATTENDEES;
+
+	/**
+	 * The table SMRTMS.User
+	 */
+	public static final User USER = jooqdb.tables.User.USER;
+
+	/**
+	 * The table SMRTMS.User_Friends
+	 */
+	public static final UserFriends USER_FRIENDS = jooqdb.tables.UserFriends.USER_FRIENDS;
 }

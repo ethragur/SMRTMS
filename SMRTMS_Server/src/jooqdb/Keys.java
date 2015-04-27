@@ -6,15 +6,17 @@ package jooqdb;
 
 import javax.annotation.Generated;
 
-import jooqdb.tables.Author;
-import jooqdb.tables.records.AuthorRecord;
+import jooqdb.tables.Event;
+import jooqdb.tables.User;
+import jooqdb.tables.records.EventRecord;
+import jooqdb.tables.records.UserRecord;
 
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
 
 
 /**
- * A class modelling foreign key relationships between tables of the <code>library</code> 
+ * A class modelling foreign key relationships between tables of the <code>SMRTMS</code> 
  * schema
  */
 @Generated(
@@ -36,7 +38,8 @@ public class Keys {
 	// UNIQUE and PRIMARY KEY definitions
 	// -------------------------------------------------------------------------
 
-	public static final UniqueKey<AuthorRecord> KEY_AUTHOR_PRIMARY = UniqueKeys0.KEY_AUTHOR_PRIMARY;
+	public static final UniqueKey<EventRecord> KEY_EVENT_ID = UniqueKeys0.KEY_EVENT_ID;
+	public static final UniqueKey<UserRecord> KEY_USER_ID = UniqueKeys0.KEY_USER_ID;
 
 	// -------------------------------------------------------------------------
 	// FOREIGN KEY definitions
@@ -48,6 +51,7 @@ public class Keys {
 	// -------------------------------------------------------------------------
 
 	private static class UniqueKeys0 extends AbstractKeys {
-		public static final UniqueKey<AuthorRecord> KEY_AUTHOR_PRIMARY = createUniqueKey(Author.AUTHOR, Author.AUTHOR.ID);
+		public static final UniqueKey<EventRecord> KEY_EVENT_ID = createUniqueKey(Event.EVENT, Event.EVENT.ID);
+		public static final UniqueKey<UserRecord> KEY_USER_ID = createUniqueKey(User.USER, User.USER.ID);
 	}
 }
