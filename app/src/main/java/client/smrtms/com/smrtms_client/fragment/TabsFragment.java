@@ -208,16 +208,16 @@ public class TabsFragment extends Fragment {
         public Fragment getItem(int i) {
             switch (i) {
                 case 0:
-                    // Top Rated fragment activity
+                    // Map fragment
                     return new GMapFragment();
                 case 1:
-                    // Games fragment activity
+                    // chat fragment
                     return new ChatFragment();
                 case 2:
-                    // Movies fragment activity
+                    // contacts fragment 
                     return new ContactsFragment();
                 case 3:
-                    // Movies fragment activity
+                    // event fragment 
                     return new EventFragment();
             }
 
