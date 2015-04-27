@@ -28,30 +28,6 @@ public class MapsActivity extends FragmentActivity {
         setUpMapIfNeeded();
 
 
-
-
-        //swipe Controlls, created on start of each activity
-        onSwipeTouchListener = new OnSwipeTouchListener(MapsActivity.this) {
-            public void onSwipeTop() {
-
-            }
-            public void onSwipeRight() {
-                Intent myIntent = new Intent(MapsActivity.this,MainScreen.class);
-                MapsActivity.this.startActivity(myIntent);
-            }
-            public void onSwipeLeft() {
-
-            }
-            public void onSwipeBottom() {
-
-            }
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return gestureDetector.onTouchEvent(event);
-            }
-        };
-
-
     }
 
     @Override

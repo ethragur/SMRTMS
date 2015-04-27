@@ -1855,19 +1855,18 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f040013;
         public static final int abc_search_view=0x7f040014;
         public static final int abc_simple_dropdown_hint=0x7f040015;
-        public static final int activity_chat=0x7f040016;
-        public static final int activity_contacts=0x7f040017;
-        public static final int activity_event=0x7f040018;
-        public static final int activity_login=0x7f040019;
-        public static final int activity_main=0x7f04001a;
-        public static final int activity_main_screen=0x7f04001b;
-        public static final int activity_maps=0x7f04001c;
-        public static final int activity_register=0x7f04001d;
-        public static final int activity_settings=0x7f04001e;
-        public static final int activity_the_one_button=0x7f04001f;
-        public static final int chat_message=0x7f040020;
-        public static final int fragment=0x7f040021;
-        public static final int support_simple_spinner_dropdown_item=0x7f040022;
+        public static final int activity_contacts=0x7f040016;
+        public static final int activity_event=0x7f040017;
+        public static final int activity_login=0x7f040018;
+        public static final int activity_main=0x7f040019;
+        public static final int activity_main_screen=0x7f04001a;
+        public static final int activity_maps=0x7f04001b;
+        public static final int activity_register=0x7f04001c;
+        public static final int activity_settings=0x7f04001d;
+        public static final int activity_the_one_button=0x7f04001e;
+        public static final int chat_message=0x7f04001f;
+        public static final int fragment=0x7f040020;
+        public static final int support_simple_spinner_dropdown_item=0x7f040021;
     }
     public static final class menu {
         public static final int menu_main_screen=0x7f0e0000;

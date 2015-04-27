@@ -209,7 +209,7 @@ public class TabsFragment extends Fragment {
             switch (i) {
                 case 0:
                     // Top Rated fragment activity
-                    return new MapFragment();
+                    return new GMapFragment();
                 case 1:
                     // Games fragment activity
                     return new ChatFragment();
