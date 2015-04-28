@@ -1,80 +1,55 @@
 package client.smrtms.com.smrtms_client.controller;
 
-
 import android.util.Log;
 
-import org.java_websocket.WebSocketImpl;
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.handshake.ServerHandshake;
+import org.java_websocket.drafts.Draft_10;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Created by effi on 4/26/15.
- *  Client for Webserver Connection
- *
+ * Created by effi on 4/28/15.
  */
 public class ConnectionManager
 {
-    private WebSocketClient cc;
-    private URI ServerURI;
+    private Client client;
 
-    public ConnectionManager(String uri)
+
+
+    public ConnectionManager()
     {
         try {
-            ServerURI = new URI(uri);
-        }
-        catch(URISyntaxException e)
-        {
-            Log.d("Connection", "Wrong Server URI");
+            client = new Client(new URI( "ws://localhost:8887" ), new Draft_10() );
+        } catch (URISyntaxException e) {
+            Log.d("Connection", "Wrong URI");
             e.printStackTrace();
         }
+        client.connect();
+
+
     }
 
-    //create new Client
-    public void create()
+    public void send(String SendMsg)
     {
-       cc = new WebSocketClient(ServerURI)
-       {
-           @Override
-           public void onOpen(ServerHandshake handshakedata) {
-               Log.d("Connection", "Connection opened");
-           }
-
-           @Override
-           public void onMessage(String message) {
-               Log.d("Connection", "Send: " + message);
-
-           }
-
-           @Override
-           public void onClose(int code, String reason, boolean remote) {
-                Log.d("Connection", "Closed: " + reason);
-           }
-
-           @Override
-           public void onError(Exception ex) {
-               Log.d("Connection", "Error");
-
-           }
-       };
-    }
-
-    /**
-     * Send Message to Server, create must be called before
-     * @param Message msg to send
-     */
-    public void send(String Message)
-    {
-        if(cc != null)
+        if(client.isConnected())
         {
-            cc.send(Message);
+            client.send(SendMsg);
+
         }
         else
         {
-            Log.d("Connection", "Server not Initialized");
+            Log.d("Connection", "Connection is closed");
         }
     }
 
+    public void close()
+    {
+        client.close();
+    }
+
+    public String recieve()
+    {
+        //ToDO: client cant recieve anything, Client.onMessage() gets the recieved Msg
+        return "empty";
+    }
 }
