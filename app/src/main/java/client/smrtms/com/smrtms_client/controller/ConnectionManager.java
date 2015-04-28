@@ -1,69 +1,80 @@
 package client.smrtms.com.smrtms_client.controller;
 
-import android.widget.Toast;
 
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
+import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.zip.GZIPInputStream;
+import org.java_websocket.WebSocketImpl;
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
 
-import client.smrtms.com.smrtms_client.activity.MainScreen;
+import java.net.URI;
+import java.net.URISyntaxException;
 
-public class ConnectionManager {
-    public void SendFile() {
-        JSONObject jsonobj = new JSONObject();
+/**
+ * Created by effi on 4/26/15.
+ *  Client for Webserver Connection
+ *
+ */
+public class ConnectionManager
+{
+    private WebSocketClient cc;
+    private URI ServerURI;
 
+    public ConnectionManager(String uri)
+    {
         try {
-            final String wurl = "sepm@phil-m.eu:8080";
-
-            DefaultHttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppostreq = new HttpPost(wurl);
-            StringEntity se = new StringEntity(jsonobj.toString());
-            se.setContentType("application/json;charset=UTF-8");
-            se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json;charset=UTF-8"));
-            httppostreq.setEntity(se);
-            HttpResponse httpresponse = httpclient.execute(httppostreq);
-
-            HttpEntity resultentity = httpresponse.getEntity();
-            InputStream inputstream = resultentity.getContent();
-            Header contentencoding = httpresponse.getFirstHeader("Content-Encoding");
-            if (contentencoding != null && contentencoding.getValue().equalsIgnoreCase("gzip")) {
-                inputstream = new GZIPInputStream(inputstream);
-            }
-            String resultstring = convertStreamToString(inputstream);
-
-            inputstream.close();
-
-            resultstring = resultstring.substring(1, resultstring.length() - 1);
-           // recvdref.setText(resultstring + "\n\n" + httppostreq.toString().getBytes());
-            JSONObject recvdjson = new JSONObject(resultstring);
-           // recvdref.setText(recvdjson.toString(2));
+            ServerURI = new URI(uri);
         }
-        catch (Exception e) { e.printStackTrace(); }
+        catch(URISyntaxException e)
+        {
+            Log.d("Connection", "Wrong Server URI");
+            e.printStackTrace();
+        }
     }
 
-    private String convertStreamToString(InputStream is) {
-        String line = "";
-        StringBuilder total = new StringBuilder();
-        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-        try {
-            while ((line = rd.readLine()) != null) {
-                total.append(line);
-            }
-        } catch (Exception e) {
-            //Toast.makeText(THE_CONTEXT_OF_THIS_FREAKIN_APP , "Stream Exception", Toast.LENGTH_SHORT).show();
-        }
-        return total.toString();
+    //create new Client
+    public void create()
+    {
+       cc = new WebSocketClient(ServerURI)
+       {
+           @Override
+           public void onOpen(ServerHandshake handshakedata) {
+               Log.d("Connection", "Connection opened");
+           }
+
+           @Override
+           public void onMessage(String message) {
+               Log.d("Connection", "Send: " + message);
+
+           }
+
+           @Override
+           public void onClose(int code, String reason, boolean remote) {
+                Log.d("Connection", "Closed: " + reason);
+           }
+
+           @Override
+           public void onError(Exception ex) {
+               Log.d("Connection", "Error");
+
+           }
+       };
     }
+
+    /**
+     * Send Message to Server, create must be called before
+     * @param Message msg to send
+     */
+    public void send(String Message)
+    {
+        if(cc != null)
+        {
+            cc.send(Message);
+        }
+        else
+        {
+            Log.d("Connection", "Server not Initialized");
+        }
+    }
+
 }
