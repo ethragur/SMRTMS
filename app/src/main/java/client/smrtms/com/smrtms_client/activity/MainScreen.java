@@ -11,7 +11,7 @@ import com.firebase.androidchat.ChatActivity;
 
 import client.smrtms.com.smrtms_client.controller.GPSTracker;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
-import client.smrtms.com.smrtms_client.OnSwipeTouchListener;
+import client.smrtms.com.smrtms_client.View.OnSwipeTouchListener;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.fragment.TabsFragment;
 

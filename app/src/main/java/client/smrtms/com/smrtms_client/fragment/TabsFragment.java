@@ -30,11 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.smrtms.com.smrtms_client.R;
-import client.smrtms.com.smrtms_client.SlidingTabLayout;
+import client.smrtms.com.smrtms_client.View.SlidingTabLayout;
 import client.smrtms.com.smrtms_client.activity.MapsActivity;
 
 /**
- * A basic sample which shows how to use {@link client.smrtms.com.smrtms_client.SlidingTabLayout}
+ * A basic sample which shows how to use {@link client.smrtms.com.smrtms_client.View.SlidingTabLayout}
  * to display a custom {@link ViewPager} title strip which gives continuous feedback to the user
  * when scrolling.
  */
@@ -42,7 +42,7 @@ public class TabsFragment extends Fragment {
 
     /**
      * This class represents a tab to be displayed by {@link ViewPager} and it's associated
-     * {@link client.smrtms.com.smrtms_client.SlidingTabLayout}.
+     * {@link client.smrtms.com.smrtms_client.View.SlidingTabLayout}.
      */
     static class PagerItem {
         private final CharSequence mTitle;
@@ -64,14 +64,14 @@ public class TabsFragment extends Fragment {
         }
 
         /**
-         * @return the color to be used for indicator on the {@link client.smrtms.com.smrtms_client.SlidingTabLayout}
+         * @return the color to be used for indicator on the {@link client.smrtms.com.smrtms_client.View.SlidingTabLayout}
          */
         int getIndicatorColor() {
             return mIndicatorColor;
         }
 
         /**
-         * @return the color to be used for right divider on the {@link client.smrtms.com.smrtms_client.SlidingTabLayout}
+         * @return the color to be used for right divider on the {@link client.smrtms.com.smrtms_client.View.SlidingTabLayout}
          */
         int getDividerColor() {
             return mDividerColor;
@@ -208,16 +208,16 @@ public class TabsFragment extends Fragment {
         public Fragment getItem(int i) {
             switch (i) {
                 case 0:
-                    // Top Rated fragment activity
+                    // Map fragment
                     return new GMapFragment();
                 case 1:
-                    // Games fragment activity
+                    // chat fragment
                     return new ChatFragment();
                 case 2:
-                    // Movies fragment activity
+                    // contacts fragment 
                     return new ContactsFragment();
                 case 3:
-                    // Movies fragment activity
+                    // event fragment 
                     return new EventFragment();
             }
 
