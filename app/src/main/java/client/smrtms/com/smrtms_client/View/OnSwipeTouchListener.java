@@ -1,4 +1,4 @@
-package client.smrtms.com.smrtms_client;
+package client.smrtms.com.smrtms_client.View;
 
 /**
  * Created by effi on 21.03.15.

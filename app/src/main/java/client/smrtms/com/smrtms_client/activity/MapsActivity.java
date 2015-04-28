@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.view.MotionEvent;
 import android.view.View;
-import client.smrtms.com.smrtms_client.OnSwipeTouchListener;
+import client.smrtms.com.smrtms_client.View.OnSwipeTouchListener;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.User;

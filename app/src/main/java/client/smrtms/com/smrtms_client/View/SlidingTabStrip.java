@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package client.smrtms.com.smrtms_client;
+package client.smrtms.com.smrtms_client.View;
 
 import android.R;
 import android.content.Context;
