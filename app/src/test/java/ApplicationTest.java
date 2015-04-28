@@ -1,14 +1,13 @@
-package client.smrtms.com.smrtms_client;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.MotionEvent;
 import android.view.View;
 
+import client.smrtms.com.smrtms_client.View.OnSwipeTouchListener;
 import client.smrtms.com.smrtms_client.activity.MainScreen;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
-//import org.junit.*;
+import org.junit.*;
 
 import com.firebase.androidchat.ChatActivity;
 
@@ -22,7 +21,7 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<MainScreen
     }
 
 
-
+    @Test
     public void testActivitySwitch()
     {
         Activity ac = getActivity();
@@ -34,6 +33,7 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<MainScreen
         ac.startActivity(myIntent);
     }
 
+    @Test
     public void testSwipeActivies()
     {
         Activity ac = getActivity();
@@ -60,7 +60,7 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<MainScreen
 
     }
 
-
+    @Test
     public void succLogin()
     {
         assertNotNull(LoginUser.getInstance());

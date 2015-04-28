@@ -1,5 +1,3 @@
-package client.smrtms.com.smrtms_client;
-
 import android.test.ActivityInstrumentationTestCase2;
 
 import client.smrtms.com.smrtms_client.activity.LoginActivity;
