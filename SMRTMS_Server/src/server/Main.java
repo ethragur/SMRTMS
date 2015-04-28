@@ -13,6 +13,8 @@ import java.util.zip.GZIPInputStream;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
@@ -30,7 +32,7 @@ import org.jooq.tools.json.JSONObject;
 
 public class Main {
 	
-	private String convertStreamToString(InputStream is) {
+	private static String convertStreamToString(InputStream is) {
         String line = "";
         StringBuilder total = new StringBuilder();
         BufferedReader rd = new BufferedReader(new InputStreamReader(is));
@@ -71,22 +73,6 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		HttpEntity resultentity = HttpResponse.getEntity();
-		InputStream inputstream = resultentity.getContent();
-		Header contentencoding = HttpResponse.getFirstHeader("Content-Encoding");
-		
-		while(true) {
-			
-			if(contentencoding != null && contentencoding.getValue().equalsIgnoreCase("gzip")) {
-				inputstream = new GZIPInputStream(inputstream);
-			}
-			String resultstring = convertStreamToString(inputstream);
-			inputstream.close();
-			resultstring = resultstring.substring(1,resultstring.length()-1);
-			recvdref.setText(resultstring + "\n\n" + httppostreq.toString().getBytes());
-			JSONObject recvdjson = new JSONObject(resultstring);
-			recvdref.setText(recvdjson.toString(2));
-		}
 	}
 
 }
