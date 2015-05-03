@@ -7,7 +7,7 @@
 
 
 
-    <client.smrtms.com.smrtms_client.SlidingTabLayout
+    <client.smrtms.com.smrtms_client.View.SlidingTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
