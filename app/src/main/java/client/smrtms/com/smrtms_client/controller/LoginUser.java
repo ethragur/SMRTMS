@@ -24,7 +24,7 @@ public class LoginUser extends User
 
     public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
     {
-        super(Username, ID, new Double(0), new Double(0));
+        super(Username, ID, 47.268409, 11.3932439);
         mContext = Context;
         gpsTracker = new GPSTracker(Context);
         friendList = new ArrayList<User>();
@@ -42,7 +42,7 @@ public class LoginUser extends User
 
     public static void createInstance(String Username, String ID, Context Context)
     {
-        inst = new LoginUser("TestUser", "0001", new Double(0), new Double(0), Context);
+        inst = new LoginUser("TestUser", "0001", 47.268409, 11.3932439, Context);
     }
 
     public static LoginUser getInstance()
@@ -73,6 +73,10 @@ public class LoginUser extends User
     public List<User> getFriendList()
     {
         return friendList;
+    }
+
+    public void addFriend(User newFriend) {
+        friendList.add(newFriend);
     }
 
 }

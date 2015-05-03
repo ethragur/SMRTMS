@@ -31,6 +31,7 @@ import java.util.List;
 
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.controller.User;
 
 
 /**
@@ -136,6 +137,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }*/
 
         LoginUser.createInstance(email, "0001", LoginActivity.this);
+
+        //setup dummy
+        setUpDummyFriends();
 
 
         if (cancel) {
@@ -314,6 +318,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
         LoginActivity.this.startActivity(myIntent);
     }
+
+    private void setUpDummyFriends() {
+        LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
+        LoginUser.getInstance().addFriend(new User("dummy2","0003",47.2637871,11.4000567));
+        LoginUser.getInstance().addFriend(new User("dummy3","0004",37.4209024,-122.0807398));
+    }
+
 }
 
 
