@@ -115,8 +115,8 @@
     <orderEntry type="library" exported="" name="play-services-drive-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-games-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-7.0.0" level="project" />
-    <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="firebase-client-jvm-2.2.3" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="firebase-client-android-2.2.3" level="project" />
     <orderEntry type="library" exported="" name="play-services-nearby-7.0.0" level="project" />
   </component>

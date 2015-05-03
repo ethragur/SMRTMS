@@ -1,5 +1,8 @@
 package client.smrtms.com.smrtms_client.activity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -20,12 +23,12 @@ public class MainScreen extends ActionBarActivity {
     public OnSwipeTouchListener onSwipeTouchListener;
     LoginUser activeUser;
     GPSTracker gps;
+    final Context context = this;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -55,8 +58,38 @@ public class MainScreen extends ActionBarActivity {
             return true;
         }
         if (id == R.id.logout) {
-            Intent myIntent = new Intent(this, LoginActivity.class);
-            startActivity(myIntent);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+            // set title
+            //alertDialogBuilder.setTitle("Your Title");
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Do you really want to sign out?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // if this button is clicked, close
+                            // current activity and open LoginActivity
+                            Intent myIntent = new Intent(MainScreen.this, LoginActivity.class);
+                            myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(myIntent);
+                            MainScreen.this.finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // if this button is clicked, just close
+                            // the dialog box and do nothing
+                            dialog.cancel();
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
             return true;
         }
 

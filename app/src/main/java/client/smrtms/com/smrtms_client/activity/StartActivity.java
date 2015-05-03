@@ -1,6 +1,5 @@
 package client.smrtms.com.smrtms_client.activity;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ public class StartActivity extends Activity{
         setContentView(R.layout.activity_the_one_button);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -28,6 +26,6 @@ public class StartActivity extends Activity{
     public void changeToMainScreen(View view) {
         Intent myIntent = new Intent(StartActivity.this, MainScreen.class);
         StartActivity.this.startActivity(myIntent);
+        finish();
     }
-
 }
