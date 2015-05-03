@@ -5,7 +5,6 @@ package client.smrtms.com.smrtms_client.tokens;
  */
 public class AuthenticationToken extends Token
 {
-
     public AuthenticationToken()
     {
         super("Authentication");
