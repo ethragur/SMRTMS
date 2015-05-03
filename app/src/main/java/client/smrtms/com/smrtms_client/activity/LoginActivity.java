@@ -301,6 +301,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 finish();
                 Intent myIntent = new Intent(LoginActivity.this,StartActivity.class);
                 LoginActivity.this.startActivity(myIntent);
+                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
