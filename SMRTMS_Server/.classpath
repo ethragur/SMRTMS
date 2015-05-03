@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="/home/max/SMRTMS/SMRTMS_Server/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="/home/max/SMRTMS/SMRTMS_Server/httpcore-4.4.1.jar"/>
 	<classpathentry kind="lib" path="/home/max/SMRTMS/SMRTMS_Server/httpclient-4.4.1.jar"/>
+	<classpathentry kind="lib" path="/home/max/SMRTMS/SMRTMS_Server/java_websocket.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
