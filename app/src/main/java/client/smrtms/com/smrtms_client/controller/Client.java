@@ -23,63 +23,16 @@ import java.net.URL;
  *
  *  See commented main for Usage Example
  */
-public class Client extends WebSocketClient
+public class Client
 {
-    public boolean isConnected() {
-        return isConnected;
-    }
 
-    private boolean isConnected = false;
-
-
-
-    public Client(URI serverUri, Draft draft) {
-        super( serverUri, draft );
-    }
-
-    public Client(URI serverURI) {
-        super( serverURI );
-    }
-
-    @Override
-    public void onOpen( ServerHandshake handshakedata ) {
-        Log.d("Connection", "opened connection");
-        isConnected = true;
-        // if you plan to refuse connection based on ip or httpfields overload: onWebsocketHandshakeReceivedAsClient
-    }
-
-    @Override
-    public void onMessage( String message ) {
-        System.out.println( "received: " + message );
-    }
-
-
-    public void onFragment( Framedata fragment ) {
-        Log.d("Connection", "received fragment: " + new String(fragment.getPayloadData().array()));
-    }
-
-    @Override
-    public void onClose( int code, String reason, boolean remote ) {
-        // The codecodes are documented in class org.java_websocket.framing.CloseFrame
-        isConnected = false;
-        Log.d("Connection", "Connection closed by " + (remote ? "remote peer" : "us"));
-    }
-
-    @Override
-    public void onError( Exception ex ) {
-        ex.printStackTrace();
-        // if the error is fatal then onClose will be called additionally
-    }
-
-
-
-    /*
-    public static void main(String[] args)
+    public static void ConnectToServer()
     {
         ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
         try {
             c = new ConnectionManager( new URI( "ws://localhost:8887" ), new Draft_10() );
         } catch (URISyntaxException e) {
+            Log.d("Connection", "Wrong URI");
             e.printStackTrace();
         }
         c.connect();
@@ -95,7 +48,7 @@ public class Client extends WebSocketClient
 
 
     }
-    */
+
 }
 
 
