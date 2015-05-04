@@ -48,7 +48,10 @@ public class Client
 
         c.send("test");
 
-        return true;
+        if (c.isConnected())
+            return true;
+        else
+            return false;
     }
 
 }

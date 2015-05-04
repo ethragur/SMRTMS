@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -94,13 +95,17 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
+        Toast toast;
         // Try to connect to the Server
         if (client.ConnectToServer()) {
-            Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
+            Log.d("Connection", "Success!");
         }
         else {
-            Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
+            Log.d("Connection", "Failed");
         }
+        toast.show();
     }
 
     private void populateAutoComplete() {
