@@ -56,35 +56,43 @@ public class Main {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	
+		boolean serverrunning = true;
 		
+		while (serverrunning) {
+			serverrunning = startServer();
+		}
+		
+	}
+	
+	private static boolean startServer() {
 		// Do the server stuff
-		WebSocketImpl.DEBUG = true;
-		
-		try {
-			Server server = new Server(8887);
-			server.start();
-	        System.out.println( "ChatServer started on port: " + server.getPort() );
-	        
-	        BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
-	        while ( true ) {
-	            String in = sysin.readLine();
-	            server.sendToAll( in );
-	            if( in.equals( "exit" ) ) {
-	                server.stop();
-	                break;
-	            } else if( in.equals( "restart" ) ) {
-	                server.stop();
-	                server.start();
-	                break;
-	            }
-	        }
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		
+				WebSocketImpl.DEBUG = true;
+				
+				try {
+					Server server = new Server(8887);
+					server.start();
+			        System.out.println( "ChatServer started on port: " + server.getPort() );
+			        
+			        BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
+			        while ( true ) {
+			            String in = sysin.readLine();
+			            server.sendToAll( in );
+			            if( in.equals( "exit" ) ) {
+			                server.stop();
+			                return false;
+			            } else if( in.equals( "restart" ) ) {
+			                server.stop();
+			                server.start();
+			                return true;
+			            }
+			        }
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				return true;
 	}
 
 }
