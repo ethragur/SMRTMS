@@ -9,9 +9,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.firebase.androidchat.ChatActivity;
 
+import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.GPSTracker;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.View.OnSwipeTouchListener;
@@ -23,6 +25,7 @@ public class MainScreen extends ActionBarActivity {
     public OnSwipeTouchListener onSwipeTouchListener;
     LoginUser activeUser;
     GPSTracker gps;
+    Client client;
     final Context context = this;
 
     @Override
@@ -35,6 +38,13 @@ public class MainScreen extends ActionBarActivity {
             TabsFragment fragment = new TabsFragment();
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
+        }
+
+        if (client.ConnectToServer()) {
+            Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
+        }
+        else {
+            Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
         }
     }
 

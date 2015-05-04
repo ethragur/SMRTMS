@@ -5,6 +5,7 @@
 package client.smrtms.com.smrtms_client.controller;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import org.java_websocket.WebSocketImpl;
 import org.java_websocket.client.WebSocketClient;
@@ -26,7 +27,7 @@ import java.net.URL;
 public class Client
 {
 
-    public static void ConnectToServer()
+    public static boolean ConnectToServer()
     {
         ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
         try {
@@ -34,6 +35,7 @@ public class Client
         } catch (URISyntaxException e) {
             Log.d("Connection", "Wrong URI");
             e.printStackTrace();
+            return false;
         }
         c.connect();
 
@@ -46,7 +48,7 @@ public class Client
 
         c.send("test");
 
-
+        return true;
     }
 
 }
