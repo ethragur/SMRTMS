@@ -19,7 +19,7 @@ public class ConnectionManager
     public ConnectionManager()
     {
         try {
-            client = new Client(new URI( "ws://localhost:8887" ), new Draft_10() );
+            client = new Client(new URI( "ws://phil-m.eu:8887" ), new Draft_10() );
         } catch (URISyntaxException e) {
             Log.d("Connection", "Wrong URI");
             e.printStackTrace();
