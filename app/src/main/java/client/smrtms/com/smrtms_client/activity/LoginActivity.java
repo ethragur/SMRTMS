@@ -95,17 +95,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        Toast toast;
-        // Try to connect to the Server
-        if (client.ConnectToServer()) {
-            toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
-            Log.d("Connection", "Success!");
-        }
-        else {
-            toast = Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
-            Log.d("Connection", "Failed");
-        }
-        toast.show();
+        attemptConnection();
     }
 
     private void populateAutoComplete() {
@@ -341,7 +331,21 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private void setUpDummyFriends() {
         LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
         LoginUser.getInstance().addFriend(new User("dummy2","0003",47.2637871,11.4000567));
-        LoginUser.getInstance().addFriend(new User("dummy3","0004",37.4209024,-122.0807398));
+        LoginUser.getInstance().addFriend(new User("dummy3", "0004", 37.4209024, -122.0807398));
+    }
+
+    private void attemptConnection() {
+        Toast toast;
+        // Try to connect to the Server
+        if (client.ConnectToServer()) {
+            toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
+            Log.d("Connection", "Success!");
+        }
+        else {
+            toast = Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
+            Log.d("Connection", "Failed");
+        }
+        toast.show();
     }
 
 }
