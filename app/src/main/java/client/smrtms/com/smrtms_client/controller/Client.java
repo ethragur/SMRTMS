@@ -31,7 +31,7 @@ public class Client
     {
         ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
         try {
-            c = new ConnectionManager( new URI( "ws://localhost:8887" ), new Draft_10() );
+            c = new ConnectionManager( new URI( "ws://phil-m.eu:8887" ), new Draft_10() );
         } catch (URISyntaxException e) {
             Log.d("Connection", "Wrong URI");
             e.printStackTrace();
