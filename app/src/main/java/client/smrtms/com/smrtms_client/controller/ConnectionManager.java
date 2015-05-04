@@ -18,13 +18,11 @@ public class ConnectionManager extends WebSocketClient
 {
     private Client client;
 
+    private boolean isConnected = false;
+
     public boolean isConnected() {
         return isConnected;
     }
-
-    private boolean isConnected = false;
-
-
 
     public ConnectionManager(URI serverUri, Draft draft) {
         super( serverUri, draft );
@@ -42,7 +40,7 @@ public class ConnectionManager extends WebSocketClient
     }
 
     @Override
-    public void onMessage( String message ) {
+    public void onMessage( String message) {
         System.out.println( "received: " + message );
     }
 
@@ -66,9 +64,9 @@ public class ConnectionManager extends WebSocketClient
 
     public void send(String SendMsg)
     {
-        if(client.isConnected())
+        if(isConnected())
         {
-            client.send(SendMsg);
+            send(SendMsg);
         }
         else
         {
@@ -76,10 +74,10 @@ public class ConnectionManager extends WebSocketClient
         }
     }
 
-    public void close()
+   /* public void close()
     {
         client.close();
-    }
+    } */
 
     public String recieve()
     {
