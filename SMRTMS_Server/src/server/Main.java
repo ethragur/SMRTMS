@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.zip.GZIPInputStream;
 
+import org.java_websocket.WebSocketImpl;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
@@ -57,12 +58,32 @@ public class Main {
 		}
 		
 		// Do the server stuff
+		WebSocketImpl.DEBUG = true;
+		
 		try {
 			Server server = new Server(8887);
+			server.start();
+	        System.out.println( "ChatServer started on port: " + server.getPort() );
+	        
+	        BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
+	        while ( true ) {
+	            String in = sysin.readLine();
+	            server.sendToAll( in );
+	            if( in.equals( "exit" ) ) {
+	                server.stop();
+	                break;
+	            } else if( in.equals( "restart" ) ) {
+	                server.stop();
+	                server.start();
+	                break;
+	            }
+	        }
 		}
-		catch (UnknownHostException e) {
+		catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 		
 	}
 
