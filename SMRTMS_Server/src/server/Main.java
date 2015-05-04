@@ -22,7 +22,7 @@ import org.jooq.tools.json.JSONObject;
 
 /*
  *  Prepare the SQL Server
- *  Step 1 - install mysql, user: "root", pw: "" (none)
+ *  Step 1 - install mysql
  *  Step 2 - start the msysql deamon
  *  Step 3 - read the db_script.sql into the database, it will generate all the tables
  */
@@ -31,7 +31,7 @@ import org.jooq.tools.json.JSONObject;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		System.out.println("Starting SMRTMS Server... please stand by");
 		
 		String userName = "root";
 		String password = "sepmLoot";
@@ -72,7 +72,8 @@ public class Main {
 				try {
 					Server server = new Server(8887);
 					server.start();
-			        System.out.println( "ChatServer started on port: " + server.getPort() );
+			        System.out.println( "SMRTMS Server started on port: " + server.getPort() );
+			        System.out.println( "Ready!" );
 			        
 			        BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
 			        while ( true ) {
@@ -85,7 +86,10 @@ public class Main {
 			                server.stop();
 			                server.start();
 			                return true;
-			            }
+			            } 
+			             /* else if( in.startsWith("say ")) {
+			            	server.sendToAll(text);
+			            }*/
 			        }
 				}
 				catch (Exception e) {
