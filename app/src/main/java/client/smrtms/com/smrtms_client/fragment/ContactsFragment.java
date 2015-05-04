@@ -60,6 +60,12 @@ public class ContactsFragment extends Fragment {
             });
             ll.addView(temp);
         }
+        //add friend button
+        Button addFriend = new Button(getActivity());
+        addFriend.setText("+ Friend");
+        addFriend.setLayoutParams(lp);
+        ll.addView(addFriend);
+
 
         ViewGroup viewGroup = (ViewGroup) view;
         viewGroup.addView(ll);
