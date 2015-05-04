@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -13,8 +14,10 @@ import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,10 +28,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.User;
@@ -56,6 +61,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    final Context context = this;
+
+    Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +96,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        client = new Client();
+
+        attemptConnection();
     }
 
     private void populateAutoComplete() {
@@ -276,6 +287,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
+                client.WriteMsg("test");
             } catch (InterruptedException e) {
                 return false;
             }
@@ -323,7 +335,32 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private void setUpDummyFriends() {
         LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
         LoginUser.getInstance().addFriend(new User("dummy2","0003",47.2637871,11.4000567));
-        LoginUser.getInstance().addFriend(new User("dummy3","0004",37.4209024,-122.0807398));
+        LoginUser.getInstance().addFriend(new User("dummy3", "0004", 37.4209024, -122.0807398));
+    }
+
+    private void attemptConnection() {
+        // Try to connect to the Server
+        client.ConnectToServer();
+
+        // Wait a little while and then check if it worked
+        final Handler handler = new Handler();  // Creates a small thread to wait 1000ms in before checking the connection
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                Toast toast;
+                if (client.isConnected()) {
+                    toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
+                    Log.d("Connection", "Success!");
+                } else {
+                    toast = Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
+                    Log.d("Connection", "Failed");
+                }
+                toast.show();
+
+            }
+        }, 1000);   // wait for 1000ms
+
     }
 
 }
