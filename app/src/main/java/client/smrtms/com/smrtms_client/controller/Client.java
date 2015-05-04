@@ -26,23 +26,34 @@ import java.net.URL;
  */
 public class Client
 {
+    ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
 
-    public static boolean ConnectToServer()
-    {
-        ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
+    public Client () {
         try {
             c = new ConnectionManager( new URI( "ws://phil-m.eu:8887" ), new Draft_10() );
         } catch (URISyntaxException e) {
             Log.d("Connection", "Wrong URI");
             e.printStackTrace();
+        }
+    }
+
+    public boolean ConnectToServer()
+    {
+        if (c == null) {
+            Log.d("Connection", "ConnectionManager is not initialized");
             return false;
         }
+
         c.connect();
 
         if (c.isConnected())
             return true;
         else
             return false;
+    }
+
+    public void WriteMsg(String text) {
+        c.sendmsg(text);
     }
 
 }

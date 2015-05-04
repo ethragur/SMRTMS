@@ -94,6 +94,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        client = new Client();
 
         attemptConnection();
     }
@@ -284,6 +285,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
+                client.WriteMsg("test");
             } catch (InterruptedException e) {
                 return false;
             }
