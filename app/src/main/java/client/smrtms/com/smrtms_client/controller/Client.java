@@ -23,6 +23,8 @@ import java.net.URL;
  *  Client for Webserver Connection
  *
  *  See commented main for Usage Example
+ *
+ *  MAX: This class is pretty useles... its pretty much just a interfece for ConnectionManager. Why not just use ConnectionManager directly?
  */
 public class Client
 {

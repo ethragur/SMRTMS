@@ -61,8 +61,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    Client client;
     final Context context = this;
+
+    Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -341,10 +342,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         // Try to connect to the Server
         client.ConnectToServer();
 
-        final Handler handler = new Handler();
+        // Wait a little while and then check if it worked
+        final Handler handler = new Handler();  // Creates a small thread to wait 1000ms in before checking the connection
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 Toast toast;
                 if (client.isConnected()) {
                     toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
@@ -354,8 +357,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     Log.d("Connection", "Failed");
                 }
                 toast.show();
+
             }
-        }, 1000);
+        }, 1000);   // wait for 1000ms
 
     }
 
