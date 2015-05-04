@@ -25,7 +25,6 @@ public class MainScreen extends ActionBarActivity {
     public OnSwipeTouchListener onSwipeTouchListener;
     LoginUser activeUser;
     GPSTracker gps;
-    Client client;
     final Context context = this;
 
     @Override
@@ -38,13 +37,6 @@ public class MainScreen extends ActionBarActivity {
             TabsFragment fragment = new TabsFragment();
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
-        }
-
-        if (client.ConnectToServer()) {
-            Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
-        }
-        else {
-            Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
         }
     }
 

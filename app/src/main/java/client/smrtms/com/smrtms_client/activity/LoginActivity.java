@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -25,10 +26,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.User;
@@ -56,6 +59,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    Client client;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        // Try to connect to the Server
+        if (client.ConnectToServer()) {
+            Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
+        }
+        else {
+            Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
+        }
     }
 
     private void populateAutoComplete() {
