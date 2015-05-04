@@ -62,7 +62,7 @@ public class TestClient extends WebSocketClient
     {
         TestClient c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
         try {
-            c = new TestClient( new URI( "//213.47.182.54:8887" ), new Draft_10() );
+            c = new TestClient( new URI( "ws://phil-m.eu:8887" ), new Draft_10() );
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
