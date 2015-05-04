@@ -34,7 +34,7 @@ public class Main {
 		System.out.println("Hello World!");
 		
 		String userName = "root";
-		String password = "";
+		String password = "sepmLoot";
 		String url = "jdbc:mysql://localhost:3306/SMRTMS";
 		
 		// Connection is the only JDBC recource that we need
