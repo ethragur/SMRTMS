@@ -39,15 +39,6 @@ public class Client
         }
         c.connect();
 
-        //sleep after connection
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        c.send("test");
-
         if (c.isConnected())
             return true;
         else

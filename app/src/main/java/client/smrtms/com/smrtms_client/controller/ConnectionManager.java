@@ -62,16 +62,16 @@ public class ConnectionManager extends WebSocketClient
         // if the error is fatal then onClose will be called additionally
     }
 
-    public void send(String SendMsg)
+    public boolean sendmsg(String SendMsg)
     {
         if(isConnected())
         {
             send(SendMsg);
+            return true;
         }
-        else
-        {
-            Log.d("Connection", "Connection is closed");
-        }
+
+        Log.d("Connection", "Connection is closed");
+        return false;
     }
 
    /* public void close()
