@@ -56,4 +56,11 @@ public class User
     public void setLongitude(Double longitude) {
         Longitude = longitude;
     }
+
+
+
+    public String toString()
+    {
+        return Username + " " + ID + " " + Latitude.toString() +  " " +  Longitude.toString();
+    }
 }

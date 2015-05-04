@@ -19,25 +19,13 @@ public class JSONReader<T>
     {
         Gson gson = new Gson();
 
-        try
-        {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        //convert json to object
+
+        T obj = gson.fromJson(file, sryForThat );
+        return obj;
 
 
-            //convert json to object
 
-
-            T obj = gson.fromJson(br, sryForThat );
-            return obj;
-
-        }
-        catch(IOException e)
-        {
-            Log.d("Error", "Couldn't read JSON file");
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
     //Takes an Obejct and Converts it to a JSON string
