@@ -11,4 +11,8 @@
         android:id="@+id/logout"
         android:title="Logout">
     </item>
+    <item
+        android:id="@+id/addFriend"
+        android:title="Add Friend">
+    </item>
 </menu>

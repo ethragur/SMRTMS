@@ -5,6 +5,7 @@
 package client.smrtms.com.smrtms_client.controller;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import org.java_websocket.WebSocketImpl;
 import org.java_websocket.client.WebSocketClient;
@@ -22,80 +23,42 @@ import java.net.URL;
  *  Client for Webserver Connection
  *
  *  See commented main for Usage Example
+ *
+ *  MAX: This class is pretty useles... its pretty much just a interfece for ConnectionManager. Why not just use ConnectionManager directly?
  */
-public class Client extends WebSocketClient
+public class Client
 {
-    public boolean isConnected() {
-        return isConnected;
-    }
+    ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
 
-    private boolean isConnected = false;
-
-
-
-    public Client(URI serverUri, Draft draft) {
-        super( serverUri, draft );
-    }
-
-    public Client(URI serverURI) {
-        super( serverURI );
-    }
-
-    @Override
-    public void onOpen( ServerHandshake handshakedata ) {
-        Log.d("Connection", "opened connection");
-        isConnected = true;
-        // if you plan to refuse connection based on ip or httpfields overload: onWebsocketHandshakeReceivedAsClient
-    }
-
-    @Override
-    public void onMessage( String message ) {
-        System.out.println( "received: " + message );
-    }
-
-
-    public void onFragment( Framedata fragment ) {
-        Log.d("Connection", "received fragment: " + new String(fragment.getPayloadData().array()));
-    }
-
-    @Override
-    public void onClose( int code, String reason, boolean remote ) {
-        // The codecodes are documented in class org.java_websocket.framing.CloseFrame
-        isConnected = false;
-        Log.d("Connection", "Connection closed by " + (remote ? "remote peer" : "us"));
-    }
-
-    @Override
-    public void onError( Exception ex ) {
-        ex.printStackTrace();
-        // if the error is fatal then onClose will be called additionally
-    }
-
-
-
-    /*
-    public static void main(String[] args)
-    {
-        ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
+    public Client () {
         try {
-            c = new ConnectionManager( new URI( "ws://localhost:8887" ), new Draft_10() );
+            c = new ConnectionManager( new URI( "ws://phil-m.eu:8887" ), new Draft_10() );
         } catch (URISyntaxException e) {
+            Log.d("Connection", "Wrong URI");
             e.printStackTrace();
         }
+    }
+
+    public boolean ConnectToServer()
+    {
+        if (c == null) {
+            Log.d("Connection", "ConnectionManager is not initialized");
+            return false;
+        }
+
         c.connect();
 
-        //sleep after connection
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        c.send("test");
-
-
+        return c.isConnected();
     }
-    */
+
+    public void WriteMsg(String text) {
+        c.sendmsg(text);
+    }
+
+    public boolean isConnected() {
+        return c.isConnected();
+    }
+
 }
 
 

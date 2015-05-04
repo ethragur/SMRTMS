@@ -4,8 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,8 +16,10 @@ import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,10 +30,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.User;
@@ -56,6 +63,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    Client client;
+
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +99,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        client = new Client();
+
+        attemptConnection();
     }
 
     private void populateAutoComplete() {
@@ -276,6 +290,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
+                client.WriteMsg("test");
             } catch (InterruptedException e) {
                 return false;
             }
@@ -323,9 +338,77 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private void setUpDummyFriends() {
         LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
         LoginUser.getInstance().addFriend(new User("dummy2","0003",47.2637871,11.4000567));
-        LoginUser.getInstance().addFriend(new User("dummy3","0004",37.4209024,-122.0807398));
+        LoginUser.getInstance().addFriend(new User("dummy3", "0004", 37.4209024, -122.0807398));
     }
 
+    private void attemptConnection() {
+        // Try to connect to the Server
+        client.ConnectToServer();
+
+        // Wait a little while and then check if it worked
+        final Handler handler = new Handler();  // Creates a small thread to wait 1000ms in before checking the connection
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                Toast toast;
+                if (client.isConnected()) {
+                    toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
+                    Log.d("Connection", "Success!");
+                } else {
+                    toast = Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
+                    Log.d("Connection", "Failed");
+                }
+                toast.show();
+
+            }
+        }, 1000);   // wait for 1000ms
+
+    }
+
+    public void exitDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        // set title
+        //alertDialogBuilder.setTitle("Your Title");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Do you really want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, close
+                        // current activity and open LoginActivity
+                        Intent myIntent = new Intent(LoginActivity.this, LoginActivity.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        //startActivity(myIntent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            exitDialog();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
 
 

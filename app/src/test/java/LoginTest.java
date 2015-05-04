@@ -1,5 +1,7 @@
 import android.test.ActivityInstrumentationTestCase2;
 
+import org.junit.Test;
+
 import client.smrtms.com.smrtms_client.activity.LoginActivity;
 
 /**
@@ -11,6 +13,12 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity>
     public LoginTest()
     {
         super(LoginActivity.class);
+    }
+
+    @Test
+    public void testLogin()
+    {
+
     }
 
 }
