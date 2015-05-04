@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
@@ -337,17 +338,25 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void attemptConnection() {
-        Toast toast;
         // Try to connect to the Server
-        if (client.ConnectToServer()) {
-            toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
-            Log.d("Connection", "Success!");
-        }
-        else {
-            toast = Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
-            Log.d("Connection", "Failed");
-        }
-        toast.show();
+        client.ConnectToServer();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Toast toast;
+                if (client.isConnected()) {
+                    toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
+                    Log.d("Connection", "Success!");
+                } else {
+                    toast = Toast.makeText(context, "Connection to Server Failed", Toast.LENGTH_SHORT);
+                    Log.d("Connection", "Failed");
+                }
+                toast.show();
+            }
+        }, 1000);
+
     }
 
 }

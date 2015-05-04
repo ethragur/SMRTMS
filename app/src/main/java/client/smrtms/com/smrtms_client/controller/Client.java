@@ -46,14 +46,15 @@ public class Client
 
         c.connect();
 
-        if (c.isConnected())
-            return true;
-        else
-            return false;
+        return c.isConnected();
     }
 
     public void WriteMsg(String text) {
         c.sendmsg(text);
+    }
+
+    public boolean isConnected() {
+        return c.isConnected();
     }
 
 }
