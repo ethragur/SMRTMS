@@ -15,7 +15,7 @@ package client.smrtms.com.smrtms_client.tokens;
  */
 public class Token
 {
-    private String sTag;
+    public String sTag;
 
     public Token(String tag)
     {

@@ -16,6 +16,9 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 import org.jooq.tools.json.JSONObject;
 import org.jooq.tools.json.JSONParser;
+import org.jooq.util.derby.sys.Sys;
+
+import client.smrtms.com.smrtms_client.tokens.Token;
 
 import com.google.gson.*;
 
@@ -53,7 +56,10 @@ public class Server extends WebSocketServer
         // convert String into InputStream
     	InputStream is = new ByteArrayInputStream(message.getBytes());
         
-        
+    	Gson gson = new Gson();
+    	
+    	Token t = gson.fromJson( message, Token.class );
+    	System.out.println( "Recieved Token tag: " + t.sTag );
     }
 
 
