@@ -52,13 +52,9 @@ public class Server extends WebSocketServer
     public void onMessage( WebSocket conn, String message ) {
         this.sendToAll( message );
         System.out.println( conn + ": " + message );
-        
-        // convert String into InputStream
-    	InputStream is = new ByteArrayInputStream(message.getBytes());
-        
-    	Gson gson = new Gson();
-    	
-    	Token t = gson.fromJson( message, Token.class );
+
+    	JSONReader reader = new JSONReader<Token>();
+    	Token t = (Token)reader.readJson( message , Token.class );
     	System.out.println( "Recieved Token tag: " + t.sTag );
     }
 
