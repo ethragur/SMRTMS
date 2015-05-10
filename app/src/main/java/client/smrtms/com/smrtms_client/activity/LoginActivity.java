@@ -296,7 +296,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 // Simulate network access.
                 Thread.sleep(2000);
                 JSONReader reader = new JSONReader();
-                String authtoken = reader.JSONWriter(AuthenticationToken.class);
+
+                AuthenticationToken auth = new AuthenticationToken();
+
+                String authtoken = reader.JSONWriter(auth);
+
                 client.WriteMsg( authtoken );
             } catch (InterruptedException e) {
                 return false;
