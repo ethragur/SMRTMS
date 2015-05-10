@@ -44,7 +44,7 @@ public class Server extends WebSocketServer
         System.out.println( conn + " has disconnected!" );
     }
 
-    // Recieved a string from a client
+    // Received a string from a client
     @Override
     public void onMessage( WebSocket conn, String message ) {
         this.sendToAll( message );
@@ -53,7 +53,11 @@ public class Server extends WebSocketServer
         // convert String into InputStream
     	InputStream is = new ByteArrayInputStream(message.getBytes());
         
-        Json.createReader( is );
+        JsonReader rdr = Json.createReader( is );
+        
+        JsonObject obj = rdr.readObject();
+        JsonArray results = obj.getJsonArray("tag");
+        System.out.println("boop");
     }
 
 
