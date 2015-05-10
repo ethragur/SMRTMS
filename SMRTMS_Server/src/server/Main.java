@@ -34,7 +34,7 @@ public class Main {
 		System.out.println("Starting SMRTMS Server... please stand by");
 		
 		String userName = "root";
-		String password = "sepmLoot";
+		String password = ""; //"sepmLoot";
 		String url = "jdbc:mysql://localhost:3306/SMRTMS";
 		
 		// Connection is the only JDBC recource that we need
@@ -87,9 +87,6 @@ public class Main {
 			                server.start();
 			                return true;
 			            } 
-			             /* else if( in.startsWith("say ")) {
-			            	server.sendToAll(text);
-			            }*/
 			        }
 				}
 				catch (Exception e) {

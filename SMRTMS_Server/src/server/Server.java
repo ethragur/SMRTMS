@@ -34,8 +34,8 @@ public class Server extends WebSocketServer
 
     @Override
     public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
-        this.sendToAll( conn + " has left the room!" );
-        System.out.println( conn + " has left the room!" );
+        this.sendToAll( conn + " has disconnected!" );
+        System.out.println( conn + " has disconnected!" );
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Server extends WebSocketServer
 
 
     public void onFragment( WebSocket conn, Framedata fragment ) {
-        System.out.println( "received fragment: " + fragment );
+        System.out.println( "received fragment: " + fragment + "from " + conn.toString() );
     }
 
     @Override
