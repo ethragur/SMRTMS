@@ -17,7 +17,7 @@ import org.java_websocket.server.WebSocketServer;
 import org.jooq.tools.json.JSONObject;
 import org.jooq.tools.json.JSONParser;
 
-import javax.json.*;
+import com.google.gson.*;
 
 public class Server extends WebSocketServer
 {
@@ -53,11 +53,7 @@ public class Server extends WebSocketServer
         // convert String into InputStream
     	InputStream is = new ByteArrayInputStream(message.getBytes());
         
-        JsonReader rdr = Json.createReader( is );
         
-        JsonObject obj = rdr.readObject();
-        JsonArray results = obj.getJsonArray("Token");
-        System.out.println(results.get(0).toString()	);
     }
 
 
