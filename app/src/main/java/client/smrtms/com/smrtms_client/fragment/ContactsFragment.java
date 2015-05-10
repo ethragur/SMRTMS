@@ -47,7 +47,7 @@ public class ContactsFragment extends Fragment {
         // Configuring the width and height of the buttons
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        for(User friend: LoginUser.getInstance().getFriendList()) {
+        for(final User friend: LoginUser.getInstance().getFriendList()) {
             Button temp = new Button(getActivity());
             temp.setText(friend.getUsername());
             temp.setLayoutParams(lp);
@@ -55,6 +55,7 @@ public class ContactsFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent myIntent = new Intent(getActivity(), ChatActivity.class);
+                    myIntent.putExtra("UserKey", friend.getID());
                     getActivity().startActivity(myIntent);
                 }
             });

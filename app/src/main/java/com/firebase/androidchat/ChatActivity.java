@@ -1,6 +1,7 @@
 package com.firebase.androidchat;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -43,10 +44,25 @@ public class ChatActivity extends ListActivity {
         // Make sure we have a mUsername
         setupUsername();
 
+        //get UserID from chat Partner
+        Intent origin = getIntent();
+        String chatPartnerID = origin.getStringExtra("UserKey");
+
+        String chatName;
+
+        //Bigger UserID always first string so chat is equivalent
+        if(Integer.parseInt(LoginUser.getInstance().getID()) > Integer.parseInt(chatPartnerID))
+        {
+            chatName = LoginUser.getInstance().getID() + chatPartnerID;
+        }
+        else
+        {
+            chatName = chatPartnerID + LoginUser.getInstance().getID();
+        }
         setTitle("Chatting as " + mUsername);
 
         // Setup our Firebase mFirebaseRef
-        mFirebaseRef = new Firebase(FIREBASE_URL).child("Chat");
+        mFirebaseRef = new Firebase(FIREBASE_URL).child(chatName);
 
         // Setup our input methods. Enter key on the keyboard or pushing the send button
         EditText inputText = (EditText) findViewById(R.id.messageInput);
