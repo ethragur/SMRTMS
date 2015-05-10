@@ -32,13 +32,18 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
 
+import org.apache.http.auth.AuthenticationException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import client.smrtms.com.smrtms_client.controller.Client;
+import client.smrtms.com.smrtms_client.controller.JSONReader;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.User;
+import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.controller.JSONReader;
 
 
 /**
@@ -290,7 +295,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
-                client.WriteMsg("test");
+                JSONReader reader = new JSONReader();
+
+                AuthenticationToken auth = new AuthenticationToken();
+
+                String authtoken = reader.JSONWriter(auth);
+
+                client.WriteMsg( authtoken );
             } catch (InterruptedException e) {
                 return false;
             }
