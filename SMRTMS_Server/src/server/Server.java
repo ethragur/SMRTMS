@@ -1,7 +1,9 @@
 package server;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
@@ -12,6 +14,10 @@ import org.java_websocket.WebSocketImpl;
 import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+import org.jooq.tools.json.JSONObject;
+import org.jooq.tools.json.JSONParser;
+
+import javax.json.*;
 
 public class Server extends WebSocketServer
 {
@@ -43,6 +49,11 @@ public class Server extends WebSocketServer
     public void onMessage( WebSocket conn, String message ) {
         this.sendToAll( message );
         System.out.println( conn + ": " + message );
+        
+        // convert String into InputStream
+    	InputStream is = new ByteArrayInputStream(message.getBytes());
+        
+        Json.createReader( is );
     }
 
 
