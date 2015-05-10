@@ -38,6 +38,7 @@ public class Server extends WebSocketServer
         System.out.println( conn + " has disconnected!" );
     }
 
+    // Recieved a string from a client
     @Override
     public void onMessage( WebSocket conn, String message ) {
         this.sendToAll( message );
@@ -46,7 +47,7 @@ public class Server extends WebSocketServer
 
 
     public void onFragment( WebSocket conn, Framedata fragment ) {
-        System.out.println( "received fragment: " + fragment + "from " + conn.toString() );
+        System.out.println( "received fragment: " + fragment );
     }
 
     @Override
