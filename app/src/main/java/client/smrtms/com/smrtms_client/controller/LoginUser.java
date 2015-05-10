@@ -57,14 +57,14 @@ public class LoginUser extends User
 
         return inst;
     }
-    // get current GPS Data
+    // get current GPS Data and send it to the server
     private synchronized void getNewCoordinates()
     {
         if (gpsTracker.canGetLocation()) {
             this.setLatitude(gpsTracker.getLatitude());
             this.setLongitude(gpsTracker.getLongitude());
 
-            UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(),this.getLongitude());
+            UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(),this.getLongitude(), LoginUser.getInstance().getID());
             JSONReader<UserUpdateToken> Writer = new JSONReader<>();
             String toSend = Writer.JSONWriter(userUpdateToken);
             Client client = new Client();

@@ -25,7 +25,7 @@ import client.smrtms.com.smrtms_client.R;
 
 public class ChatActivity extends ListActivity {
 
-    // TODO: change this to your own Firebase URL
+    // FIREBASE URL
     private static final String FIREBASE_URL = "https://flickering-heat-823.firebaseIO.com";
 
     private String mUsername;

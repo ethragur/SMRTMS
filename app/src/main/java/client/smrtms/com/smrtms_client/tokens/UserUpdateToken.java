@@ -7,11 +7,14 @@ public class UserUpdateToken extends Token
 {
     Double Latitude;
     Double Longitude;
-    public UserUpdateToken(Double lat, Double longi)
+    String UserID;
+
+    public UserUpdateToken(Double lat, Double longi, String ID)
     {
         super("UserUpdate");
         Latitude = lat;
         Longitude = longi;
+        UserID = ID;
     }
 
 }
