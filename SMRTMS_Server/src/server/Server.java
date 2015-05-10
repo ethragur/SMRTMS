@@ -57,7 +57,7 @@ public class Server extends WebSocketServer
         
         JsonObject obj = rdr.readObject();
         JsonArray results = obj.getJsonArray("Token");
-        System.out.println(results.get(0).toString());
+        System.out.println(results.get(0).toString()	);
     }
 
 

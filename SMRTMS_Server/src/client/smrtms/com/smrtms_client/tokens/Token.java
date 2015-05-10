@@ -1,5 +1,4 @@
-//package client.smrtms.com.smrtms_client.tokens;
-package tokens;
+package client.smrtms.com.smrtms_client.tokens;
 
 // Okay, I know this is a horrible way of doing this, but by linking the Token classes
 // from the client software to the eclipse projects of the server, they share
