@@ -77,7 +77,7 @@ public class Server extends WebSocketServer
     	Token t = (Token)reader.readJson( message , Token.class );
     	System.out.println( "Recieved Token tag: " + t.sTag );
     	
-    	ParseToken(t);
+    	ParseToken(t, message);
     }
 
 
@@ -110,25 +110,33 @@ public class Server extends WebSocketServer
         }
     }
 
-    public void ParseToken (Token t) {
+    public void ParseToken (Token t, String msg ) {
     	if (dbm.isConnected) {
+    		JSONReader reader = new JSONReader<Token>();
+    		
 	    	switch (t.sTag) {
 	    		case "Authentication":
-	    			AuthenticationToken auth = (AuthenticationToken) t;
-	    			boolean result = authman.AuthenticateUser( auth );
-	    			System.out.println("Legit login: " + result);
+	    	    	AuthenticationToken auth = (AuthenticationToken)reader.readJson( msg , AuthenticationToken.class );
+	    			
+	    	    	HandleAuthToken(auth);
 	    			break;
 	    		case "Registration":
-	    			RegistrationToken reg = (RegistrationToken) t;
+	    			RegistrationToken reg = (RegistrationToken)reader.readJson( msg , RegistrationToken.class );
 	    			
+	    			HandleRegistToken( reg );
 	    			break;
 	    		default:
 	    			System.out.println("ERROR: Token could not be identified!!");
 	    	}
     	}
-
     }
-
-
-
+    
+    private void HandleAuthToken( AuthenticationToken auth ) {
+    	boolean result = authman.AuthenticateUser( auth );
+		System.out.println("Legit login: " + result);
+    }
+    
+    private void HandleRegistToken ( RegistrationToken reg ) {
+    	authman.RegisterUser( reg );
+    }
 }

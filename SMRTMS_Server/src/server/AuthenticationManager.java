@@ -19,11 +19,16 @@ public class AuthenticationManager {
 		boolean result = false;
 		
 		String pw = dbm.getUserPassword( t.email );
+		if (pw != null)
+			System.out.println("Yes! Found password! Its: " + pw);
+		else
+			System.out.println("No... User not found...");
+		
 		try {
 			String hashpw = dbm.hash( t.password ).toString();
 			
 			if (pw != null ) {
-				if ( t.password == pw ) 
+				if ( t.password.compareTo(pw) == 0 ) 
 					result = true;
 			}
 		} catch (NoSuchAlgorithmException e) {
@@ -36,7 +41,7 @@ public class AuthenticationManager {
 	public boolean RegisterUser ( RegistrationToken t ) {
 		boolean result = false;
 		
-		
+		dbm.CreateUser(t);
 		
 		return result;
 	}

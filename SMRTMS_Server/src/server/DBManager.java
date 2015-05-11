@@ -18,7 +18,7 @@ import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 
 public class DBManager {
 	String userName = "root";
-	String password = ""; //"sepmLoot";
+	String password = "sepmLoot";
 	String url = "jdbc:mysql://localhost:3306/SMRTMS";
 	
 	Connection conn = null;
@@ -37,6 +37,8 @@ public class DBManager {
 			create.insertInto(USER, USER.USERNAME, USER.EMAIL, USER.PASSWORD, USER.AVATAR)
 			.values(t.username, t.email, hashpw, "nicolascage.png");
 			
+			System.out.println("New User created!");
+			
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +49,8 @@ public class DBManager {
 		Result<Record> result = create.select().from(USER).fetch();
 		
 		for (Record r : result) {
-			if (r.getValue(USER.EMAIL).toString() == email)
+			System.out.print("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
+			if (r.getValue(USER.EMAIL).toString().compareTo(email) == 0)
 				return r.getValue(USER.PASSWORD).toString();
 			/*
 			Integer id = r.getValue(USER.ID);
