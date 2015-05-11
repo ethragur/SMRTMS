@@ -28,6 +28,7 @@ import org.jooq.tools.json.JSONParser;
 import org.jooq.util.derby.sys.Sys;
 
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 import server.AuthenticationManager;
 import server.DBManager;
@@ -38,6 +39,7 @@ public class Server extends WebSocketServer
 {
 
 	private DBManager dbm;
+	private AuthenticationManager authman = new AuthenticationManager();
 	
     public Server( int port ) throws UnknownHostException {
         super(new InetSocketAddress(port));
@@ -110,8 +112,14 @@ public class Server extends WebSocketServer
     	switch (t.sTag) {
     		case "Authentication":
     			AuthenticationToken auth = (AuthenticationToken) t;
-    			AuthenticationManager authman = new AuthenticationManager();
     			authman.AuthenticateUser( auth );
+    			break;
+    		case "Registration":
+    			RegistrationToken reg = (RegistrationToken) t;
+    			
+    			break;
+    		default:
+    			System.out.println("ERROR: Token could not be identified!!");
     	}
 
     }

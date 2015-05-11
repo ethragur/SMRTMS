@@ -12,10 +12,16 @@ import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
+
 public class DBManager {
 	String userName = "root";
 	String password = ""; //"sepmLoot";
 	String url = "jdbc:mysql://localhost:3306/SMRTMS";
+	
+	public void CreateUser ( RegistrationToken t ) {
+		
+	}
 	
 	public String getUserPassword ( String email ) {
 
@@ -35,7 +41,6 @@ public class DBManager {
 		}
 		
 		return null;
-
 	}
 	
 	private DSLContext getConnection() {

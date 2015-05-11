@@ -5,9 +5,9 @@ package client.smrtms.com.smrtms_client.tokens;
  */
 public class AuthenticationToken extends Token
 {
-	public String id;
+	public String email;
 	public String password;
-	public Boolean access;
+	public boolean access;
 	
     public AuthenticationToken()
     {
