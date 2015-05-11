@@ -70,7 +70,7 @@ public class LoginUser extends User
                 this.setLatitude(gpsTracker.getLatitude());
                 this.setLongitude(gpsTracker.getLongitude());
 
-                UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(), this.getLongitude(), LoginUser.getInstance().getID());
+                UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(), this.getLongitude());
                 JSONReader<UserUpdateToken> Writer = new JSONReader<>();
                 String toSend = Writer.JSONWriter(userUpdateToken);
                 Client.getInstance().WriteMsg(toSend);

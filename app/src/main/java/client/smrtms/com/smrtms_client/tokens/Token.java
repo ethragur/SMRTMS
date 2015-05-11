@@ -10,18 +10,28 @@ package client.smrtms.com.smrtms_client.tokens;
 // I'm thinking about creating the client.smrtms.com.... package chain in the server
 // just so Java will leave me alone...
 
+import client.smrtms.com.smrtms_client.controller.LoginUser;
+
 /**
  * Created by effi on 4/29/15.
  */
 public class Token
 {
     public String sTag;
-    public int id;
+    public String id;
 
     public Token(String tag)
     {
         sTag = tag;
-        id = -1;
+        if(LoginUser.getInstance() != null)
+        {
+            id = LoginUser.getInstance().getID();
+        }
+        else
+        {
+            id = "";
+        }
+
     }
 
 }
