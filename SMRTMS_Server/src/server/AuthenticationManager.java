@@ -9,7 +9,11 @@ import server.DBManager;
 
 public class AuthenticationManager {
 	
-	private DBManager dbm = new DBManager();
+	private DBManager dbm;
+	
+	public AuthenticationManager( DBManager dbmanager ) {
+		dbm = dbmanager;
+	}
 	
 	public boolean AuthenticateUser( AuthenticationToken t ) {
 		boolean result = false;

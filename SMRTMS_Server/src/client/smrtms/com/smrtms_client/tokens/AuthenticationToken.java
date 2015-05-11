@@ -9,8 +9,11 @@ public class AuthenticationToken extends Token
 	public String password;
 	public boolean access;
 	
-    public AuthenticationToken()
+    public AuthenticationToken(String mail, String pw)
     {
         super("Authentication");
+        email = mail;
+        password = pw;
+        access = false;
     }
 }

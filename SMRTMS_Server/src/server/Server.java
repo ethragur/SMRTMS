@@ -39,17 +39,19 @@ public class Server extends WebSocketServer
 {
 
 	private DBManager dbm;
-	private AuthenticationManager authman = new AuthenticationManager();
+	private AuthenticationManager authman;
 	
     public Server( int port ) throws UnknownHostException {
         super(new InetSocketAddress(port));
         dbm = new DBManager();
+        authman = new AuthenticationManager(dbm);
     }
 
 
     public Server( InetSocketAddress address ) {
         super(address);
         dbm = new DBManager();
+        authman = new AuthenticationManager(dbm);
     }
 
 
@@ -109,18 +111,20 @@ public class Server extends WebSocketServer
     }
 
     public void ParseToken (Token t) {
-    	switch (t.sTag) {
-    		case "Authentication":
-    			AuthenticationToken auth = (AuthenticationToken) t;
-    			boolean result = authman.AuthenticateUser( auth );
-    			System.out.println("Legit login: " + result);
-    			break;
-    		case "Registration":
-    			RegistrationToken reg = (RegistrationToken) t;
-    			
-    			break;
-    		default:
-    			System.out.println("ERROR: Token could not be identified!!");
+    	if (dbm.isConnected) {
+	    	switch (t.sTag) {
+	    		case "Authentication":
+	    			AuthenticationToken auth = (AuthenticationToken) t;
+	    			boolean result = authman.AuthenticateUser( auth );
+	    			System.out.println("Legit login: " + result);
+	    			break;
+	    		case "Registration":
+	    			RegistrationToken reg = (RegistrationToken) t;
+	    			
+	    			break;
+	    		default:
+	    			System.out.println("ERROR: Token could not be identified!!");
+	    	}
     	}
 
     }

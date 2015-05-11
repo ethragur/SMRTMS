@@ -21,8 +21,15 @@ public class DBManager {
 	String password = ""; //"sepmLoot";
 	String url = "jdbc:mysql://localhost:3306/SMRTMS";
 	
+	Connection conn = null;
+	DSLContext create = null;
+	public boolean isConnected = false;
+	
+	public DBManager() {
+		Connect();
+	}
+	
 	public void CreateUser ( RegistrationToken t ) {
-		DSLContext create = getConnection();
 		
 		try {
 			String hashpw = hash( t.password ).toString();
@@ -36,8 +43,6 @@ public class DBManager {
 	}
 	
 	public String getUserPassword ( String email ) {
-
-		DSLContext create = getConnection();
 			
 		Result<Record> result = create.select().from(USER).fetch();
 		
@@ -55,16 +60,16 @@ public class DBManager {
 		return null;
 	}
 	
-	private DSLContext getConnection() {
+	public void Connect() {
+		System.out.println("Connecting to DB...");
 		try {
-			Connection conn = DriverManager.getConnection(url, userName, password);
-			return DSL.using(conn, SQLDialect.MYSQL);
+			conn = DriverManager.getConnection(url, userName, password);
+			create = DSL.using(conn, SQLDialect.MYSQL);	
+			isConnected = true;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			return null;
+			e.printStackTrace();		
 		}
-		
 	}
 	
 	public byte[] hash(String password) throws NoSuchAlgorithmException {
