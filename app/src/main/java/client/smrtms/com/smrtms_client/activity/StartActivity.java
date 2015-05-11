@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.controller.LoginUser;
 
 public class StartActivity extends Activity{
     final Context context=this;
@@ -49,6 +50,7 @@ public class StartActivity extends Activity{
                         // if this button is clicked, close
                         // current activity and open LoginActivity
                         Intent myIntent = new Intent(StartActivity.this, LoginActivity.class);
+                        LoginUser.getInstance().logout();
                         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myIntent);
                         finish();
