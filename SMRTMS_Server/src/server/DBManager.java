@@ -2,6 +2,8 @@ package server;
 
 import static jooqdb.Tables.USER;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,7 +24,15 @@ public class DBManager {
 	public void CreateUser ( RegistrationToken t ) {
 		DSLContext create = getConnection();
 		
-		create.insertInto(USER, USER.ID, USER.USERNAME, USER.EMAIL, USER.PASSWORD, USER.PASSWORD, USER.AVATAR, arg7, arg8, arg9)
+		try {
+			String hashpw = hash( t.password ).toString();
+			
+			create.insertInto(USER, USER.USERNAME, USER.EMAIL, USER.PASSWORD, USER.AVATAR)
+			.values(t.username, t.email, hashpw, "nicolascage.png");
+			
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getUserPassword ( String email ) {
@@ -55,5 +65,12 @@ public class DBManager {
 			return null;
 		}
 		
+	}
+	
+	public byte[] hash(String password) throws NoSuchAlgorithmException {
+	    MessageDigest sha256 = MessageDigest.getInstance("SHA-256");        
+	    byte[] passBytes = password.getBytes();
+	    byte[] passHash = sha256.digest(passBytes);
+	    return passHash;
 	}
 }

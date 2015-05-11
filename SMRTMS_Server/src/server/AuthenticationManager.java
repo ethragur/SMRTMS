@@ -16,7 +16,7 @@ public class AuthenticationManager {
 		
 		String pw = dbm.getUserPassword( t.email );
 		try {
-			String hashpw = hash( t.password ).toString();
+			String hashpw = dbm.hash( t.password ).toString();
 			
 			if (pw != null ) {
 				if ( t.password == pw ) 
@@ -35,12 +35,5 @@ public class AuthenticationManager {
 		
 		
 		return result;
-	}
-	
-	public byte[] hash(String password) throws NoSuchAlgorithmException {
-	    MessageDigest sha256 = MessageDigest.getInstance("SHA-256");        
-	    byte[] passBytes = password.getBytes();
-	    byte[] passHash = sha256.digest(passBytes);
-	    return passHash;
 	}
 }

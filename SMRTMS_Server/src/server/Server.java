@@ -112,7 +112,8 @@ public class Server extends WebSocketServer
     	switch (t.sTag) {
     		case "Authentication":
     			AuthenticationToken auth = (AuthenticationToken) t;
-    			authman.AuthenticateUser( auth );
+    			boolean result = authman.AuthenticateUser( auth );
+    			System.out.println("Legit login: " + result);
     			break;
     		case "Registration":
     			RegistrationToken reg = (RegistrationToken) t;
