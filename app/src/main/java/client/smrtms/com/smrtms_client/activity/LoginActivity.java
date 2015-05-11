@@ -69,14 +69,18 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mProgressView;
     private View mLoginFormView;
 
-    Client client;
+
 
     final Context context = this;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -104,7 +108,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        client = new Client();
+
 
         attemptConnection();
     }
@@ -294,14 +298,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
                 JSONReader reader = new JSONReader();
 
-                AuthenticationToken auth = new AuthenticationToken();
+                AuthenticationToken auth = new AuthenticationToken( mEmail, mPassword );
 
                 String authtoken = reader.JSONWriter(auth);
 
-                client.WriteMsg( authtoken );
+                Client.getInstance().WriteMsg(authtoken);
+
+                Thread.sleep(2000);
+
             } catch (InterruptedException e) {
                 return false;
             }
@@ -325,6 +331,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
                 finish();
+                LoginUser.getInstance().setIsLogin(true);
                 Intent myIntent = new Intent(LoginActivity.this,StartActivity.class);
                 LoginActivity.this.startActivity(myIntent);
                 finish();
@@ -354,7 +361,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private void attemptConnection() {
         // Try to connect to the Server
-        client.ConnectToServer();
+
 
         // Wait a little while and then check if it worked
         final Handler handler = new Handler();  // Creates a small thread to wait 1000ms in before checking the connection
@@ -363,7 +370,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             public void run() {
 
                 Toast toast;
-                if (client.isConnected()) {
+                if (Client.getInstance().isConnected()) {
                     toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
                     Log.d("Connection", "Success!");
                 } else {

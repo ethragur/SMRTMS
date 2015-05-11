@@ -4,17 +4,11 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import client.smrtms.com.smrtms_client.activity.MainScreen;
-import client.smrtms.com.smrtms_client.controller.JSONReader;
-import client.smrtms.com.smrtms_client.controller.User;
-
 /**
  * Created by effi on 5/4/15.
  */
 public class GSONReaderTest extends TestCase
 {
-
-
 
 
     @Test
