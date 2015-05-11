@@ -20,8 +20,8 @@ import java.net.URISyntaxException;
  */
 public class Client
 {
-    public static ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
-
+    public ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
+    public static Client inst;
     public Client ()
     {
         if(c == null) {
@@ -35,6 +35,20 @@ public class Client
         else
         {
 
+        }
+    }
+
+    public static Client getInstance()
+    {
+        if(inst != null)
+        {
+            return inst;
+        }
+        else
+        {
+            inst = new Client();
+            inst.ConnectToServer();
+            return inst;
         }
     }
 

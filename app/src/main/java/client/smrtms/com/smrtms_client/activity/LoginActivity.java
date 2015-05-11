@@ -69,7 +69,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mProgressView;
     private View mLoginFormView;
 
-    Client client;
+
 
     final Context context = this;
 
@@ -108,7 +108,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        client = new Client();
+
 
         attemptConnection();
     }
@@ -305,7 +305,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
                 String authtoken = reader.JSONWriter(auth);
 
-                client.WriteMsg( authtoken );
+                Client.getInstance().WriteMsg( authtoken );
             } catch (InterruptedException e) {
                 return false;
             }
@@ -358,7 +358,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private void attemptConnection() {
         // Try to connect to the Server
-        client.ConnectToServer();
+
 
         // Wait a little while and then check if it worked
         final Handler handler = new Handler();  // Creates a small thread to wait 1000ms in before checking the connection
@@ -367,7 +367,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             public void run() {
 
                 Toast toast;
-                if (client.isConnected()) {
+                if (Client.getInstance().isConnected()) {
                     toast = Toast.makeText(context, "Connection to Server Successful!", Toast.LENGTH_SHORT);
                     Log.d("Connection", "Success!");
                 } else {

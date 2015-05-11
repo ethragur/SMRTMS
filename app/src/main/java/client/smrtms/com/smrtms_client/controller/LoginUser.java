@@ -67,15 +67,7 @@ public class LoginUser extends User
             UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(),this.getLongitude(), LoginUser.getInstance().getID());
             JSONReader<UserUpdateToken> Writer = new JSONReader<>();
             String toSend = Writer.JSONWriter(userUpdateToken);
-            Client client = new Client();
-            if(client.isConnected())
-            {
-                client.WriteMsg(toSend);
-            }
-            else
-            {
-                Log.d("Connection", "UserUpdate couldn't be send");
-            }
+            Client.getInstance().WriteMsg(toSend);
 
         }
         else
