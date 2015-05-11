@@ -40,8 +40,9 @@ public class ConnectionManager extends WebSocketClient
     }
 
     @Override
-    public void onMessage( String message) {
-        System.out.println( "received: " + message );
+    public void onMessage( String message)
+    {
+        Log.d("ServerMsg", message);
     }
 
 
