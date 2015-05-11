@@ -17,9 +17,8 @@ public class DBManager {
 	String password = ""; //"sepmLoot";
 	String url = "jdbc:mysql://localhost:3306/SMRTMS";
 	
-	public void bla () {
-		// Connection is the only JDBC recource that we need
-		// PreparedStatement and ResultSet are handled by jOOQ, internally
+	public void getUserPassword ( String email ) {
+
 		DSLContext create = getConnection();
 			
 		Result<Record> result = create.select().from(USER).fetch();
