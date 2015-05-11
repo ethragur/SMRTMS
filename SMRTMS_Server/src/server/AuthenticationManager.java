@@ -14,11 +14,17 @@ public class AuthenticationManager {
 		boolean result = false;
 		
 		String pw = dbm.getUserPassword( t.id );
-		if (pw != null ) {
-			if ( t.password == pw ) 
-				result = true;
+		try {
+			String hashpw = hash( t.password ).toString();
+			
+			if (pw != null ) {
+				if ( t.password == pw ) 
+					result = true;
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	

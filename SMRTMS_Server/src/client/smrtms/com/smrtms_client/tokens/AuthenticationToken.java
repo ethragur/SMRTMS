@@ -7,6 +7,7 @@ public class AuthenticationToken extends Token
 {
 	public String id;
 	public String password;
+	public Boolean access;
 	
     public AuthenticationToken()
     {
