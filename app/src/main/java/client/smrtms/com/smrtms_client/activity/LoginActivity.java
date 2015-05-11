@@ -74,9 +74,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     final Context context = this;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);

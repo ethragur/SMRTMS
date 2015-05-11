@@ -5,18 +5,10 @@
 package client.smrtms.com.smrtms_client.controller;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import org.java_websocket.WebSocketImpl;
-import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_10;
-import org.java_websocket.framing.Framedata;
-import org.java_websocket.handshake.ServerHandshake;
-import org.java_websocket.drafts.Draft;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
+
 
 /**
  * Created by effi on 4/26/15.
@@ -28,14 +20,21 @@ import java.net.URL;
  */
 public class Client
 {
-    ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
+    public static ConnectionManager c = null; // more about drafts here: http://github.com/TooTallNate/Java-WebSocket/wiki/Drafts
 
-    public Client () {
-        try {
-            c = new ConnectionManager( new URI( "ws://phil-m.eu:8887" ), new Draft_10() );
-        } catch (URISyntaxException e) {
-            Log.d("Connection", "Wrong URI");
-            e.printStackTrace();
+    public Client ()
+    {
+        if(c == null) {
+            try {
+                c = new ConnectionManager(new URI("wss://phil-m.eu:8887"), new Draft_10());
+            } catch (URISyntaxException e) {
+                Log.d("Connection", "Wrong URI");
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+
         }
     }
 
@@ -55,8 +54,16 @@ public class Client
         c.sendmsg(text);
     }
 
-    public boolean isConnected() {
-        return c.isConnected();
+    public boolean isConnected()
+    {
+        if(c == null)
+        {
+            return false;
+        }
+        else
+        {
+            return c.isConnected();
+        }
     }
 
 }

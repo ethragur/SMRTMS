@@ -68,13 +68,13 @@ public class LoginUser extends User
             JSONReader<UserUpdateToken> Writer = new JSONReader<>();
             String toSend = Writer.JSONWriter(userUpdateToken);
             Client client = new Client();
-            if(client.ConnectToServer())
+            if(client.isConnected())
             {
                 client.WriteMsg(toSend);
             }
             else
             {
-                Log.d("Connection", "UserUpdate Couldn't be send");
+                Log.d("Connection", "UserUpdate couldn't be send");
             }
 
         }
