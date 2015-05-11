@@ -18,6 +18,7 @@ import org.jooq.tools.json.JSONObject;
 import org.jooq.tools.json.JSONParser;
 import org.jooq.util.derby.sys.Sys;
 
+import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 
 import com.google.gson.*;
@@ -56,6 +57,13 @@ public class Server extends WebSocketServer
     	JSONReader reader = new JSONReader<Token>();
     	Token t = (Token)reader.readJson( message , Token.class );
     	System.out.println( "Recieved Token tag: " + t.sTag );
+    	
+    	try {
+    		ParseToken(t);
+    	}
+    	catch (IOException e) {
+    		e.printStackTrace();
+    	}
     }
 
 
@@ -88,6 +96,18 @@ public class Server extends WebSocketServer
         }
     }
 
+    public Token ParseToken (Token t) throws IOException {
+    	Token result = null;
+    	switch (t.sTag) {
+    		case "Authentication":
+    			result = (AuthenticationToken) t;
+    	}
+    	
+    	if (result == null)
+    		throw new IOException();
+    	
+    	return result;
+    }
 
 
 
