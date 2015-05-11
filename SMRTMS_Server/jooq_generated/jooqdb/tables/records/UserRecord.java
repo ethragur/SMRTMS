@@ -28,7 +28,7 @@ import org.jooq.impl.TableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<Integer, String, String, String, Integer, String> {
 
-	private static final long serialVersionUID = 736919659;
+	private static final long serialVersionUID = -1675335139;
 
 	/**
 	 * Setter for <code>SMRTMS.User.ID</code>.
@@ -45,30 +45,30 @@ public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<I
 	}
 
 	/**
-	 * Setter for <code>SMRTMS.User.First_Name</code>.
+	 * Setter for <code>SMRTMS.User.Username</code>.
 	 */
-	public void setFirstName(String value) {
+	public void setUsername(String value) {
 		setValue(1, value);
 	}
 
 	/**
-	 * Getter for <code>SMRTMS.User.First_Name</code>.
+	 * Getter for <code>SMRTMS.User.Username</code>.
 	 */
-	public String getFirstName() {
+	public String getUsername() {
 		return (String) getValue(1);
 	}
 
 	/**
-	 * Setter for <code>SMRTMS.User.Last_Name</code>.
+	 * Setter for <code>SMRTMS.User.Email</code>.
 	 */
-	public void setLastName(String value) {
+	public void setEmail(String value) {
 		setValue(2, value);
 	}
 
 	/**
-	 * Getter for <code>SMRTMS.User.Last_Name</code>.
+	 * Getter for <code>SMRTMS.User.Email</code>.
 	 */
-	public String getLastName() {
+	public String getEmail() {
 		return (String) getValue(2);
 	}
 
@@ -147,7 +147,7 @@ public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<I
 	 */
 	@Override
 	public Field<String> field2() {
-		return User.USER.FIRST_NAME;
+		return User.USER.USERNAME;
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<I
 	 */
 	@Override
 	public Field<String> field3() {
-		return User.USER.LAST_NAME;
+		return User.USER.EMAIL;
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<I
 	 */
 	@Override
 	public String value2() {
-		return getFirstName();
+		return getUsername();
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<I
 	 */
 	@Override
 	public String value3() {
-		return getLastName();
+		return getEmail();
 	}
 
 	/**
@@ -244,7 +244,7 @@ public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<I
 	 */
 	@Override
 	public UserRecord value2(String value) {
-		setFirstName(value);
+		setUsername(value);
 		return this;
 	}
 
@@ -253,7 +253,7 @@ public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<I
 	 */
 	@Override
 	public UserRecord value3(String value) {
-		setLastName(value);
+		setEmail(value);
 		return this;
 	}
 
@@ -312,12 +312,12 @@ public class UserRecord extends TableRecordImpl<UserRecord> implements Record6<I
 	/**
 	 * Create a detached, initialised UserRecord
 	 */
-	public UserRecord(Integer id, String firstName, String lastName, String password, Integer position, String avatar) {
+	public UserRecord(Integer id, String username, String email, String password, Integer position, String avatar) {
 		super(User.USER);
 
 		setValue(0, id);
-		setValue(1, firstName);
-		setValue(2, lastName);
+		setValue(1, username);
+		setValue(2, email);
 		setValue(3, password);
 		setValue(4, position);
 		setValue(5, avatar);

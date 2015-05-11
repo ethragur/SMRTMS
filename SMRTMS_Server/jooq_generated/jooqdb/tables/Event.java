@@ -14,6 +14,7 @@ import jooqdb.Smrtms;
 import jooqdb.tables.records.EventRecord;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -33,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Event extends TableImpl<EventRecord> {
 
-	private static final long serialVersionUID = 119268144;
+	private static final long serialVersionUID = -2084326360;
 
 	/**
 	 * The reference instance of <code>SMRTMS.Event</code>
@@ -51,12 +52,12 @@ public class Event extends TableImpl<EventRecord> {
 	/**
 	 * The column <code>SMRTMS.Event.ID</code>.
 	 */
-	public final TableField<EventRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<EventRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>SMRTMS.Event.Name</code>.
 	 */
-	public final TableField<EventRecord, String> NAME = createField("Name", org.jooq.impl.SQLDataType.CHAR.length(1), this, "");
+	public final TableField<EventRecord, String> NAME = createField("Name", org.jooq.impl.SQLDataType.CHAR.length(50), this, "");
 
 	/**
 	 * The column <code>SMRTMS.Event.Description</code>.
@@ -93,6 +94,14 @@ public class Event extends TableImpl<EventRecord> {
 
 	private Event(String alias, Table<EventRecord> aliased, Field<?>[] parameters) {
 		super(alias, Smrtms.SMRTMS, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<EventRecord, Integer> getIdentity() {
+		return Keys.IDENTITY_EVENT;
 	}
 
 	/**

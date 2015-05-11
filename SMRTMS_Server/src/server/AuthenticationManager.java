@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import server.DBManager;
 
 public class AuthenticationManager {
@@ -13,7 +14,7 @@ public class AuthenticationManager {
 	public boolean AuthenticateUser( AuthenticationToken t ) {
 		boolean result = false;
 		
-		String pw = dbm.getUserPassword( t.id );
+		String pw = dbm.getUserPassword( t.email );
 		try {
 			String hashpw = hash( t.password ).toString();
 			
@@ -25,6 +26,14 @@ public class AuthenticationManager {
 			e.printStackTrace();
 		}
 
+		return result;
+	}
+	
+	public boolean RegisterUser ( RegistrationToken t ) {
+		boolean result = false;
+		
+		
+		
 		return result;
 	}
 	

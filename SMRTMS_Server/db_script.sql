@@ -1,14 +1,14 @@
-DROP database SMRTMS;
+DROP database IF EXISTS SMRTMS;
 CREATE database IF NOT EXISTS SMRTMS;
 USE SMRTMS;
 
 CREATE TABLE IF NOT EXISTS User 
 (	ID int unique auto_increment,
-	First_Name char(50),
-    Last_Name char(50),
-    Password char(20),
-    Position int,
-    Avatar char(15)
+	Username char(50),
+  	Email char(50),
+    	Password char(20),
+	Position int, 
+	Avatar char(15)
 );
     
 CREATE TABLE IF NOT EXISTS User_Friends
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Event_Attendees
 );
 
 INSERT INTO User
-(First_Name, Last_Name, `Password`, Position, Avatar) VALUES
-("Hubert", "Herbert", "123456", 3189, "f34tg45gh34.png");
+(Username, Email, `Password`, Position, Avatar) VALUES
+("Hubert", "h@gmail.com", "123456", 3189, "f34tg45gh34.png");
 
 INSERT INTO Event_Attendees (User_ID, Event_ID) VALUES (1, 2);

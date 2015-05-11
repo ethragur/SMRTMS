@@ -11,6 +11,7 @@ import jooqdb.tables.User;
 import jooqdb.tables.records.EventRecord;
 import jooqdb.tables.records.UserRecord;
 
+import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
 
@@ -33,6 +34,8 @@ public class Keys {
 	// IDENTITY definitions
 	// -------------------------------------------------------------------------
 
+	public static final Identity<EventRecord, Integer> IDENTITY_EVENT = Identities0.IDENTITY_EVENT;
+	public static final Identity<UserRecord, Integer> IDENTITY_USER = Identities0.IDENTITY_USER;
 
 	// -------------------------------------------------------------------------
 	// UNIQUE and PRIMARY KEY definitions
@@ -49,6 +52,11 @@ public class Keys {
 	// -------------------------------------------------------------------------
 	// [#1459] distribute members to avoid static initialisers > 64kb
 	// -------------------------------------------------------------------------
+
+	private static class Identities0 extends AbstractKeys {
+		public static Identity<EventRecord, Integer> IDENTITY_EVENT = createIdentity(Event.EVENT, Event.EVENT.ID);
+		public static Identity<UserRecord, Integer> IDENTITY_USER = createIdentity(User.USER, User.USER.ID);
+	}
 
 	private static class UniqueKeys0 extends AbstractKeys {
 		public static final UniqueKey<EventRecord> KEY_EVENT_ID = createUniqueKey(Event.EVENT, Event.EVENT.ID);

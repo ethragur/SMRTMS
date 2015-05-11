@@ -20,7 +20,9 @@ public class DBManager {
 	String url = "jdbc:mysql://localhost:3306/SMRTMS";
 	
 	public void CreateUser ( RegistrationToken t ) {
+		DSLContext create = getConnection();
 		
+		create.insertInto(USER, USER.ID, USER.USERNAME, USER.EMAIL, USER.PASSWORD, USER.PASSWORD, USER.AVATAR, arg7, arg8, arg9)
 	}
 	
 	public String getUserPassword ( String email ) {
@@ -30,7 +32,7 @@ public class DBManager {
 		Result<Record> result = create.select().from(USER).fetch();
 		
 		for (Record r : result) {
-			if (r.getValue(USER.ID).toString() == email)
+			if (r.getValue(USER.EMAIL).toString() == email)
 				return r.getValue(USER.PASSWORD).toString();
 			/*
 			Integer id = r.getValue(USER.ID);
