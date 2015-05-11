@@ -1,5 +1,7 @@
 package server;
 
+import static jooqdb.Tables.USER;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -7,6 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Collection;
 
 import org.java_websocket.WebSocket;
@@ -14,6 +18,11 @@ import org.java_websocket.WebSocketImpl;
 import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 import org.jooq.tools.json.JSONObject;
 import org.jooq.tools.json.JSONParser;
 import org.jooq.util.derby.sys.Sys;
@@ -34,6 +43,32 @@ public class Server extends WebSocketServer
 
     public Server( InetSocketAddress address ) {
         super(address);
+    }
+    
+    private void OpenDBConnection() {
+    	String userName = "root";
+		String password = ""; //"sepmLoot";
+		String url = "jdbc:mysql://localhost:3306/SMRTMS";
+		
+		// Connection is the only JDBC recource that we need
+		// PreparedStatement and ResultSet are handled by jOOQ, internally
+		try (Connection conn = DriverManager.getConnection(url, userName, password)) {
+			DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
+			Result<Record> result = create.select().from(USER).fetch();
+			
+			for (Record r : result) {
+				Integer id = r.getValue(USER.ID);
+				String firstName = r.getValue(USER.FIRST_NAME);
+				String lastName = r.getValue(USER.LAST_NAME);
+				
+				System.out.println("ID: " + id + " first name: " + firstName + " last name: " + lastName);
+			}
+		}
+		
+		// Simple exception handling
+		catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
 
@@ -59,12 +94,7 @@ public class Server extends WebSocketServer
     	Token t = (Token)reader.readJson( message , Token.class );
     	System.out.println( "Recieved Token tag: " + t.sTag );
     	
-    	try {
-    		ParseToken(t);
-    	}
-    	catch (IOException e) {
-    		e.printStackTrace();
-    	}
+    	ParseToken(t);
     }
 
 
