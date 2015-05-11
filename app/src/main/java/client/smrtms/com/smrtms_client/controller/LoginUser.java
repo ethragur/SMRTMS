@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import client.smrtms.com.smrtms_client.tokens.LogoutToken;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
 
 /**
@@ -92,9 +93,15 @@ public class LoginUser extends User
 
     public void logout()
     {
-        //TODO Logout Handling
         isLogin = false;
+        LogoutToken lt = new LogoutToken();
+        //Send Server a logout token
+        JSONReader<LogoutToken> Writer = new JSONReader<>();
+        String toSend = Writer.JSONWriter(lt);
+        Client.getInstance().WriteMsg(toSend);
+        //cancel update timer
         inst.timer.cancel();
+        //clear Instance
         inst = null;
     }
 
