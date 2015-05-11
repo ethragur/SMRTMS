@@ -20,6 +20,7 @@ import org.jooq.util.derby.sys.Sys;
 
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
+import server.AuthenticationManager;
 
 import com.google.gson.*;
 
@@ -96,17 +97,14 @@ public class Server extends WebSocketServer
         }
     }
 
-    public Token ParseToken (Token t) throws IOException {
-    	Token result = null;
+    public void ParseToken (Token t) {
     	switch (t.sTag) {
     		case "Authentication":
-    			result = (AuthenticationToken) t;
+    			AuthenticationToken auth = (AuthenticationToken) t;
+    			AuthenticationManager authman = new AuthenticationManager();
+    			authman.AuthenticateUser( auth );
     	}
-    	
-    	if (result == null)
-    		throw new IOException();
-    	
-    	return result;
+
     }
 
 
