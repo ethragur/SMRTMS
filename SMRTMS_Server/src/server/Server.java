@@ -42,14 +42,12 @@ public class Server extends WebSocketServer
     public Server( int port ) throws UnknownHostException {
         super(new InetSocketAddress(port));
         dbm = new DBManager();
-        dbm.bla();
     }
 
 
     public Server( InetSocketAddress address ) {
         super(address);
         dbm = new DBManager();
-        dbm.bla();
     }
 
 

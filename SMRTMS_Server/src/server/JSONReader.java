@@ -20,9 +20,6 @@ public class JSONReader<T>
 
         T obj = gson.fromJson(file, sryForThat );
         return obj;
-
-
-
     }
 
     //Takes an Obejct and Converts it to a JSON string
