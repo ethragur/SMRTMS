@@ -17,19 +17,24 @@ public class DBManager {
 	String password = ""; //"sepmLoot";
 	String url = "jdbc:mysql://localhost:3306/SMRTMS";
 	
-	public void getUserPassword ( String email ) {
+	public String getUserPassword ( String email ) {
 
 		DSLContext create = getConnection();
 			
 		Result<Record> result = create.select().from(USER).fetch();
 		
 		for (Record r : result) {
+			if (r.getValue(USER.ID).toString() == email)
+				return r.getValue(USER.PASSWORD).toString();
+			/*
 			Integer id = r.getValue(USER.ID);
 			String firstName = r.getValue(USER.FIRST_NAME);
 			String lastName = r.getValue(USER.LAST_NAME);
 			
-			System.out.println("ID: " + id + " first name: " + firstName + " last name: " + lastName);
+			System.out.println("ID: " + id + " first name: " + firstName + " last name: " + lastName); */
 		}
+		
+		return null;
 
 	}
 	
