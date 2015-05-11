@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Clubbr</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_activity_main_screen">Clubbr</string>
 
     <string name="title_activity_register">Register</string>
     <string name="title_activity_settings">Settings</string>

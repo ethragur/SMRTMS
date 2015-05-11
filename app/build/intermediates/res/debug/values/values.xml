@@ -218,7 +218,7 @@
     <string name="action_sign_in_short">Sign in</string>
     <!-- From: file:/home/michael/workspace/SMRTMS/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="app_name">SMRTMS_Client</string>
+    <string name="app_name">Clubbr</string>
     <!-- From: file:/home/michael/workspace/SMRTMS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text">An application requires an update to the Android Wear app.</string>
@@ -288,7 +288,7 @@ available. Please contact the developer for assistance.</string>
     <string name="title_activity_login">Sign in</string>
     <!-- From: file:/home/michael/workspace/SMRTMS/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_activity_main_screen">Clubbr</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_settings">Settings</string>
