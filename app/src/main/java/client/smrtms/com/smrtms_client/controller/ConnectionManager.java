@@ -11,6 +11,8 @@ import org.java_websocket.handshake.ServerHandshake;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import client.smrtms.com.smrtms_client.tokens.Token;
+
 /**
  * Created by effi on 4/28/15.
  */
@@ -43,6 +45,13 @@ public class ConnectionManager extends WebSocketClient
     public void onMessage( String message)
     {
         Log.d("ServerMsg", message);
+        JSONReader<Token> reader = new JSONReader<>();
+        Token t = reader.readJson(message, Token.class);
+        ServerControl s = new ServerControl(message, t);
+        Thread x = new Thread(s);
+
+        x.start();
+
     }
 
 

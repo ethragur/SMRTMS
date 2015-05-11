@@ -44,6 +44,7 @@ public class Server extends WebSocketServer
     @Override
     public void onMessage( WebSocket conn, String message ) {
         this.sendToAll( message );
+
         System.out.println( conn + ": " + message );
     }
 
@@ -67,6 +68,7 @@ public class Server extends WebSocketServer
         while ( true ) {
             String in = sysin.readLine();
             s.sendToAll( in );
+
             if( in.equals( "exit" ) ) {
                 s.stop();
                 break;
