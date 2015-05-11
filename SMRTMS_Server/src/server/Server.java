@@ -30,45 +30,26 @@ import org.jooq.util.derby.sys.Sys;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 import server.AuthenticationManager;
+import server.DBManager;
 
 import com.google.gson.*;
 
 public class Server extends WebSocketServer
 {
 
+	private DBManager dbm;
+	
     public Server( int port ) throws UnknownHostException {
         super(new InetSocketAddress(port));
+        dbm = new DBManager();
+        dbm.bla();
     }
 
 
     public Server( InetSocketAddress address ) {
         super(address);
-    }
-    
-    private void OpenDBConnection() {
-    	String userName = "root";
-		String password = ""; //"sepmLoot";
-		String url = "jdbc:mysql://localhost:3306/SMRTMS";
-		
-		// Connection is the only JDBC recource that we need
-		// PreparedStatement and ResultSet are handled by jOOQ, internally
-		try (Connection conn = DriverManager.getConnection(url, userName, password)) {
-			DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-			Result<Record> result = create.select().from(USER).fetch();
-			
-			for (Record r : result) {
-				Integer id = r.getValue(USER.ID);
-				String firstName = r.getValue(USER.FIRST_NAME);
-				String lastName = r.getValue(USER.LAST_NAME);
-				
-				System.out.println("ID: " + id + " first name: " + firstName + " last name: " + lastName);
-			}
-		}
-		
-		// Simple exception handling
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+        dbm = new DBManager();
+        dbm.bla();
     }
 
 
