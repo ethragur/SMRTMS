@@ -30,7 +30,9 @@ public class LoginUser extends User
 
     public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
     {
+
         super(Username, ID, new Double(0), new Double(0));
+        isLogin = new Boolean(false);
         mContext = Context;
         gpsTracker = new GPSTracker(Context);
         friendList = new ArrayList<User>();
