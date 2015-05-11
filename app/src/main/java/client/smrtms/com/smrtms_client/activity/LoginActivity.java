@@ -305,7 +305,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
                 String authtoken = reader.JSONWriter(auth);
 
-                Client.getInstance().WriteMsg( authtoken );
+                Client.getInstance().WriteMsg(authtoken);
             } catch (InterruptedException e) {
                 return false;
             }
@@ -329,6 +329,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
                 finish();
+                LoginUser.getInstance().setIsLogin(true);
                 Intent myIntent = new Intent(LoginActivity.this,StartActivity.class);
                 LoginActivity.this.startActivity(myIntent);
                 finish();

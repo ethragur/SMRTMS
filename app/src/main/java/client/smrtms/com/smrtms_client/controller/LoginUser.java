@@ -21,7 +21,10 @@ public class LoginUser extends User
     private static LoginUser inst;
     private GPSTracker gpsTracker;
     private Context mContext;
+    private Boolean isLogin;
 
+
+    Timer timer;
     private List<User> friendList;
 
     public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
@@ -30,7 +33,7 @@ public class LoginUser extends User
         mContext = Context;
         gpsTracker = new GPSTracker(Context);
         friendList = new ArrayList<User>();
-        Timer timer = new Timer();
+        timer = new Timer();
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -60,20 +63,21 @@ public class LoginUser extends User
     // get current GPS Data and send it to the server
     private synchronized void getNewCoordinates()
     {
-        if (gpsTracker.canGetLocation()) {
-            this.setLatitude(gpsTracker.getLatitude());
-            this.setLongitude(gpsTracker.getLongitude());
-
-            UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(),this.getLongitude(), LoginUser.getInstance().getID());
-            JSONReader<UserUpdateToken> Writer = new JSONReader<>();
-            String toSend = Writer.JSONWriter(userUpdateToken);
-            Client.getInstance().WriteMsg(toSend);
-
-        }
-        else
+        if(isLogin)
         {
-            //ToDo: throw some exception when it can't get GPS Data
-            Log.d("Error", "Can't get GPS data");
+            if (gpsTracker.canGetLocation()) {
+                this.setLatitude(gpsTracker.getLatitude());
+                this.setLongitude(gpsTracker.getLongitude());
+
+                UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(), this.getLongitude(), LoginUser.getInstance().getID());
+                JSONReader<UserUpdateToken> Writer = new JSONReader<>();
+                String toSend = Writer.JSONWriter(userUpdateToken);
+                Client.getInstance().WriteMsg(toSend);
+
+            } else {
+                //ToDo: throw some exception when it can't get GPS Data
+                Log.d("Error", "Can't get GPS data");
+            }
         }
     }
 
@@ -85,5 +89,22 @@ public class LoginUser extends User
     public void addFriend(User newFriend) {
         friendList.add(newFriend);
     }
+
+    public void logout()
+    {
+        //TODO Logout Handling
+        isLogin = false;
+        inst.timer.cancel();
+        inst = null;
+    }
+
+    public Boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setIsLogin(Boolean isLogin) {
+        this.isLogin = isLogin;
+    }
+
 
 }
