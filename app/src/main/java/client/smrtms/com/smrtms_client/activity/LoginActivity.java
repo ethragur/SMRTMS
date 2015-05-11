@@ -298,14 +298,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
                 JSONReader reader = new JSONReader();
 
-                AuthenticationToken auth = new AuthenticationToken();
+                AuthenticationToken auth = new AuthenticationToken( mEmail, mPassword );
 
                 String authtoken = reader.JSONWriter(auth);
 
                 Client.getInstance().WriteMsg(authtoken);
+
+                Thread.sleep(2000);
+
             } catch (InterruptedException e) {
                 return false;
             }

@@ -5,7 +5,12 @@ package client.smrtms.com.smrtms_client.tokens;
  */
 public class RegistrationToken extends Token
 {
-    public RegistrationToken()
+    public String email;
+	public String password;
+	public String username;
+    public boolean result;
+	
+	public RegistrationToken()
     {
         super("Registration");
     }

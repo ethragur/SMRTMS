@@ -5,8 +5,15 @@ package client.smrtms.com.smrtms_client.tokens;
  */
 public class AuthenticationToken extends Token
 {
-    public AuthenticationToken()
+	public String email;
+	public String password;
+	public boolean access;
+	
+    public AuthenticationToken(String mail, String pw)
     {
         super("Authentication");
+        email = mail;
+        password = pw;
+        access = false;
     }
 }
