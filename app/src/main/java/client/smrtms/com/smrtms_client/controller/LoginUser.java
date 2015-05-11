@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
+
 /**
  * Created by effi on 4/13/15.
  * Singleton of the current active User
@@ -55,12 +57,25 @@ public class LoginUser extends User
 
         return inst;
     }
-    // get current GPS Data
+    // get current GPS Data and send it to the server
     private synchronized void getNewCoordinates()
     {
         if (gpsTracker.canGetLocation()) {
             this.setLatitude(gpsTracker.getLatitude());
             this.setLongitude(gpsTracker.getLongitude());
+
+            UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(),this.getLongitude(), LoginUser.getInstance().getID());
+            JSONReader<UserUpdateToken> Writer = new JSONReader<>();
+            String toSend = Writer.JSONWriter(userUpdateToken);
+            Client client = new Client();
+            if(client.ConnectToServer())
+            {
+                client.WriteMsg(toSend);
+            }
+            else
+            {
+                Log.d("Connection", "UserUpdate Couldn't be send");
+            }
 
         }
         else

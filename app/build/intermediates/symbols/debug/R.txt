@@ -455,6 +455,7 @@ int id action_mode_bar 0x7f0a0043
 int id action_mode_bar_stub 0x7f0a0042
 int id action_mode_close_button 0x7f0a0035
 int id activity_chooser_view_content 0x7f0a0036
+int id addFriend 0x7f0a0070
 int id adjust_height 0x7f0a0017
 int id adjust_width 0x7f0a0018
 int id always 0x7f0a001c
