@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import client.smrtms.com.smrtms_client.R;
 
@@ -27,26 +28,20 @@ public class EventFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        // This will create the LinearLayout
-        LinearLayout ll = new LinearLayout(getActivity());
-        ll.setOrientation(LinearLayout.VERTICAL);
-
-        // Configuring the width and height of the linear layout.
-        LinearLayout.LayoutParams llLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        ll.setLayoutParams(llLP);
-
-        // Configuring the width and height of the buttons
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
+        // This will create the RelativeLayout
+        RelativeLayout layout = new RelativeLayout(getActivity());
+        layout.setLayoutParams(new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 
         //add friend button
         Button addFriend = new Button(getActivity());
         addFriend.setText("+ Event");
-        addFriend.setLayoutParams(lp);
-        ll.addView(addFriend);
+        RelativeLayout.LayoutParams paramAdd = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //paramAdd.addRule(RelativeLayout.BELOW,"BUTTON ABOVE");
+        addFriend.setLayoutParams(paramAdd);
+        layout.addView(addFriend);
 
 
         ViewGroup viewGroup = (ViewGroup) view;
-        viewGroup.addView(ll);
+        viewGroup.addView(layout);
     }
     }
