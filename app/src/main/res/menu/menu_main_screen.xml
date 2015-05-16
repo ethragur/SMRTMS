@@ -15,4 +15,8 @@
         android:id="@+id/addFriend"
         android:title="Add Friend">
     </item>
+    <item
+        android:id="@+id/addEvent"
+        android:title="New Event">
+    </item>
 </menu>
