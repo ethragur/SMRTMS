@@ -1,6 +1,5 @@
 package client.smrtms.com.smrtms_client.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,14 +15,14 @@ import android.widget.RelativeLayout;
 
 
 import com.firebase.androidchat.ChatActivity;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
 import client.smrtms.com.smrtms_client.R;
-import client.smrtms.com.smrtms_client.activity.MapsActivity;
+import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
-
 
 
 public class ContactsFragment extends Fragment {
@@ -79,9 +78,13 @@ public class ContactsFragment extends Fragment {
             temp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*switch t Map fragment*/
+                    // send message
+                    sendCoordinates.setCoordinates(new LatLng(friend.getLatitude(), friend.getLongitude()));
+                    // switch t Map fragment
                     TabsFragment tf = (TabsFragment) getParentFragment();
                     tf.setTabPostion(0);
+
+
                 }
             });
             mButton.add(temp);
