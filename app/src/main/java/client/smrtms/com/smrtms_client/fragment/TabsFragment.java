@@ -95,6 +95,7 @@ public class TabsFragment extends Fragment {
      */
     private List<PagerItem> mTabs = new ArrayList<PagerItem>();
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,6 +140,7 @@ public class TabsFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment, container, false);
     }
+
 
     // BEGIN_INCLUDE (fragment_onviewcreated)
 
@@ -186,6 +188,11 @@ public class TabsFragment extends Fragment {
         // END_INCLUDE (setup_slidingtablayout)
     }
     // END_INCLUDE (fragment_onviewcreated)
+
+
+    public void setTabPostion (int postion) {
+        mViewPager.setCurrentItem(postion);
+    }
 
     /**
      * The {@link FragmentPagerAdapter} used to display pages in this sample.Each page is

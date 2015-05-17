@@ -1,5 +1,6 @@
 package client.smrtms.com.smrtms_client.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.firebase.androidchat.ChatActivity;
 import java.util.ArrayList;
 
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.activity.MapsActivity;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
 
@@ -74,6 +76,14 @@ public class ContactsFragment extends Fragment {
             temp = new Button(getActivity());
             temp.setText("Map");
             temp.setId(id++);
+            temp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*switch t Map fragment*/
+                    TabsFragment tf = (TabsFragment) getParentFragment();
+                    tf.setTabPostion(0);
+                }
+            });
             mButton.add(temp);
         }
 
@@ -93,7 +103,6 @@ public class ContactsFragment extends Fragment {
             } else {
                 paramFriend.addRule(RelativeLayout.BELOW,fButton.get(i-1).getId());
                 fButton.get(i).setLayoutParams(paramFriend);
-                System.out.println(fButton.get(i).getText() +" is under" + fButton.get(i-1).getText());
                 paramMap.addRule(RelativeLayout.BELOW,mButton.get(i-1).getId());
                 mButton.get(i).setLayoutParams(paramMap);
             }

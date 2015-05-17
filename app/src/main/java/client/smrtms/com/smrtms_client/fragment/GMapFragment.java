@@ -62,4 +62,12 @@ public class GMapFragment extends SupportMapFragment
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println(getActivity().getIntent().getExtras());
+    }
+
+
+
 }
