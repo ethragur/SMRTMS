@@ -1727,6 +1727,7 @@ containing a value of this type.
         public static final int action_mode_bar_stub=0x7f0a0042;
         public static final int action_mode_close_button=0x7f0a0035;
         public static final int activity_chooser_view_content=0x7f0a0036;
+        public static final int addEvent=0x7f0a0071;
         public static final int addFriend=0x7f0a0070;
         public static final int adjust_height=0x7f0a0017;
         public static final int adjust_width=0x7f0a0018;
