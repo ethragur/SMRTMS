@@ -77,7 +77,7 @@ public class Server extends WebSocketServer
     	Token t = (Token)reader.readJson( message , Token.class );
     	System.out.println( "Recieved Token tag: " + t.sTag );
     	
-    	ParseToken(t, message);
+    	ParseToken(t, message, conn);
     }
 
 
@@ -110,7 +110,7 @@ public class Server extends WebSocketServer
         }
     }
 
-    public void ParseToken (Token t, String msg ) {
+    public void ParseToken (Token t, String msg, WebSocket conn ) {
     	if (dbm.isConnected) {
     		JSONReader reader = new JSONReader<Token>();
     		
@@ -118,7 +118,7 @@ public class Server extends WebSocketServer
 	    		case "Authentication":
 	    	    	AuthenticationToken auth = (AuthenticationToken)reader.readJson( msg , AuthenticationToken.class );
 	    			
-	    	    	HandleAuthToken(auth);
+	    	    	HandleAuthToken(auth, conn);
 	    			break;
 	    		case "Registration":
 	    			RegistrationToken reg = (RegistrationToken)reader.readJson( msg , RegistrationToken.class );
@@ -131,9 +131,13 @@ public class Server extends WebSocketServer
     	}
     }
     
-    private void HandleAuthToken( AuthenticationToken auth ) {
+    private void HandleAuthToken( AuthenticationToken auth, WebSocket conn ) {
     	boolean result = authman.AuthenticateUser( auth );
 		System.out.println("Legit login: " + result);
+		auth.access = result;
+		JSONReader reader = new JSONReader<Token>();
+		String answer = reader.JSONWriter(auth);
+		conn.send( answer );
     }
     
     private void HandleRegistToken ( RegistrationToken reg ) {
