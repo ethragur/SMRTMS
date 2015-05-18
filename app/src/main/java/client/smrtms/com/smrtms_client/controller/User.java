@@ -29,9 +29,9 @@ public class User
         return ID;
     }
 
-    public void setID(String ID) {
+  /*  public void setID(String ID) {
         this.ID = ID;
-    }
+    }*/
 
     public String getUsername() {
         return Username;

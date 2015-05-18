@@ -33,10 +33,6 @@ public class Event {
         return ID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     public String getName() {
         return name;
     }
@@ -71,9 +67,5 @@ public class Event {
 
     public ArrayList<User> getAttendees() {
         return attendees;
-    }
-
-    public void setAttendees(ArrayList<User> attendees) {
-        this.attendees = attendees;
     }
 }
