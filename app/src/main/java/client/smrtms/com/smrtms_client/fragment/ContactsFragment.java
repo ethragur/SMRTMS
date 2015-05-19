@@ -15,13 +15,14 @@ import android.widget.RelativeLayout;
 
 
 import com.firebase.androidchat.ChatActivity;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
-
 
 
 public class ContactsFragment extends Fragment {
@@ -74,6 +75,18 @@ public class ContactsFragment extends Fragment {
             temp = new Button(getActivity());
             temp.setText("Map");
             temp.setId(id++);
+            temp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // send message
+                    sendCoordinates.setCoordinates(new LatLng(friend.getLatitude(), friend.getLongitude()));
+                    // switch t Map fragment
+                    TabsFragment tf = (TabsFragment) getParentFragment();
+                    tf.setTabPostion(0);
+
+
+                }
+            });
             mButton.add(temp);
         }
 
@@ -93,7 +106,6 @@ public class ContactsFragment extends Fragment {
             } else {
                 paramFriend.addRule(RelativeLayout.BELOW,fButton.get(i-1).getId());
                 fButton.get(i).setLayoutParams(paramFriend);
-                System.out.println(fButton.get(i).getText() +" is under" + fButton.get(i-1).getText());
                 paramMap.addRule(RelativeLayout.BELOW,mButton.get(i-1).getId());
                 mButton.get(i).setLayoutParams(paramMap);
             }

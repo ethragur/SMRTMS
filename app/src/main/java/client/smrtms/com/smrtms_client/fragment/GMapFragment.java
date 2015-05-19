@@ -1,24 +1,16 @@
 package client.smrtms.com.smrtms_client.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import client.smrtms.com.smrtms_client.R;
-import client.smrtms.com.smrtms_client.activity.MainScreen;
-import client.smrtms.com.smrtms_client.activity.MapsActivity;
+import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
 
@@ -53,13 +45,30 @@ public class GMapFragment extends SupportMapFragment
         //clear Map, so that all the new Markers will be drawn
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude())).title("Your Position"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude())));
+       // mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude())));
+        mapZoom(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude()));
         //draw map for each Friend
 
         for(User friend: LoginUser.getInstance().getFriendList())
         {
             mMap.addMarker(new MarkerOptions().position(new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getUsername()));
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LatLng coordinate;
+        if ((coordinate = sendCoordinates.getCoordinates()) != null) {
+            mapZoom(coordinate);
+        } else {
+           mapZoom(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude()));
+        }
+    }
+
+    private void mapZoom(LatLng coordinate) {
+        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(coordinate, 5);
+        mMap.animateCamera(location);
     }
 
 }
