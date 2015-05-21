@@ -39,6 +39,8 @@ public class MainScreen extends ActionBarActivity {
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
         }
+
+
     }
 
     @Override
