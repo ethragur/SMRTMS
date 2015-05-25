@@ -47,11 +47,12 @@ public class DBManager {
 				//.set(USER.ID, Integer.parseInt(t.sId))
 				.set(USER.USERNAME, t.username)
 				.set(USER.EMAIL, t.email)
-				.set(USER.PASSWORD, hashpw)
+				.set(USER.PASSWORD, /*hashpw*/ t.password)
 				.set(USER.AVATAR, "nicolascage.png")
 				.execute();
 			
 			System.out.println("New User created!");
+			//System.out.println("a in has is: " + hash( "a" ).toString());
 			
 			printUser();
 			

@@ -29,11 +29,14 @@ public class AuthenticationManager {
 		try {
 			String hashpw = dbm.hash( t.password ).toString();
 			
+			System.out.println("Comparing pw to: " + hashpw);
+			//System.out.println("a in has is: " + dbm.hash( "a" ).toString());
+			
 			if (pw != null ) {
-				if ( hashpw.compareTo(pw) == 0 ) {
+				if ( /*hashpw*/ t.password.compareTo(pw) == 0 ) {
 					result = true;
 					System.out.println("-------------------------------");
-					System.out.println("AUTHENTICATED USER SUCCESSFULLY!!");
+					System.out.println("AUTHENTICATED USER SUCCESSFULLY!!");	
 					System.out.println("-------------------------------");
 				}
 			}
