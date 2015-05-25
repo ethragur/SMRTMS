@@ -45,4 +45,10 @@ public class RegisterActivity extends ActionBarActivity {
         Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         RegisterActivity.this.startActivity(myIntent);
     }
+
+
+    public void onRegisterClick(View view)
+    {
+
+    }
 }

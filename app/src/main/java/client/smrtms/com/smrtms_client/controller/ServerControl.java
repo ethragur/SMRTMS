@@ -37,11 +37,14 @@ public class ServerControl implements Runnable
                 AuthenticationToken authT = reader.readJson(input, AuthenticationToken.class);
                 if(authT.access)
                 {
+                    LoginUser.getInstance().setIsLogin(true);
+                    LoginUser.getInstance().setID(authT.id);
                     Log.d("Login", "Login Successful");
                 }
                 else
                 {
                     Log.d("Login", "Wrong Uname or Password");
+                    LoginUser.getInstance().setIsLogin(false);
                 }
 
                 break;
