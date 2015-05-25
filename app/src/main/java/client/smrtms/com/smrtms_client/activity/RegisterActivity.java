@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import java.security.MessageDigest;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.JSONReader;

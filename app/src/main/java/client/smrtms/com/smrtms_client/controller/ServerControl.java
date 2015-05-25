@@ -62,7 +62,7 @@ public class ServerControl implements Runnable
         }
         else
         {
-            Log.d("Login", "Wrong Uname or Password");
+            Log.d("Login", "Wrong Username or Password");
             LoginUser.getInstance().setIsLogin(false);
         }
 

@@ -2,6 +2,7 @@ package client.smrtms.com.smrtms_client.tokens;
 
 /**
  * Created by effi on 11.05.15.
+ * LogoutRequest
  */
 public class LogoutToken extends Token
 {

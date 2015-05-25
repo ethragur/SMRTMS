@@ -79,7 +79,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        Client.getInstance();
 
 
         // Set up the login form.
@@ -124,7 +124,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      * errors are presented and no actual login attempt is made.
      */
     public void attemptLogin() {
-        if (mAuthTask != null) {
+        if (mAuthTask != null)
+        {
             return;
         }
 
