@@ -30,6 +30,7 @@ import org.jooq.util.derby.sys.Sys;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
+import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
 import server.AuthenticationManager;
 import server.DBManager;
 
@@ -70,7 +71,7 @@ public class Server extends WebSocketServer
     // Received a string from a client
     @Override
     public void onMessage( WebSocket conn, String message ) {
-        this.sendToAll( message );
+        //this.sendToAll( message );
         System.out.println( conn + ": " + message );
 
     	JSONReader reader = new JSONReader<Token>();
@@ -123,8 +124,12 @@ public class Server extends WebSocketServer
 	    		case "Registration":
 	    			RegistrationToken reg = (RegistrationToken)reader.readJson( msg , RegistrationToken.class );
 	    			
-	    			HandleRegistToken( reg );
+	    			HandleRegistToken( reg, conn );
 	    			break;
+	    		case "UserUpdate":
+	    			UserUpdateToken uut = (UserUpdateToken)reader.readJson( msg, UserUpdateToken.class );
+	    			
+	    			HandleUpdateToken ( uut, conn );
 	    		default:
 	    			System.out.println("ERROR: Token could not be identified!!");
 	    	}
@@ -134,13 +139,28 @@ public class Server extends WebSocketServer
     private void HandleAuthToken( AuthenticationToken auth, WebSocket conn ) {
     	boolean result = authman.AuthenticateUser( auth );
 		System.out.println("Legit login: " + result);
+		
 		auth.access = result;
+		if (result == true)
+		{
+			auth.sId = dbm.getUserID( auth.email );
+		}
+		
 		JSONReader reader = new JSONReader<Token>();
 		String answer = reader.JSONWriter(auth);
 		conn.send( answer );
     }
     
-    private void HandleRegistToken ( RegistrationToken reg ) {
+    private void HandleRegistToken ( RegistrationToken reg, WebSocket conn ) {
     	authman.RegisterUser( reg );
+    	reg.result = true;
+    	
+    	JSONReader reader = new JSONReader<Token>();
+		String answer = reader.JSONWriter( reg );
+		conn.send( answer );
+    }
+    
+    private void HandleUpdateToken ( UserUpdateToken uut, WebSocket conn ) {
+    	authman.UpdateUser( uut );
     }
 }

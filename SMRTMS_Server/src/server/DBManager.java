@@ -15,6 +15,7 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
+import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
 
 public class DBManager {
 	String userName = "root";
@@ -34,14 +35,22 @@ public class DBManager {
 		try {
 			String hashpw = hash( t.password ).toString();
 			
-			create.insertInto(USER, USER.USERNAME, USER.EMAIL, USER.PASSWORD, USER.AVATAR)
-			.values(t.username, t.email, hashpw, "nicolascage.png");
+			create.insertInto(USER, USER.ID, USER.USERNAME, USER.EMAIL, USER.PASSWORD, USER.AVATAR)
+			.values(t.sId, t.username, t.email, hashpw, "nicolascage.png");
 			
 			System.out.println("New User created!");
 			
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void UpdateUser ( UserUpdateToken t ) {
+		create.update(USER)
+				.set(USER.LONGITUDE, t.Longitude)
+				.set(USER.LATITUDE, t.Latitude)
+				.where(USER.ID.equal(t.sId))
+				.execute();
 	}
 	
 	public String getUserPassword ( String email ) {
@@ -52,12 +61,19 @@ public class DBManager {
 			System.out.print("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
 			if (r.getValue(USER.EMAIL).toString().compareTo(email) == 0)
 				return r.getValue(USER.PASSWORD).toString();
-			/*
-			Integer id = r.getValue(USER.ID);
-			String firstName = r.getValue(USER.FIRST_NAME);
-			String lastName = r.getValue(USER.LAST_NAME);
-			
-			System.out.println("ID: " + id + " first name: " + firstName + " last name: " + lastName); */
+		}
+		
+		return null;
+	}
+	
+	public String getUserID ( String email ) {
+		
+		Result<Record> result = create.select().from(USER).fetch();
+		
+		for (Record r : result) {
+			System.out.print("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
+			if (r.getValue(USER.EMAIL).toString().compareTo(email) == 0)
+				return r.getValue(USER.ID).toString();
 		}
 		
 		return null;

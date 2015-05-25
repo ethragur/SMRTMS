@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
+import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
 import server.DBManager;
 
 public class AuthenticationManager {
@@ -19,8 +20,9 @@ public class AuthenticationManager {
 		boolean result = false;
 		
 		String pw = dbm.getUserPassword( t.email );
-		if (pw != null)
+		if (pw != null) {
 			System.out.println("Yes! Found password! Its: " + pw);
+		}
 		else
 			System.out.println("No... User not found...");
 		
@@ -28,8 +30,12 @@ public class AuthenticationManager {
 			String hashpw = dbm.hash( t.password ).toString();
 			
 			if (pw != null ) {
-				if ( t.password.compareTo(pw) == 0 ) 
+				if ( t.password.compareTo(pw) == 0 ) {
 					result = true;
+					System.out.println("-------------------------------");
+					System.out.println("AUTHENTICATED USER SUCCESSFULLY!!");
+					System.out.println("-------------------------------");
+				}
 			}
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -42,6 +48,20 @@ public class AuthenticationManager {
 		boolean result = false;
 		
 		dbm.CreateUser(t);
+		System.out.println("-------------------------------");
+		System.out.println("CREATES USER SUCCESSFULLY!!");
+		System.out.println("-------------------------------");
+		
+		return result;
+	}
+	
+	public boolean UpdateUser ( UserUpdateToken t ) {
+		boolean result = false;
+		
+		dbm.UpdateUser(t);
+		System.out.println("-------------------------------");
+		System.out.println("UPDATED USER SUCCESSFULLY!!");
+		System.out.println("-------------------------------");
 		
 		return result;
 	}

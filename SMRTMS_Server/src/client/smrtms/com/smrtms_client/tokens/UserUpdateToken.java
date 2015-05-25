@@ -5,8 +5,8 @@ package client.smrtms.com.smrtms_client.tokens;
  */
 public class UserUpdateToken extends Token
 {
-    Double Longitude;
-    Double Latitude;
+    public Double Longitude;
+    public Double Latitude;
     public UserUpdateToken(Double lati, Double longi)
     {
         super("UserUpdate");

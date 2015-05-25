@@ -14,7 +14,6 @@ import jooqdb.Smrtms;
 import jooqdb.tables.records.UserRecord;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -34,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-	private static final long serialVersionUID = 1008492224;
+	private static final long serialVersionUID = 191338671;
 
 	/**
 	 * The reference instance of <code>SMRTMS.User</code>
@@ -52,7 +51,7 @@ public class User extends TableImpl<UserRecord> {
 	/**
 	 * The column <code>SMRTMS.User.ID</code>.
 	 */
-	public final TableField<UserRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<UserRecord, String> ID = createField("ID", org.jooq.impl.SQLDataType.CHAR.length(100), this, "");
 
 	/**
 	 * The column <code>SMRTMS.User.Username</code>.
@@ -70,14 +69,24 @@ public class User extends TableImpl<UserRecord> {
 	public final TableField<UserRecord, String> PASSWORD = createField("Password", org.jooq.impl.SQLDataType.CHAR.length(20), this, "");
 
 	/**
-	 * The column <code>SMRTMS.User.Position</code>.
+	 * The column <code>SMRTMS.User.Longitude</code>.
 	 */
-	public final TableField<UserRecord, Integer> POSITION = createField("Position", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<UserRecord, Double> LONGITUDE = createField("Longitude", org.jooq.impl.SQLDataType.DOUBLE, this, "");
+
+	/**
+	 * The column <code>SMRTMS.User.Latitude</code>.
+	 */
+	public final TableField<UserRecord, Double> LATITUDE = createField("Latitude", org.jooq.impl.SQLDataType.DOUBLE, this, "");
 
 	/**
 	 * The column <code>SMRTMS.User.Avatar</code>.
 	 */
 	public final TableField<UserRecord, String> AVATAR = createField("Avatar", org.jooq.impl.SQLDataType.CHAR.length(15), this, "");
+
+	/**
+	 * The column <code>SMRTMS.User.IsOnline</code>.
+	 */
+	public final TableField<UserRecord, Byte> ISONLINE = createField("IsOnline", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * Create a <code>SMRTMS.User</code> table reference
@@ -99,14 +108,6 @@ public class User extends TableImpl<UserRecord> {
 
 	private User(String alias, Table<UserRecord> aliased, Field<?>[] parameters) {
 		super(alias, Smrtms.SMRTMS, aliased, parameters, "");
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Identity<UserRecord, Integer> getIdentity() {
-		return Keys.IDENTITY_USER;
 	}
 
 	/**
