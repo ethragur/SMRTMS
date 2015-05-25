@@ -32,7 +32,7 @@ public class RegisterActivity extends ActionBarActivity
         mUsernameView =(EditText) findViewById(R.id.editUsername);
         mEmailView = (EditText) findViewById(R.id.editEmail);
         mPasswordView = (EditText) findViewById(R.id.editPW);
-        mPasswordReView = (EditText) findViewById(R.id.editPW);
+        mPasswordReView = (EditText) findViewById(R.id.editPWre);
     }
 
 
@@ -82,29 +82,37 @@ public class RegisterActivity extends ActionBarActivity
             String toSend;
             toSend = writer.JSONWriter(rt);
 
-            Client.getInstance().WriteMsg(toSend);
-
-            while(regSuc == 0)
+            if(Client.getInstance().WriteMsg(toSend))
             {
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+
+                while (regSuc == 0) {
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (regSuc == 1) {
+                    regSuc = 0;
+                    Toast.makeText(this.getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                    Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    RegisterActivity.this.startActivity(myIntent);
+                }
+                if (regSuc == -1) {
+                    regSuc = 0;
+                    Toast.makeText(this.getApplicationContext(), "Username or Email already in Use", Toast.LENGTH_SHORT).show();
                 }
             }
-
-            if(regSuc == 1)
+            else
             {
-                regSuc = 0;
-                Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                RegisterActivity.this.startActivity(myIntent);
-            }
-            if(regSuc == -1)
-            {
-                regSuc = 0;
-                Log.d("Registration", "Sth went wrong");
+                Toast.makeText(this.getApplicationContext(), "Client is not connected to Server", Toast.LENGTH_SHORT).show();
             }
 
+        }
+        else
+        {
+            Toast.makeText(this.getApplicationContext(), "Password doesn't match", Toast.LENGTH_SHORT).show();
         }
     }
 }

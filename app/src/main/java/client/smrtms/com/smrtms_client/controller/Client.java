@@ -64,8 +64,8 @@ public class Client
         return c.isConnected();
     }
 
-    public void WriteMsg(String text) {
-        c.sendmsg(text);
+    public boolean WriteMsg(String text) {
+        return c.sendmsg(text);
     }
 
     public boolean isConnected()
