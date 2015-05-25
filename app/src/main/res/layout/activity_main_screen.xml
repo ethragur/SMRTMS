@@ -2,6 +2,7 @@
         android:id="@+id/sample_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+    android:background="@drawable/back1"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="client.smrtms.com.smrtms_client.activity.MainScreen"
         android:orientation="vertical">
