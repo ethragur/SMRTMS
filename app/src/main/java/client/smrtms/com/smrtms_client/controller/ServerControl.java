@@ -2,7 +2,9 @@ package client.smrtms.com.smrtms_client.controller;
 
 import android.util.Log;
 
+import client.smrtms.com.smrtms_client.activity.RegisterActivity;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 
 /**
@@ -33,8 +35,8 @@ public class ServerControl implements Runnable
         switch (t.sTag)
         {
             case "Authentication": //to auth
-                JSONReader<AuthenticationToken> reader = new JSONReader<AuthenticationToken>();
-                AuthenticationToken authT = reader.readJson(input, AuthenticationToken.class);
+                JSONReader<AuthenticationToken> readerA = new JSONReader<AuthenticationToken>();
+                AuthenticationToken authT = readerA.readJson(input, AuthenticationToken.class);
                 if(authT.access)
                 {
                     LoginUser.getInstance().setIsLogin(true);
@@ -48,7 +50,17 @@ public class ServerControl implements Runnable
                 }
 
                 break;
-            case "":
+            case "Registration":
+                JSONReader<RegistrationToken> readerR = new JSONReader<>();
+                RegistrationToken retT = readerR.readJson(input, RegistrationToken.class);
+                if(retT.result)
+                {
+                    RegisterActivity.regSuc = 1;
+                }
+                else
+                {
+                    RegisterActivity.regSuc = -1;
+                }
                 break;
             default:
                 break;

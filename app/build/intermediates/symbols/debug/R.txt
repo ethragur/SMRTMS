@@ -477,10 +477,10 @@ int id dialog 0x7f0a0021
 int id disableHome 0x7f0a000c
 int id donate_with_google 0x7f0a002f
 int id dropdown 0x7f0a0022
-int id editText 0x7f0a0062
-int id editText2 0x7f0a0063
-int id editText3 0x7f0a0064
-int id editText4 0x7f0a0065
+int id editEmail 0x7f0a0063
+int id editPW 0x7f0a0064
+int id editPWre 0x7f0a0065
+int id editUsername 0x7f0a0062
 int id edit_query 0x7f0a0048
 int id email 0x7f0a0057
 int id email_login_form 0x7f0a0056

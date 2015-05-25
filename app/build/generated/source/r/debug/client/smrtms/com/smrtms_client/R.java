@@ -1749,10 +1749,10 @@ containing a value of this type.
         public static final int disableHome=0x7f0a000c;
         public static final int donate_with_google=0x7f0a002f;
         public static final int dropdown=0x7f0a0022;
-        public static final int editText=0x7f0a0062;
-        public static final int editText2=0x7f0a0063;
-        public static final int editText3=0x7f0a0064;
-        public static final int editText4=0x7f0a0065;
+        public static final int editEmail=0x7f0a0063;
+        public static final int editPW=0x7f0a0064;
+        public static final int editPWre=0x7f0a0065;
+        public static final int editUsername=0x7f0a0062;
         public static final int edit_query=0x7f0a0048;
         public static final int email=0x7f0a0057;
         public static final int email_login_form=0x7f0a0056;
