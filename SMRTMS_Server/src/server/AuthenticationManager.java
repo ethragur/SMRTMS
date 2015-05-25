@@ -30,7 +30,7 @@ public class AuthenticationManager {
 			String hashpw = dbm.hash( t.password ).toString();
 			
 			if (pw != null ) {
-				if ( t.password.compareTo(pw) == 0 ) {
+				if ( hashpw.compareTo(pw) == 0 ) {
 					result = true;
 					System.out.println("-------------------------------");
 					System.out.println("AUTHENTICATED USER SUCCESSFULLY!!");
