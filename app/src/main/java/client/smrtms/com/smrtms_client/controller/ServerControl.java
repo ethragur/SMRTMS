@@ -1,5 +1,8 @@
 package client.smrtms.com.smrtms_client.controller;
 
+import android.util.Log;
+
+import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 
 /**
@@ -25,11 +28,22 @@ public class ServerControl implements Runnable
     //parses the received string from the Server
     public void parseString()
     {
-        JSONReader reader = new JSONReader<Token>();
+
 
         switch (t.sTag)
         {
             case "Authentication": //to auth
+                JSONReader<AuthenticationToken> reader = new JSONReader<AuthenticationToken>();
+                AuthenticationToken authT = reader.readJson(input, AuthenticationToken.class);
+                if(authT.access)
+                {
+                    Log.d("Login", "Login Successful");
+                }
+                else
+                {
+                    Log.d("Login", "Wrong Uname or Password");
+                }
+
                 break;
             case "":
                 break;
