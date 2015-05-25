@@ -48,7 +48,7 @@ public class Main {
 				try {
 					Server server = new Server(8887);
 					server.start();
-			        System.out.println( "SMRTMS Server started on port: " + server.getPort() );
+			        System.out.println( "SMRTMS v0.2 Server started on port: " + server.getPort() );
 			        System.out.println( "Ready!" );
 			        
 			        BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );

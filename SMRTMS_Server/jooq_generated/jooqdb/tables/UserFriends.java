@@ -28,7 +28,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserFriends extends TableImpl<UserFriendsRecord> {
 
-	private static final long serialVersionUID = -39644354;
+	private static final long serialVersionUID = 1127706816;
 
 	/**
 	 * The reference instance of <code>SMRTMS.User_Friends</code>
@@ -46,12 +46,12 @@ public class UserFriends extends TableImpl<UserFriendsRecord> {
 	/**
 	 * The column <code>SMRTMS.User_Friends.Friender_ID</code>.
 	 */
-	public final TableField<UserFriendsRecord, Integer> FRIENDER_ID = createField("Friender_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<UserFriendsRecord, String> FRIENDER_ID = createField("Friender_ID", org.jooq.impl.SQLDataType.CHAR.length(100), this, "");
 
 	/**
 	 * The column <code>SMRTMS.User_Friends.Friendee_ID</code>.
 	 */
-	public final TableField<UserFriendsRecord, Integer> FRIENDEE_ID = createField("Friendee_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<UserFriendsRecord, String> FRIENDEE_ID = createField("Friendee_ID", org.jooq.impl.SQLDataType.CHAR.length(100), this, "");
 
 	/**
 	 * The column <code>SMRTMS.User_Friends.Tracking_Flag</code>.

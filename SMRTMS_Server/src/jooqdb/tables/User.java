@@ -14,6 +14,7 @@ import jooqdb.Smrtms;
 import jooqdb.tables.records.UserRecord;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -33,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-	private static final long serialVersionUID = 191338671;
+	private static final long serialVersionUID = -1855239986;
 
 	/**
 	 * The reference instance of <code>SMRTMS.User</code>
@@ -51,7 +52,7 @@ public class User extends TableImpl<UserRecord> {
 	/**
 	 * The column <code>SMRTMS.User.ID</code>.
 	 */
-	public final TableField<UserRecord, String> ID = createField("ID", org.jooq.impl.SQLDataType.CHAR.length(100), this, "");
+	public final TableField<UserRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>SMRTMS.User.Username</code>.
