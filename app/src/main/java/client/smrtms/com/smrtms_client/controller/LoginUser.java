@@ -115,6 +115,10 @@ public class LoginUser extends User
         this.isLogin = isLogin;
     }
 
+    public void setFriendList(List<User> fl)
+    {
+        this.friendList = fl;
+    }
 
 
 }

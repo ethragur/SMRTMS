@@ -4,6 +4,7 @@ import android.util.Log;
 
 import client.smrtms.com.smrtms_client.activity.RegisterActivity;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 
@@ -35,36 +36,58 @@ public class ServerControl implements Runnable
         switch (t.sTag)
         {
             case "Authentication": //to auth
-                JSONReader<AuthenticationToken> readerA = new JSONReader<AuthenticationToken>();
-                AuthenticationToken authT = readerA.readJson(input, AuthenticationToken.class);
-                if(authT.access)
-                {
-                    LoginUser.getInstance().setIsLogin(true);
-                    LoginUser.getInstance().setID(authT.id);
-                    Log.d("Login", "Login Successful");
-                }
-                else
-                {
-                    Log.d("Login", "Wrong Uname or Password");
-                    LoginUser.getInstance().setIsLogin(false);
-                }
-
+                handleAuth();
                 break;
             case "Registration":
-                JSONReader<RegistrationToken> readerR = new JSONReader<>();
-                RegistrationToken retT = readerR.readJson(input, RegistrationToken.class);
-                if(retT.result)
-                {
-                    RegisterActivity.regSuc = 1;
-                }
-                else
-                {
-                    RegisterActivity.regSuc = -1;
-                }
+                handleReg();
+                break;
+            case "FriendList":
+                handleFriendList();
                 break;
             default:
+                Log.e("ServerMsg", "UnknownToken");
                 break;
         }
+    }
+
+    private void handleAuth()
+    {
+        JSONReader<AuthenticationToken> readerA = new JSONReader<AuthenticationToken>();
+        AuthenticationToken authT = readerA.readJson(input, AuthenticationToken.class);
+        if(authT.access)
+        {
+            LoginUser.getInstance().setIsLogin(true);
+            LoginUser.getInstance().setID(authT.id);
+            Log.d("Login", "Login Successful");
+        }
+        else
+        {
+            Log.d("Login", "Wrong Uname or Password");
+            LoginUser.getInstance().setIsLogin(false);
+        }
+
+    }
+
+    private void handleReg()
+    {
+        JSONReader<RegistrationToken> readerR = new JSONReader<>();
+        RegistrationToken retT = readerR.readJson(input, RegistrationToken.class);
+        if(retT.result)
+        {
+            RegisterActivity.regSuc = 1;
+        }
+        else
+        {
+            RegisterActivity.regSuc = -1;
+        }
+    }
+
+    private void handleFriendList()
+    {
+        JSONReader<FriendListToken> readerFL = new JSONReader<>();
+        FriendListToken friendT = readerFL.readJson(input, FriendListToken.class);
+        LoginUser.getInstance().setFriendList(friendT.userList);
+
     }
 
 }
