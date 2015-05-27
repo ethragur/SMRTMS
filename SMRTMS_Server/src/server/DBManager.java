@@ -82,6 +82,8 @@ public class DBManager {
 			.set(USER.ISONLINE, isonline)
 			.where(USER.ID.equal(id))
 			.execute();
+		
+		printUser();
 	}
 	
 	public String getUserPassword ( String email ) {

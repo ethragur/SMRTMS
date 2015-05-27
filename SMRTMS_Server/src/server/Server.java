@@ -130,6 +130,11 @@ public class Server extends WebSocketServer
 	    			UserUpdateToken uut = (UserUpdateToken)reader.readJson( msg, UserUpdateToken.class );
 	    			
 	    			HandleUpdateToken ( uut, conn );
+	    			break;
+	    		case "Logout":
+	    			dbm.UpdateUserOnline(Integer.parseInt(t.sId), false);
+	    			break;
+	    			
 	    		default:
 	    			System.out.println("ERROR: Token could not be identified!!");
 	    	}
@@ -145,6 +150,7 @@ public class Server extends WebSocketServer
 		if (result == true)
 		{
 			auth.sId = dbm.getUserID( auth.email );
+			dbm.UpdateUserOnline(Integer.parseInt(auth.sId), true);
 		}
 		
 		JSONReader reader = new JSONReader<Token>();
