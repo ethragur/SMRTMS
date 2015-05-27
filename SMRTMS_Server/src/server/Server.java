@@ -155,6 +155,11 @@ public class Server extends WebSocketServer
     	authman.RegisterUser( reg );
     	reg.result = true;
     	
+    	if (reg.result == true)
+		{
+			reg.sId = dbm.getUserID( reg.email );
+		}
+    	
     	JSONReader reader = new JSONReader<Token>();
 		String answer = reader.JSONWriter( reg );
 		conn.send( answer );

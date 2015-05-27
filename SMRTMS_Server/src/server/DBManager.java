@@ -107,6 +107,7 @@ public class DBManager {
 		for (Record r : result) {
 			System.out.print("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
 			if (r.getValue(USER.EMAIL).toString().compareTo(email) == 0)
+				System.out.println("Found User ID! Its " + r.getValue(USER.ID).toString());
 				return r.getValue(USER.ID).toString();
 		}
 		
