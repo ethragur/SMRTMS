@@ -69,6 +69,21 @@ public class DBManager {
 				.execute();
 	}
 	
+	public void UpdateUserOnline( int id, boolean online ) {
+		
+		// Convert boolean to byte. because reasons. jooq-y reasons
+		byte isonline;
+		if (online)
+			isonline = 1;
+		else
+			isonline = 0;
+		
+		create.update(USER)
+			.set(USER.ISONLINE, isonline)
+			.where(USER.ID.equal(id))
+			.execute();
+	}
+	
 	public String getUserPassword ( String email ) {
 			
 		Result<Record> result = create.select().from(USER).fetch();

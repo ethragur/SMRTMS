@@ -140,6 +140,7 @@ public class Server extends WebSocketServer
     	boolean result = authman.AuthenticateUser( auth );
 		System.out.println("Legit login: " + result);
 		
+		// write ID back
 		auth.access = result;
 		if (result == true)
 		{
@@ -155,9 +156,10 @@ public class Server extends WebSocketServer
     	authman.RegisterUser( reg );
     	reg.result = true;
     	
+    	// Write ID back
     	if (reg.result == true)
 		{
-			reg.sId = dbm.getUserID( reg.email );
+			reg.sId = dbm.getUserID( reg.email );	
 		}
     	
     	JSONReader reader = new JSONReader<Token>();
