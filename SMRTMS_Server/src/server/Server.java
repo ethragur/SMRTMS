@@ -53,6 +53,7 @@ public class Server extends WebSocketServer
         super(address);
         dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
+        dbm.printUser();
     }
 
 

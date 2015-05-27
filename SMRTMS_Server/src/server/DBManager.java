@@ -150,7 +150,7 @@ public class DBManager {
 	    return passHash;
 	}
 	
-	private void printUser() {
+	public void printUser() {
 		create.select().from(USER).fetch();
 	}
 }
