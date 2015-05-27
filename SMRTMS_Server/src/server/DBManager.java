@@ -85,8 +85,6 @@ public class DBManager {
 			.set(USER.ISONLINE, isonline)
 			.where(USER.ID.equal(id))
 			.execute();
-		
-		printUser();
 	}
 	
 	public String getUserPassword ( String email ) {
@@ -100,6 +98,24 @@ public class DBManager {
 			System.out.println("No... ");
 		}
 		
+		return null;
+	}
+	
+	public String getUserID ( String email ) {
+		
+		Result<Record> result = create.select().from(USER).fetch();
+		
+		System.out.println(("Looking for User ID......"));
+		for (Record r : result) {
+			System.out.println("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
+			if (r.getValue(USER.EMAIL).toString().compareTo(email) == 0) {
+				System.out.println("Found User ID! Its " + r.getValue(USER.ID).toString());
+				return r.getValue(USER.ID).toString();
+			}
+			System.out.println("No...");
+		}
+		
+		System.out.println("========= ERROR: Couldn't find the User ID!!!! =======");
 		return null;
 	}
 	
@@ -118,23 +134,6 @@ public class DBManager {
 		}
 		
 		return friends;
-	}
-	
-	public String getUserID ( String email ) {
-		
-		Result<Record> result = create.select().from(USER).fetch();
-		
-		
-		System.out.println(("Looking for User ID......"));
-		for (Record r : result) {
-			System.out.println("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
-			if (r.getValue(USER.EMAIL).toString().compareTo(email) == 0)
-				System.out.println("Found User ID! Its " + r.getValue(USER.ID).toString());
-				return r.getValue(USER.ID).toString();
-		}
-		
-		System.out.println("========= ERROR: Couldn't find the User ID!!!! =======");
-		return null;
 	}
 	
 	public void Connect() {

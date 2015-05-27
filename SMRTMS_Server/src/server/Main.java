@@ -54,7 +54,7 @@ public class Main {
 			        BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
 			        while ( true ) {
 			            String in = sysin.readLine();
-			            server.sendToAll( in );
+			            //server.sendToAll( in );
 			            if( in.equals( "exit" ) ) {
 			                server.stop();
 			                return false;

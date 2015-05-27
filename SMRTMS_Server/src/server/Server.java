@@ -46,6 +46,8 @@ public class Server extends WebSocketServer
         super(new InetSocketAddress(port));
         dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
+        dbm.printUser();
+        System.out.println("Database Connection is ready!");
     }
 
 
@@ -53,6 +55,8 @@ public class Server extends WebSocketServer
         super(address);
         dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
+        dbm.printUser();
+        System.out.println("Database Connection is ready!");
     }
 
 
