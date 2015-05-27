@@ -43,12 +43,15 @@ public class DBManager {
 			//create.insertInto(USER, USER.ID, USER.USERNAME, USER.EMAIL, USER.PASSWORD, USER.AVATAR)
 			//.values(t.sId, t.username, t.email, hashpw, "nicolascage.png");
 			
+			byte nope = 0;
+			
 			create.insertInto(USER)
 				//.set(USER.ID, Integer.parseInt(t.sId))
 				.set(USER.USERNAME, t.username)
 				.set(USER.EMAIL, t.email)
 				.set(USER.PASSWORD, /*hashpw*/ t.password)
 				.set(USER.AVATAR, "nicolascage.png")
+				.set(USER.ISONLINE, nope)
 				.execute();
 			
 			System.out.println("New User created!");
@@ -94,7 +97,7 @@ public class DBManager {
 			System.out.print("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
 			if (r.getValue(USER.EMAIL).toString().compareTo(email) == 0)
 				return r.getValue(USER.PASSWORD).toString();
-			System.out.print("No... ");
+			System.out.println("No... ");
 		}
 		
 		return null;
@@ -121,13 +124,16 @@ public class DBManager {
 		
 		Result<Record> result = create.select().from(USER).fetch();
 		
+		
+		System.out.println(("Looking for User ID......"));
 		for (Record r : result) {
-			System.out.print("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
+			System.out.println("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");
 			if (r.getValue(USER.EMAIL).toString().compareTo(email) == 0)
 				System.out.println("Found User ID! Its " + r.getValue(USER.ID).toString());
 				return r.getValue(USER.ID).toString();
 		}
 		
+		System.out.println("========= ERROR: Couldn't find the User ID!!!! =======");
 		return null;
 	}
 	

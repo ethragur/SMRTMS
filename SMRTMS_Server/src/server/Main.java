@@ -31,7 +31,7 @@ import org.jooq.tools.json.JSONObject;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Starting SMRTMS Server... please stand by");
+		System.out.println("Starting Clubbr Server... please stand by");
 	
 		boolean serverrunning = true;
 		

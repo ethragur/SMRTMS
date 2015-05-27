@@ -17,8 +17,7 @@ public class AuthenticationManager {
 	}
 	
 	public boolean AuthenticateUser( AuthenticationToken t ) {
-		boolean result = false;
-		
+
 		String pw = dbm.getUserPassword( t.email );
 		if (pw != null) {
 			System.out.println("Yes! Found password! Its: " + pw);
@@ -34,17 +33,17 @@ public class AuthenticationManager {
 			
 			if (pw != null ) {
 				if ( /*hashpw*/ t.password.compareTo(pw) == 0 ) {
-					result = true;
 					System.out.println("-------------------------------");
 					System.out.println("AUTHENTICATED USER SUCCESSFULLY!!");	
 					System.out.println("-------------------------------");
+					return true;
 				}
 			}
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return false;
 	}
 	
 	public boolean RegisterUser ( RegistrationToken t ) {
