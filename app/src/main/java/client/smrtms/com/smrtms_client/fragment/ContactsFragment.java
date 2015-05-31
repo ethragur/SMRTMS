@@ -7,25 +7,34 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import com.firebase.androidchat.ChatActivity;
 import com.google.android.gms.maps.model.LatLng;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
+
 import java.util.ArrayList;
 
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.controller.ItemListAdapter;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
 
 
 public class ContactsFragment extends Fragment {
+
+    User selectedFriend;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +49,74 @@ public class ContactsFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
+        // Construct the data source
+        final ArrayList<User> users = new ArrayList<>();
+
+        for(User friend: LoginUser.getInstance().getFriendList()) {
+            users.add(friend);
+        }
+        // Create the adapter to convert the array to views
+        ItemListAdapter adapter = new ItemListAdapter(getActivity(), users);
+        // Attach the adapter to a ListView
+        ListView listView = (ListView) getActivity().findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+
+
+        ActionItem chat     = new ActionItem(1, "chat", getResources().getDrawable(R.drawable.chat));
+        ActionItem map     = new ActionItem(2, "map", getResources().getDrawable(R.drawable.globe));
+
+        //create QuickAction. Use QuickAction.VERTICAL or QuickAction.HORIZONTAL param to define layout
+        //orientation
+        final QuickAction quickAction = new QuickAction(getActivity(), QuickAction.HORIZONTAL);
+
+        //add action items into QuickAction
+        quickAction.addActionItem(chat);
+        quickAction.addActionItem(map);
+
+        //Set listener for action item clicked
+        quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+            @Override
+            public void onItemClick(QuickAction source, int pos, int actionId) {
+                //here we can filter which action item was clicked with pos or actionId parameter
+                ActionItem actionItem = quickAction.getActionItem(pos);
+
+                /* chat is selected */
+                if (actionItem.getActionId() == 1) {
+                    Intent myIntent = new Intent(getActivity(), ChatActivity.class);
+                    myIntent.putExtra("UserKey", selectedFriend.getID());
+                    getActivity().startActivity(myIntent);
+
+                /* map is selected */
+                } else if (actionItem.getActionId() == 2) {
+                    // send message
+                    sendCoordinates.setCoordinates(new LatLng(selectedFriend.getLatitude(), selectedFriend.getLongitude()));
+                    // switch t Map fragment
+                    TabsFragment tf = (TabsFragment) getParentFragment();
+                    tf.setTabPostion(0);
+
+                }
+            }
+        });
+
+
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                quickAction.show(view);
+                selectedFriend = (User) parent.getItemAtPosition(position);
+                Toast.makeText(getActivity().getApplicationContext(), selectedFriend.getUsername(), Toast.LENGTH_SHORT).show();
+
+
+            }
+
+        });
+
+
+/*
         // This will create the LinearLayout Vertical
         RelativeLayout layout = new RelativeLayout(getActivity());
         layout.setLayoutParams(new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
@@ -124,7 +201,7 @@ public class ContactsFragment extends Fragment {
 
         ViewGroup viewGroup = (ViewGroup) view;
         viewGroup.addView(layout);
-
+*/
 
     }
 }
