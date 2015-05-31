@@ -336,7 +336,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             mAuthTask = null;
             showProgress(false);
 
-            if (true) {
+            if (success) {
                 finish();
                 LoginUser.getInstance().setIsLogin(true);
                 Intent myIntent = new Intent(LoginActivity.this,StartActivity.class);
@@ -362,7 +362,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void setUpDummyFriends() {
-        LoginUser.getInstance().addFriend(new User("dummy1","0002",10.0,11.0));
+        LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
         LoginUser.getInstance().addFriend(new User("dummy2","0003",47.2637871,11.4000567));
         LoginUser.getInstance().addFriend(new User("dummy3", "0004", 37.4209024, -122.0807398));
     }
