@@ -14,22 +14,34 @@ import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
 
-public class TokenHandler {
+public class TokenHandler implements Runnable {
 	
 	private DBManager dbm;
 	private AuthenticationManager authman;
 	
-	public TokenHandler() {
+	Token token;
+	String message;
+	WebSocket connection;
+	
+	public TokenHandler(Token t, String msg, WebSocket conn) {
 		dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
-        dbm.printUser();
+        //dbm.printUser();
         System.out.println("Database Connection is ready!");
+        
+        token = t;
+        message = msg;
+        connection = conn;
 	}
 	
 	private void sendToken( Token tok, WebSocket conn ) {
 		JSONReader reader = new JSONReader<Token>();
 		String answer = reader.JSONWriter( tok );
 		conn.send( answer );
+	}
+	
+	public void run() {
+		ParseToken(token, message, connection);
 	}
 	
 	public void ParseToken (Token t, String msg, WebSocket conn ) {

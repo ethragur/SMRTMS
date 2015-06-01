@@ -43,13 +43,11 @@ public class Server extends WebSocketServer
 	
     public Server( int port ) throws UnknownHostException {
         super(new InetSocketAddress(port));
-        tokenhandler = new TokenHandler();
     }
 
 
     public Server( InetSocketAddress address ) {
         super(address);
-        tokenhandler = new TokenHandler();
     }
 
 
@@ -75,7 +73,8 @@ public class Server extends WebSocketServer
     	Token t = (Token)reader.readJson( message , Token.class );
     	System.out.println( "Recieved Token tag: " + t.sTag );
     	
-    	tokenhandler.ParseToken(t, message, conn);
+    	TokenHandler tokenhandler = new TokenHandler( t, message, conn );
+    	tokenhandler.run();
     }
 
 
