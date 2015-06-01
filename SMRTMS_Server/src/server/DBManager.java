@@ -19,6 +19,7 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
+import ServerClasses.User;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
@@ -138,17 +139,36 @@ public String getUserIDviaName ( String name ) {
 		return null;
 	}
 	
-	public ArrayList<String> getUserfriends ( String id ) {
+	public ArrayList<User> getUserfriends ( String id ) {
 		
 		Result<Record> result = create.select().from(USER_FRIENDS).fetch();
 		
-		ArrayList<String> friends = new ArrayList<String>();
+		ArrayList<User> friends = new ArrayList<User>();
 		
+		// Find ID of friends
 		for (Record r : result) {
 			if (r.getValue(USER_FRIENDS.FRIENDER_ID).toString().compareTo( id ) == 0)
 			{
-				String newfriend = USER_FRIENDS.FRIENDEE_ID.toString();
-				friends.add(newfriend);
+				System.out.println("Found Friend!");
+				// Find data of that friend
+				System.out.println(("Looking for User ID......"));
+				for (Record p : result) {
+					System.out.println("Is " + p.getValue(USER.ID).toString() + " the same as " + r.getValue(USER_FRIENDS.FRIENDEE_ID) + "? ");
+					if (p.getValue(USER.ID).toString().compareTo(r.getValue(USER_FRIENDS.FRIENDEE_ID)) == 0) {
+						System.out.println("Found User ID! Its " + p.getValue(USER.ID).toString());
+						
+						// Build User and add to list
+						String friendname = p.getValue(USER.USERNAME);
+						String friendid = p.getValue(USER.ID).toString();
+						Double friendlong = p.getValue(USER.LONGITUDE);
+						Double friendlatt = p.getValue(USER.LATITUDE);
+						
+						User newfriend = new User(friendname, friendid, friendlatt, friendlong);
+						friends.add(newfriend);
+						
+					}
+					System.out.println("No...");
+				}
 			}
 		}
 		

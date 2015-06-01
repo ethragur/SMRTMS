@@ -1,8 +1,12 @@
 package server;
 
+import java.util.ArrayList;
+import ServerClasses.*;
+
 import org.java_websocket.WebSocket;
 
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
@@ -18,6 +22,12 @@ public class TokenHandler {
         authman = new AuthenticationManager(dbm);
         dbm.printUser();
         System.out.println("Database Connection is ready!");
+	}
+	
+	private void sendToken( Token tok, WebSocket conn ) {
+		JSONReader reader = new JSONReader<Token>();
+		String answer = reader.JSONWriter( tok );
+		conn.send( answer );
 	}
 	
 	public void ParseToken (Token t, String msg, WebSocket conn ) {
@@ -44,10 +54,12 @@ public class TokenHandler {
 	    			dbm.UpdateUserOnline(Integer.parseInt(t.sId), false);
 	    			break;
 	    		case "FriendList":
-	    			
+	    			FriendListToken flt = (FriendListToken)reader.readJson( msg, FriendListToken.class );
+	    			HandleFriendListToken(flt, conn);
 	    			break;
 	    		case "FriendRequest":
-	    			
+	    			FriendReqToken frt = (FriendReqToken)reader.readJson( msg, FriendReqToken.class );
+	    			HandleFriendReqToken(frt, conn);
 	    			break;
 	    		default:
 	    			System.out.println("ERROR: Token could not be identified!!");
@@ -67,9 +79,7 @@ public class TokenHandler {
 			dbm.UpdateUserOnline(Integer.parseInt(auth.sId), true);
 		}
 		
-		JSONReader reader = new JSONReader<Token>();
-		String answer = reader.JSONWriter(auth);
-		conn.send( answer );
+		sendToken(auth, conn);
     }
     
     private void HandleRegistToken ( RegistrationToken reg, WebSocket conn ) {
@@ -82,9 +92,7 @@ public class TokenHandler {
 			reg.sId = dbm.getUserID( reg.email );	
 		}
     	
-    	JSONReader reader = new JSONReader<Token>();
-		String answer = reader.JSONWriter( reg );
-		conn.send( answer );
+    	sendToken( reg , conn);
     }
     
     private void HandleUpdateToken ( UserUpdateToken uut, WebSocket conn ) {
@@ -92,6 +100,15 @@ public class TokenHandler {
     }
     
     private void HandleFriendReqToken ( FriendReqToken frt, WebSocket conn ) {
+    	// For now, adds friends without consent. Yay!
     	dbm.addFriend( frt );
+    	frt.accept = true;
+    	
+    	sendToken( frt, conn);
+    }
+    
+    private void HandleFriendListToken ( FriendListToken flt, WebSocket conn ) {
+    	ArrayList<User> friends = dbm.getUserfriends( flt.sId );
+    	flt.userList = friends;
     }
 }
