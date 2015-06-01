@@ -3,6 +3,7 @@ package server;
 import org.java_websocket.WebSocket;
 
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
@@ -88,5 +89,9 @@ public class TokenHandler {
     
     private void HandleUpdateToken ( UserUpdateToken uut, WebSocket conn ) {
     	authman.UpdateUser( uut );
+    }
+    
+    private void HandleFriendReqToken ( FriendReqToken frt, WebSocket conn ) {
+    	dbm.addFriend( frt );
     }
 }

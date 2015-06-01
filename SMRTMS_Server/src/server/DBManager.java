@@ -19,6 +19,7 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
+import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
 
@@ -115,7 +116,25 @@ public class DBManager {
 			System.out.println("No...");
 		}
 		
-		System.out.println("========= ERROR: Couldn't find the User ID!!!! =======");
+		System.out.println("========= ERROR: Couldn't find the User ID!!!! ========");
+		return null;
+	}
+	
+public String getUserIDviaName ( String name ) {
+		
+		Result<Record> result = create.select().from(USER).fetch();
+		
+		System.out.println(("Looking for User ID by checking name......"));
+		for (Record r : result) {
+			System.out.println("Is " + r.getValue(USER.USERNAME).toString() + " the same as " + name + "? ");
+			if (r.getValue(USER.USERNAME).toString().compareTo(name) == 0) {
+				System.out.println("Found User ID! Its " + r.getValue(USER.ID).toString());
+				return r.getValue(USER.ID).toString();
+			}
+			System.out.println("No...");
+		}
+		
+		System.out.println("========= ERROR: Couldn't find the User ID!!!! ========");
 		return null;
 	}
 	
@@ -134,6 +153,29 @@ public class DBManager {
 		}
 		
 		return friends;
+	}
+	
+	private void insertFriends( String friender_ID, String friendee_ID ) {
+		
+		byte nope = 0;
+		
+		create.insertInto(USER_FRIENDS)
+		//.set(USER.ID, Integer.parseInt(t.sId))
+		.set(USER_FRIENDS.FRIENDER_ID, friender_ID)
+		.set(USER_FRIENDS.FRIENDEE_ID, friendee_ID)
+		.set(USER_FRIENDS.TRACKING_FLAG, nope)
+		.execute();
+		
+		System.out.println("Friends added to the DB!");
+	}
+	
+	public void addFriend ( FriendReqToken frt ) {
+		// Get User_ID from friender
+		String frienderID = frt.sId;
+		// Get User_ID from friendee
+		String friendeeID = getUserIDviaName( frt.friendsname );
+		// Add to friend table
+		insertFriends(frienderID, friendeeID);
 	}
 	
 	public void Connect() {
