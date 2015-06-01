@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -58,7 +59,7 @@ public class ContactsFragment extends Fragment {
         // Create the adapter to convert the array to views
         ItemListAdapter adapter = new ItemListAdapter(getActivity(), users);
         // Attach the adapter to a ListView
-        ListView listView = (ListView) getActivity().findViewById(R.id.listView);
+        ListView listView = (ListView) getActivity().findViewById(R.id.listFriend);
         listView.setAdapter(adapter);
 
 

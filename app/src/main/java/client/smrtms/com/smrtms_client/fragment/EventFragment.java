@@ -28,7 +28,7 @@ public class EventFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        // This will create the RelativeLayout
+      /*  // This will create the RelativeLayout
         RelativeLayout layout = new RelativeLayout(getActivity());
         layout.setLayoutParams(new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 
@@ -42,6 +42,6 @@ public class EventFragment extends Fragment {
 
 
         ViewGroup viewGroup = (ViewGroup) view;
-        viewGroup.addView(layout);
+        viewGroup.addView(layout);*/
     }
-    }
+}
