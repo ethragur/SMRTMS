@@ -1,6 +1,7 @@
 package server;
 
 import java.util.ArrayList;
+
 import ServerClasses.*;
 
 import org.java_websocket.WebSocket;
@@ -8,6 +9,7 @@ import org.java_websocket.WebSocket;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
+import client.smrtms.com.smrtms_client.tokens.LogoutToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
@@ -51,7 +53,8 @@ public class TokenHandler {
 	    			HandleUpdateToken ( uut, conn );
 	    			break;
 	    		case "Logout":
-	    			dbm.UpdateUserOnline(Integer.parseInt(t.sId), false);
+	    			LogoutToken lot = (LogoutToken)reader.readJson( msg, LogoutToken.class);
+	    			HandleLogoutToken ( lot );		
 	    			break;
 	    		case "FriendList":
 	    			FriendListToken flt = (FriendListToken)reader.readJson( msg, FriendListToken.class );
@@ -99,6 +102,10 @@ public class TokenHandler {
     	authman.UpdateUser( uut );
     }
     
+    private void HandleLogoutToken( LogoutToken lot ) {
+    	dbm.UpdateUserOnline(Integer.parseInt(lot.sId), false);
+    }
+    
     private void HandleFriendReqToken ( FriendReqToken frt, WebSocket conn ) {
     	// For now, adds friends without consent. Yay!
     	dbm.addFriend( frt );
@@ -110,5 +117,7 @@ public class TokenHandler {
     private void HandleFriendListToken ( FriendListToken flt, WebSocket conn ) {
     	ArrayList<User> friends = dbm.getUserfriends( flt.sId );
     	flt.userList = friends;
+    	
+    	sendToken( flt, conn );
     }
 }

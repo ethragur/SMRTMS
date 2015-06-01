@@ -17,6 +17,7 @@ import org.jooq.Record;
 import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import org.jooq.util.derby.sys.Sys;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 import ServerClasses.User;
@@ -165,12 +166,14 @@ public String getUserIDviaName ( String name ) {
 						
 						User newfriend = new User(friendname, friendid, friendlatt, friendlong);
 						friends.add(newfriend);
-						
 					}
 					System.out.println("No...");
 				}
 			}
 		}
+		
+		if (friends.size() < 1)
+			System.out.println("You don't have any friends....");
 		
 		return friends;
 	}
