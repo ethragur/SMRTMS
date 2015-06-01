@@ -362,9 +362,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void setUpDummyFriends() {
-        LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
-        LoginUser.getInstance().addFriend(new User("dummy2","0003",47.2637871,11.4000567));
-        LoginUser.getInstance().addFriend(new User("dummy3", "0004", 37.4209024, -122.0807398));
+        int size = 50;
+        for(int i = 0; i < size; i++) {
+            LoginUser.getInstance().addFriend(new User("dummy"+i,"000"+i,(Math.random()+47),(Math.random())+11));
+        }
+
+     //   LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
+      //  LoginUser.getInstance().addFriend(new User("dummy2","0003",47.2637871,11.4000567));
+     //   LoginUser.getInstance().addFriend(new User("dummy3", "0004", 37.4209024, -122.0807398));
     }
 
     private void attemptConnection() {

@@ -7,14 +7,22 @@
     tools:context="${packageName}.${activityClass}" >
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listFriend"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_height="10pt"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/imageButton">
 
     </ListView>
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/adduser"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/imageButton" />
 
 </RelativeLayout>
