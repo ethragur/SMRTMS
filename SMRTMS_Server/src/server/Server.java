@@ -133,7 +133,7 @@ public class Server extends WebSocketServer
 	    		case "UserUpdate":
 	    			UserUpdateToken uut = (UserUpdateToken)reader.readJson( msg, UserUpdateToken.class );
 	    			
-	    			//HandleUpdateToken ( uut, conn );
+	    			HandleUpdateToken ( uut, conn );
 	    			break;
 	    		case "Logout":
 	    			dbm.UpdateUserOnline(Integer.parseInt(t.sId), false);
