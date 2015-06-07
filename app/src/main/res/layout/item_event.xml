@@ -26,12 +26,23 @@
         android:layout_toRightOf="@+id/name"
         android:text="Coordinates"/>
 
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/ivEventIcon"
+        android:layout_toEndOf="@+id/ivEventIcon"/>
+
     <ImageView
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:id="@+id/ivEventIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/user" />
+        android:src="@drawable/calendar" />
+
+
 
 </RelativeLayout>
