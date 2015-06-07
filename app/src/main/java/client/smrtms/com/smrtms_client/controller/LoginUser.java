@@ -1,8 +1,13 @@
 package client.smrtms.com.smrtms_client.controller;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +17,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.activity.LoginActivity;
+import client.smrtms.com.smrtms_client.activity.MainScreen;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.LogoutToken;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
@@ -28,6 +36,7 @@ public class LoginUser extends User
     private GPSTracker gpsTracker;
     private Context mContext;
     private Boolean isLogin;
+    private int remainingTime = 0;
 
 
     Timer timer;
@@ -135,15 +144,26 @@ public class LoginUser extends User
 
     public void FriendReqIn(String name)
     {
+        Intent tmp = new Intent(mContext,MainScreen.class);
+        PendingIntent mainScr = PendingIntent.getActivity(mContext, 0, tmp, 0);
+
+        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        final Notification notification = new NotificationCompat.Builder(mContext)
+                .setSmallIcon(R.drawable.icon)
+                .setContentTitle("You got a new friend Request"/*your notification title*/)
+                .setContentIntent(mainScr)
+                .build();
+        notification.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
+        notificationManager.notify(1000/*some int*/, notification);
+
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
 
         alert.setTitle("New Friend Request");
-        alert.setMessage("User: "+ name + " wants to add you as a Friend");
+        alert.setMessage("User: " + name + " wants to add you as a Friend");
 
 
         alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton)
-            {
+            public void onClick(DialogInterface dialog, int whichButton) {
 
             }
         });
@@ -161,6 +181,33 @@ public class LoginUser extends User
     public void setmContext(Context c)
     {
         mContext = c;
+    }
+
+    public void setRemainingTime(Integer remTim)
+    {
+        remainingTime = remTim;
+
+        Timer logoutTimer = new Timer();
+
+        logoutTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run()
+            {
+                remainingTime--;
+                if(remainingTime < 0)
+                {
+                    Log.i("Logout", "Doing Logout and Stuff");
+                    Intent myIntent = new Intent(mContext, LoginActivity.class);
+                    Context tmp = mContext;
+                    logout();
+                    myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    tmp.startActivity(myIntent);
+
+
+                }
+            }
+        }, 0, 60000);
+
     }
 
 

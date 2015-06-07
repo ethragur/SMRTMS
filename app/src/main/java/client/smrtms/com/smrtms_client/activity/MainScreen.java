@@ -1,10 +1,14 @@
 package client.smrtms.com.smrtms_client.activity;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -184,8 +188,39 @@ public class MainScreen extends ActionBarActivity {
 
     }
 
+        //used right now for testing purposes
     public void addEvent(View view)
     {
-        //TODO add Events
+        //TODO sth else then interface testing
+        Intent tmp = new Intent(context,MainScreen.class);
+        PendingIntent mainScr = PendingIntent.getActivity(context, 0, tmp, 0);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        final Notification notification = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.icon)
+                .setContentTitle("You got a new friend Request"/*your notification title*/)
+                .setContentText("test" + " wants to be your friend"/*notifcation message*/)
+                .setContentIntent(mainScr)
+                .build();
+        notification.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
+        notificationManager.notify(1000/*some int*/, notification);
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+
+        alert.setTitle("New Friend Request");
+        alert.setMessage("User:  wants to add you as a Friend");
+
+
+        alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+
+        alert.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
     }
 }

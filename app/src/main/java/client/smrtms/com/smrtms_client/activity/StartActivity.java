@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TimePicker;
+import android.text.format.Time;
 
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
@@ -33,6 +35,17 @@ public class StartActivity extends Activity{
 
     public void changeToMainScreen(View view)
     {
+        TimePicker t = (TimePicker) findViewById(R.id.timePicker);
+        Integer Hour = t.getCurrentHour();
+        Integer Min = t.getCurrentMinute();
+        Time now = new Time();
+        now.setToNow();
+        Integer remainingTime = ((Hour - now.hour)*60) + (Min - now.minute);
+        if(remainingTime < 0)
+        {
+            remainingTime += 12*60;
+        }
+        LoginUser.getInstance().setRemainingTime(remainingTime);
         LoginUser.getInstance().startUpdates();
         Intent myIntent = new Intent(StartActivity.this, MainScreen.class);
         StartActivity.this.startActivity(myIntent);
