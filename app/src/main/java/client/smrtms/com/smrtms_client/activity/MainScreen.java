@@ -69,10 +69,17 @@ public class MainScreen extends ActionBarActivity {
             startActivity(myIntent);
             return true;
         }
-        if (id == R.id.logout) {
+        else if (id == R.id.logout) {
             logoutDialog();
             return true;
+        } else if (id == R.id.addFriend) {
+            addFriend(null);
+            return true;
+        } else if (id == R.id.addEvent) {
+            addEvent(null);
+            return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
