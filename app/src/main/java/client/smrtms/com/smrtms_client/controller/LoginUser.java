@@ -36,6 +36,15 @@ public class LoginUser extends User
         mContext = Context;
         gpsTracker = new GPSTracker(Context);
         friendList = new ArrayList<User>();
+
+
+
+    }
+
+
+    //start sending user updates to server
+    public void startUpdates()
+    {
         timer = new Timer();
 
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -44,13 +53,11 @@ public class LoginUser extends User
                 getNewCoordinates();
             }
         }, 0, 10000);
-
-
     }
 
     public static void createInstance(String Username, String ID, Context Context)
     {
-        inst = new LoginUser("Username", "0000",new Double(0), new Double(0), Context);
+        inst = new LoginUser("Username", "0",new Double(0), new Double(0), Context);
     }
 
     public static LoginUser getInstance()
@@ -75,6 +82,7 @@ public class LoginUser extends User
                 UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(), this.getLongitude());
                 JSONReader<UserUpdateToken> Writer = new JSONReader<>();
                 String toSend = Writer.JSONWriter(userUpdateToken);
+                Log.i("SendMsg", userUpdateToken.id);
                 Client.getInstance().WriteMsg(toSend);
 
             } else {

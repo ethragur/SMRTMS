@@ -12,6 +12,6 @@ public class RegistrationToken extends Token
 	
 	public RegistrationToken()
     {
-        super("Registration");
+        super("Registration", "0");
     }
 }

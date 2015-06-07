@@ -44,7 +44,7 @@ public class ConnectionManager extends WebSocketClient
     @Override
     public void onMessage( String message)
     {
-        Log.d("ServerMsg", message);
+        Log.i("ServerMsg", message);
         JSONReader<Token> reader = new JSONReader<>();
         Token t = reader.readJson(message, Token.class);
         ServerControl s = new ServerControl(message, t);
@@ -76,6 +76,7 @@ public class ConnectionManager extends WebSocketClient
     {
         if(isConnected())
         {
+            Log.i("SendMsg", SendMsg);
             send(SendMsg);
             return true;
         }

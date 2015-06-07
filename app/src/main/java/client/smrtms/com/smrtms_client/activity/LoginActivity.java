@@ -160,7 +160,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             cancel = true;
         }*/
 
-        LoginUser.createInstance(email, "0000", LoginActivity.this);
+        LoginUser.createInstance(email, "0", LoginActivity.this);
 
         //setup dummy
         setUpDummyFriends();
@@ -337,8 +337,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                finish();
-                LoginUser.getInstance().setIsLogin(true);
                 Intent myIntent = new Intent(LoginActivity.this,StartActivity.class);
                 LoginActivity.this.startActivity(myIntent);
                 finish();

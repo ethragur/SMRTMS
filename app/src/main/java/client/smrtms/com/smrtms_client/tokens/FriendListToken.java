@@ -2,6 +2,7 @@ package client.smrtms.com.smrtms_client.tokens;
 
 import java.util.List;
 
+import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
 
 /**
@@ -12,7 +13,7 @@ public class FriendListToken extends Token
     public List<User> userList;
     public FriendListToken()
     {
-        super("FriendList");
+        super("FriendList", LoginUser.getInstance().getID());
     }
 
 }

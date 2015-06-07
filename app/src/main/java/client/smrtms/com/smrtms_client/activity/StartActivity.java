@@ -29,7 +29,9 @@ public class StartActivity extends Activity{
         return true;
     }
 
-    public void changeToMainScreen(View view) {
+    public void changeToMainScreen(View view)
+    {
+        LoginUser.getInstance().startUpdates();
         Intent myIntent = new Intent(StartActivity.this, MainScreen.class);
         StartActivity.this.startActivity(myIntent);
         finish();

@@ -11,7 +11,7 @@ public class AuthenticationToken extends Token
 	
     public AuthenticationToken(String mail, String pw)
     {
-        super("Authentication");
+        super("Authentication", "0");
         email = mail;
         password = pw;
         access = false;

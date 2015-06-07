@@ -56,9 +56,28 @@ public class ServerControl implements Runnable
         AuthenticationToken authT = readerA.readJson(input, AuthenticationToken.class);
         if(authT.access)
         {
-            LoginUser.getInstance().setIsLogin(true);
-            LoginUser.getInstance().setID(authT.id);
-            Log.d("Login", "Login Successful");
+            int i = input.indexOf("sId") +6;
+            String tmpId = "";
+            while(input.charAt(i) != '\"')
+            {
+                tmpId += input.charAt(i++);
+            }
+
+
+            Log.i("info", tmpId);
+            if(tmpId.equals(""))
+            {
+                LoginUser.getInstance().logout();
+            }
+            else
+            {
+                LoginUser.getInstance().setID(tmpId);
+                LoginUser.getInstance().setIsLogin(true);
+                Log.d("Login", "Login Successful");
+            }
+
+
+
         }
         else
         {

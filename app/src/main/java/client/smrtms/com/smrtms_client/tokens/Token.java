@@ -20,18 +20,10 @@ public class Token
     public String sTag;
     public String id;
 
-    public Token(String tag)
+    public Token(String tag, String id)
     {
+        this.id = id;
         sTag = tag;
-        if(LoginUser.getInstance() != null)
-        {
-            id = LoginUser.getInstance().getID();
-        }
-        else
-        {
-            id = "";
-        }
-
     }
 
 }
