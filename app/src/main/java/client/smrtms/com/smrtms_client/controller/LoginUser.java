@@ -40,6 +40,7 @@ public class LoginUser extends User
 
 
     Timer timer;
+    Timer logoutTimer;
     private List<User> friendList;
 
     public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
@@ -125,6 +126,7 @@ public class LoginUser extends User
         Client.getInstance().WriteMsg(toSend);
         //cancel update timer
         inst.timer.cancel();
+        logoutTimer.cancel();
         //clear Instance
         inst = null;
     }
@@ -187,7 +189,7 @@ public class LoginUser extends User
     {
         remainingTime = remTim;
 
-        Timer logoutTimer = new Timer();
+        logoutTimer = new Timer();
 
         logoutTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -202,8 +204,7 @@ public class LoginUser extends User
                     logout();
                     myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     tmp.startActivity(myIntent);
-
-
+                    logoutTimer.cancel();
                 }
             }
         }, 0, 60000);
