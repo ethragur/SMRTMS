@@ -5,6 +5,7 @@ import android.util.Log;
 import client.smrtms.com.smrtms_client.activity.RegisterActivity;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.FriendListToken;
+import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 
@@ -43,6 +44,9 @@ public class ServerControl implements Runnable
                 break;
             case "FriendList":
                 handleFriendList();
+                break;
+            case "FriendRequest":
+                handleFriendReq();
                 break;
             default:
                 Log.e("ServerMsg", "UnknownToken");
@@ -107,6 +111,16 @@ public class ServerControl implements Runnable
         FriendListToken friendT = readerFL.readJson(input, FriendListToken.class);
         LoginUser.getInstance().setFriendList(friendT.userList);
 
+    }
+
+    private void handleFriendReq()
+    {
+        JSONReader<FriendReqToken> readerFr = new JSONReader<>();
+        FriendReqToken frReq = readerFr.readJson(input, FriendReqToken.class);
+        if(frReq != null)
+        {
+            LoginUser.getInstance().FriendReqIn(frReq.friendsname);
+        }
     }
 
 }

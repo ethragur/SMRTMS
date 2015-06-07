@@ -20,6 +20,8 @@ public class StartActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_one_button);
+
+        LoginUser.getInstance().setmContext(this.context);
     }
 
     @Override

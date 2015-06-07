@@ -1,13 +1,18 @@
 package client.smrtms.com.smrtms_client.controller;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.LogoutToken;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
 
@@ -34,7 +39,7 @@ public class LoginUser extends User
         super(Username, ID, new Double(0), new Double(0));
         isLogin = new Boolean(false);
         mContext = Context;
-        gpsTracker = new GPSTracker(Context);
+        gpsTracker = new GPSTracker(mContext);
         friendList = new ArrayList<User>();
 
 
@@ -126,6 +131,36 @@ public class LoginUser extends User
     public void setFriendList(List<User> fl)
     {
         this.friendList = fl;
+    }
+
+    public void FriendReqIn(String name)
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+
+        alert.setTitle("New Friend Request");
+        alert.setMessage("User: "+ name + " wants to add you as a Friend");
+
+
+        alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+
+            }
+        });
+
+        alert.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+
+        alert.show();
+
+    }
+
+    public void setmContext(Context c)
+    {
+        mContext = c;
     }
 
 

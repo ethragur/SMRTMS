@@ -187,7 +187,7 @@ public class ContactsFragment extends Fragment {
             } else {
                 paramFriend.addRule(RelativeLayout.BELOW,fButton.get(i-1).getId());
                 fButton.get(i).setLayoutParams(paramFriend);
-                paramMap.addRule(RelativeLayout.BELOW,mButton.get(i-1).getId());
+                paramMap.addRule(RelativeLayout.BELOW,mButton.get(i-1).getId());f
                 mButton.get(i).setLayoutParams(paramMap);
             }
 

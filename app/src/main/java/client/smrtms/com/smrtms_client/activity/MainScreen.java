@@ -27,9 +27,6 @@ import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 
 
 public class MainScreen extends ActionBarActivity {
-    public OnSwipeTouchListener onSwipeTouchListener;
-    LoginUser activeUser;
-    GPSTracker gps;
     final Context context = this;
 
     @Override
@@ -43,6 +40,8 @@ public class MainScreen extends ActionBarActivity {
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
         }
+
+        LoginUser.getInstance().setmContext(this.context);
 
 
     }
@@ -183,5 +182,10 @@ public class MainScreen extends ActionBarActivity {
         alert.show();
 
 
+    }
+
+    public void addEvent(View view)
+    {
+        //TODO add Events
     }
 }
