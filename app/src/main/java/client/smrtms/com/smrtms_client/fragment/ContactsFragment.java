@@ -1,20 +1,13 @@
 package client.smrtms.com.smrtms_client.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -27,7 +20,7 @@ import net.londatiga.android.QuickAction;
 import java.util.ArrayList;
 
 import client.smrtms.com.smrtms_client.R;
-import client.smrtms.com.smrtms_client.controller.ItemListAdapter;
+import client.smrtms.com.smrtms_client.controller.UserListAdapter;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
@@ -57,7 +50,7 @@ public class ContactsFragment extends Fragment {
             users.add(friend);
         }
         // Create the adapter to convert the array to views
-        ItemListAdapter adapter = new ItemListAdapter(getActivity(), users);
+        UserListAdapter adapter = new UserListAdapter(getActivity(), users);
         // Attach the adapter to a ListView
         ListView listView = (ListView) getActivity().findViewById(R.id.listFriend);
         listView.setAdapter(adapter);
@@ -65,6 +58,7 @@ public class ContactsFragment extends Fragment {
 
         ActionItem chat     = new ActionItem(1, "chat", getResources().getDrawable(R.drawable.chat));
         ActionItem map     = new ActionItem(2, "map", getResources().getDrawable(R.drawable.globe));
+        ActionItem delete     = new ActionItem(3, "delete", getResources().getDrawable(R.drawable.delete));
 
         //create QuickAction. Use QuickAction.VERTICAL or QuickAction.HORIZONTAL param to define layout
         //orientation
@@ -73,6 +67,7 @@ public class ContactsFragment extends Fragment {
         //add action items into QuickAction
         quickAction.addActionItem(chat);
         quickAction.addActionItem(map);
+        quickAction.addActionItem(delete);
 
         //Set listener for action item clicked
         quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
@@ -94,8 +89,11 @@ public class ContactsFragment extends Fragment {
                     // switch t Map fragment
                     TabsFragment tf = (TabsFragment) getParentFragment();
                     tf.setTabPostion(0);
-
+                /* delete is selected */
+                } else if (actionItem.getActionId() == 3) {
+                    //TODO delete friend
                 }
+
             }
         });
 
