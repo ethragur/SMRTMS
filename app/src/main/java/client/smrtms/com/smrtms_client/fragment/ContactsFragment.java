@@ -117,6 +117,9 @@ public class ContactsFragment extends Fragment {
         });
 
 
+
+
+
 /*
         // This will create the LinearLayout Vertical
         RelativeLayout layout = new RelativeLayout(getActivity());
@@ -205,4 +208,6 @@ public class ContactsFragment extends Fragment {
 */
 
     }
+
+
 }

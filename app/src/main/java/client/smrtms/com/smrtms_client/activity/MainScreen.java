@@ -10,16 +10,20 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.androidchat.ChatActivity;
 
 import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.GPSTracker;
+import client.smrtms.com.smrtms_client.controller.JSONReader;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.View.OnSwipeTouchListener;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.fragment.TabsFragment;
+import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 
 
 public class MainScreen extends ActionBarActivity {
@@ -141,4 +145,43 @@ public class MainScreen extends ActionBarActivity {
         Intent myIntent = new Intent(MainScreen.this, MainActivity.class);
         MainScreen.this.startActivity(myIntent);
     }*/
+
+    public void addFriend(View view)
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Add Friend");
+        alert.setMessage("Please Enter Username:");
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(this);
+        alert.setView(input);
+
+        alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                if(input.getText() != null)
+                {
+                    JSONReader reader = new JSONReader();
+                    FriendReqToken frToken = new FriendReqToken(input.getText().toString());
+                    String friendReq = reader.JSONWriter(frToken);
+
+                    Client.getInstance().WriteMsg(friendReq);
+
+                }
+                else
+                {
+                }
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+
+        alert.show();
+
+
+    }
 }
