@@ -22,6 +22,7 @@ import java.util.Date;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.EventListAdapter;
+import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 
@@ -48,9 +49,8 @@ public class EventFragment extends Fragment {
         // Construct the data source
         final ArrayList<Event> events = new ArrayList<>();
 
-        //TODO download events form server
-        for (int i = 0; i < 10; i++) {
-            events.add(new Event(i,"event"+i,"description"+i,(Math.random()+47),(Math.random())+11));
+        for(Event event: LoginUser.getInstance().getEventList()) {
+            events.add(event);
         }
 
         // Create the adapter to convert the array to views

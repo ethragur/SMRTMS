@@ -10,6 +10,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
@@ -53,6 +54,11 @@ public class GMapFragment extends SupportMapFragment
         {
             mMap.addMarker(new MarkerOptions().position(new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getUsername()));
         }
+
+        for(Event event: LoginUser.getInstance().getEventList())
+        {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(event.getLatitude(), event.getLongitude())).title(event.getName()));
+        }
     }
 
     @Override
@@ -68,7 +74,10 @@ public class GMapFragment extends SupportMapFragment
 
     private void mapZoom(LatLng coordinate) {
         CameraUpdate location = CameraUpdateFactory.newLatLngZoom(coordinate, 5);
-        mMap.animateCamera(location);
+        CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
+
+        mMap.moveCamera(location);
+        mMap.animateCamera(zoom);
     }
 
 }

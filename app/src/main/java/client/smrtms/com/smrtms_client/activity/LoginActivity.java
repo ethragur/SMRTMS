@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.smrtms.com.smrtms_client.controller.Client;
+import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.JSONReader;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
@@ -364,8 +365,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         for(int i = 0; i < size; i++) {
             LoginUser.getInstance().addFriend(new User("dummy"+i,"000"+i,(Math.random()+47),(Math.random())+11));
         }
+        for (int i = 0; i < 10; i++) {
+            LoginUser.getInstance().addEvent(new Event(i,"event"+i,"description"+i,(Math.random()+47),(Math.random())+11));
+        }
 
-     //   LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
+
+        //   LoginUser.getInstance().addFriend(new User("dummy1","0002",47.2634125,11.3456255));
       //  LoginUser.getInstance().addFriend(new User("dummy2","0003",47.2637871,11.4000567));
      //   LoginUser.getInstance().addFriend(new User("dummy3", "0004", 37.4209024, -122.0807398));
     }

@@ -9,13 +9,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -45,6 +41,7 @@ public class LoginUser extends User
     Timer timer;
     Timer logoutTimer;
     private List<User> friendList;
+    private List<Event> eventList;
     private Stack<FriendReqToken> pendingFriendReq;
     public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
     {
@@ -53,6 +50,7 @@ public class LoginUser extends User
         mContext = Context;
         gpsTracker = new GPSTracker(mContext);
         friendList = new ArrayList<User>();
+        eventList = new ArrayList<Event>();
         pendingFriendReq = new Stack<FriendReqToken>();
     }
 
@@ -264,5 +262,15 @@ public class LoginUser extends User
         }
     }
 
+    public List<Event> getEventList() {
+        return eventList;
+    }
 
+    public void addEvent(Event event) {
+        eventList.add(event);
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
 }

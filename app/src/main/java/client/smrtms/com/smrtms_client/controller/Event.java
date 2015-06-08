@@ -10,6 +10,7 @@ public class Event {
     private String description;
     private double latitude;
     private double longitude;
+    private boolean joined = false;
 
     private ArrayList<User> attendees = new ArrayList<>();
 
@@ -23,10 +24,12 @@ public class Event {
 
     public void join(User user) {
         attendees.add(user);
+        joined = true;
     }
 
     public void leave(User user) {
         attendees.remove(user);
+        joined = false;
     }
 
     public int getID() {
@@ -67,5 +70,9 @@ public class Event {
 
     public ArrayList<User> getAttendees() {
         return attendees;
+    }
+
+    public boolean isJoined() {
+        return joined;
     }
 }
