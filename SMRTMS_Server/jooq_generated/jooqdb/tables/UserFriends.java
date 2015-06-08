@@ -4,12 +4,17 @@
 package jooqdb.tables;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Generated;
 
+import jooqdb.Keys;
 import jooqdb.Smrtms;
 import jooqdb.tables.records.UserFriendsRecord;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.impl.TableImpl;
@@ -28,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserFriends extends TableImpl<UserFriendsRecord> {
 
-	private static final long serialVersionUID = 1127706816;
+	private static final long serialVersionUID = -989658999;
 
 	/**
 	 * The reference instance of <code>SMRTMS.User_Friends</code>
@@ -46,12 +51,12 @@ public class UserFriends extends TableImpl<UserFriendsRecord> {
 	/**
 	 * The column <code>SMRTMS.User_Friends.Friender_ID</code>.
 	 */
-	public final TableField<UserFriendsRecord, String> FRIENDER_ID = createField("Friender_ID", org.jooq.impl.SQLDataType.CHAR.length(100), this, "");
+	public final TableField<UserFriendsRecord, Integer> FRIENDER_ID = createField("Friender_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>SMRTMS.User_Friends.Friendee_ID</code>.
 	 */
-	public final TableField<UserFriendsRecord, String> FRIENDEE_ID = createField("Friendee_ID", org.jooq.impl.SQLDataType.CHAR.length(100), this, "");
+	public final TableField<UserFriendsRecord, Integer> FRIENDEE_ID = createField("Friendee_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>SMRTMS.User_Friends.Tracking_Flag</code>.
@@ -78,6 +83,14 @@ public class UserFriends extends TableImpl<UserFriendsRecord> {
 
 	private UserFriends(String alias, Table<UserFriendsRecord> aliased, Field<?>[] parameters) {
 		super(alias, Smrtms.SMRTMS, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<UserFriendsRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<UserFriendsRecord, ?>>asList(Keys.USER_FRIENDS_IBFK_1, Keys.USER_FRIENDS_IBFK_2);
 	}
 
 	/**

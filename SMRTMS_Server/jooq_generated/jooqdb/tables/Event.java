@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Event extends TableImpl<EventRecord> {
 
-	private static final long serialVersionUID = -2084326360;
+	private static final long serialVersionUID = 1954972440;
 
 	/**
 	 * The reference instance of <code>SMRTMS.Event</code>
@@ -65,9 +65,14 @@ public class Event extends TableImpl<EventRecord> {
 	public final TableField<EventRecord, String> DESCRIPTION = createField("Description", org.jooq.impl.SQLDataType.CLOB, this, "");
 
 	/**
-	 * The column <code>SMRTMS.Event.Position</code>.
+	 * The column <code>SMRTMS.Event.Longitude</code>.
 	 */
-	public final TableField<EventRecord, Integer> POSITION = createField("Position", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<EventRecord, Double> LONGITUDE = createField("Longitude", org.jooq.impl.SQLDataType.DOUBLE, this, "");
+
+	/**
+	 * The column <code>SMRTMS.Event.Latitude</code>.
+	 */
+	public final TableField<EventRecord, Double> LATITUDE = createField("Latitude", org.jooq.impl.SQLDataType.DOUBLE, this, "");
 
 	/**
 	 * The column <code>SMRTMS.Event.Attendees</code>.
@@ -108,8 +113,16 @@ public class Event extends TableImpl<EventRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public UniqueKey<EventRecord> getPrimaryKey() {
+		return Keys.KEY_EVENT_PRIMARY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public List<UniqueKey<EventRecord>> getKeys() {
-		return Arrays.<UniqueKey<EventRecord>>asList(Keys.KEY_EVENT_ID);
+		return Arrays.<UniqueKey<EventRecord>>asList(Keys.KEY_EVENT_PRIMARY, Keys.KEY_EVENT_ID);
 	}
 
 	/**

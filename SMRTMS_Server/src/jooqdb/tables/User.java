@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-	private static final long serialVersionUID = -1855239986;
+	private static final long serialVersionUID = -1472168421;
 
 	/**
 	 * The reference instance of <code>SMRTMS.User</code>
@@ -115,8 +115,24 @@ public class User extends TableImpl<UserRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Identity<UserRecord, Integer> getIdentity() {
+		return Keys.IDENTITY_USER;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UniqueKey<UserRecord> getPrimaryKey() {
+		return Keys.KEY_USER_PRIMARY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public List<UniqueKey<UserRecord>> getKeys() {
-		return Arrays.<UniqueKey<UserRecord>>asList(Keys.KEY_USER_ID);
+		return Arrays.<UniqueKey<UserRecord>>asList(Keys.KEY_USER_PRIMARY, Keys.KEY_USER_ID);
 	}
 
 	/**

@@ -4,12 +4,17 @@
 package jooqdb.tables;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Generated;
 
+import jooqdb.Keys;
 import jooqdb.Smrtms;
 import jooqdb.tables.records.EventAttendeesRecord;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.impl.TableImpl;
@@ -28,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EventAttendees extends TableImpl<EventAttendeesRecord> {
 
-	private static final long serialVersionUID = -1691269233;
+	private static final long serialVersionUID = -1076318356;
 
 	/**
 	 * The reference instance of <code>SMRTMS.Event_Attendees</code>
@@ -73,6 +78,14 @@ public class EventAttendees extends TableImpl<EventAttendeesRecord> {
 
 	private EventAttendees(String alias, Table<EventAttendeesRecord> aliased, Field<?>[] parameters) {
 		super(alias, Smrtms.SMRTMS, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<EventAttendeesRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<EventAttendeesRecord, ?>>asList(Keys.EVENT_ATTENDEES_IBFK_1, Keys.EVENT_ATTENDEES_IBFK_2);
 	}
 
 	/**

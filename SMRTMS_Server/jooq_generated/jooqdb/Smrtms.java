@@ -12,6 +12,7 @@ import javax.annotation.Generated;
 
 import jooqdb.tables.Event;
 import jooqdb.tables.EventAttendees;
+import jooqdb.tables.FriendRequestStash;
 import jooqdb.tables.User;
 import jooqdb.tables.UserFriends;
 
@@ -32,7 +33,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Smrtms extends SchemaImpl {
 
-	private static final long serialVersionUID = -916991475;
+	private static final long serialVersionUID = 487491774;
 
 	/**
 	 * The reference instance of <code>SMRTMS</code>
@@ -57,6 +58,7 @@ public class Smrtms extends SchemaImpl {
 		return Arrays.<Table<?>>asList(
 			Event.EVENT,
 			EventAttendees.EVENT_ATTENDEES,
+			FriendRequestStash.FRIEND_REQUEST_STASH,
 			User.USER,
 			UserFriends.USER_FRIENDS);
 	}

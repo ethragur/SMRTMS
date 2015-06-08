@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="/home/max/SMRTMS/SMRTMS_Server/httpclient-4.4.1.jar"/>
 	<classpathentry kind="lib" path="/home/max/SMRTMS/SMRTMS_Server/java_websocket.jar"/>
 	<classpathentry kind="lib" path="/home/max/SMRTMS/SMRTMS_Server/gson-2.3.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -27,11 +27,19 @@ public class TokenHandler implements Runnable {
 		dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
         //dbm.printUser();
-        System.out.println("Database Connection is ready!");
+        //System.out.println("Database Connection is ready!");
         
         token = t;
         message = msg;
         connection = conn;
+	}
+	
+	// The constructer to init the database connection when the server starts!
+	public TokenHandler() {
+		dbm = new DBManager();
+        authman = new AuthenticationManager(dbm);
+        dbm.printUser();
+        System.out.println("Database Connection is ready!");
 	}
 	
 	private void sendToken( Token tok, WebSocket conn ) {

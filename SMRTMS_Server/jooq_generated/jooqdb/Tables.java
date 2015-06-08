@@ -8,6 +8,7 @@ import javax.annotation.Generated;
 
 import jooqdb.tables.Event;
 import jooqdb.tables.EventAttendees;
+import jooqdb.tables.FriendRequestStash;
 import jooqdb.tables.User;
 import jooqdb.tables.UserFriends;
 
@@ -34,6 +35,11 @@ public class Tables {
 	 * The table SMRTMS.Event_Attendees
 	 */
 	public static final EventAttendees EVENT_ATTENDEES = jooqdb.tables.EventAttendees.EVENT_ATTENDEES;
+
+	/**
+	 * The table SMRTMS.Friend_Request_Stash
+	 */
+	public static final FriendRequestStash FRIEND_REQUEST_STASH = jooqdb.tables.FriendRequestStash.FRIEND_REQUEST_STASH;
 
 	/**
 	 * The table SMRTMS.User
