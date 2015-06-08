@@ -12,7 +12,7 @@ public class FriendListToken extends Token
     public List<User> userList;
     public FriendListToken()
     {
-        super("FriendList");
+        super("FriendList", "0");
     }
 
 }

@@ -18,10 +18,10 @@ public class Token
     public String sTag;
     public String sId;
 
-    public Token(String tag)
+    public Token(String tag, String id)
     {
         sTag = tag;
-        sId = "";
+        sId = id;
 
     }
 

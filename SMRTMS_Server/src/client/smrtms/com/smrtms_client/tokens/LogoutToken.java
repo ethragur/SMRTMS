@@ -8,6 +8,6 @@ public class LogoutToken extends Token
 
     public LogoutToken()
     {
-        super("Logout");
+        super("Logout", "0");
     }
 }

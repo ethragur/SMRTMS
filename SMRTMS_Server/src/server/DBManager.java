@@ -122,7 +122,7 @@ public class DBManager {
 		return null;
 	}
 	
-public String getUserIDviaName ( String name ) {
+public int getUserIDviaName ( String name ) {
 		
 		Result<Record> result = create.select().from(USER).fetch();
 		
@@ -131,13 +131,13 @@ public String getUserIDviaName ( String name ) {
 			System.out.println("Is " + r.getValue(USER.USERNAME).toString() + " the same as " + name + "? ");
 			if (r.getValue(USER.USERNAME).toString().compareTo(name) == 0) {
 				System.out.println("Found User ID! Its " + r.getValue(USER.ID).toString());
-				return r.getValue(USER.ID).toString();
+				return r.getValue(USER.ID);
 			}
 			System.out.println("No...");
 		}
 		
 		System.out.println("========= ERROR: Couldn't find the User ID!!!! ========");
-		return null;
+		return -1;
 	}
 	
 	public ArrayList<User> getUserfriends ( String id ) {
@@ -155,7 +155,7 @@ public String getUserIDviaName ( String name ) {
 				System.out.println(("Looking for User ID......"));
 				for (Record p : result) {
 					System.out.println("Is " + p.getValue(USER.ID).toString() + " the same as " + r.getValue(USER_FRIENDS.FRIENDEE_ID) + "? ");
-					if (p.getValue(USER.ID).toString().compareTo(r.getValue(USER_FRIENDS.FRIENDEE_ID)) == 0) {
+					if (p.getValue(USER.ID).toString().compareTo(r.getValue(USER_FRIENDS.FRIENDEE_ID).toString()) == 0) {
 						System.out.println("Found User ID! Its " + p.getValue(USER.ID).toString());
 						
 						// Build User and add to list
@@ -178,12 +178,11 @@ public String getUserIDviaName ( String name ) {
 		return friends;
 	}
 	
-	private void insertFriends( String friender_ID, String friendee_ID ) {
+	private void insertFriends( int friender_ID, int friendee_ID ) {
 		
 		byte nope = 0;
 		
 		create.insertInto(USER_FRIENDS)
-		//.set(USER.ID, Integer.parseInt(t.sId))
 		.set(USER_FRIENDS.FRIENDER_ID, friender_ID)
 		.set(USER_FRIENDS.FRIENDEE_ID, friendee_ID)
 		.set(USER_FRIENDS.TRACKING_FLAG, nope)
@@ -194,9 +193,9 @@ public String getUserIDviaName ( String name ) {
 	
 	public void addFriend ( FriendReqToken frt ) {
 		// Get User_ID from friender
-		String frienderID = frt.sId;
+		int frienderID = Integer.parseInt(frt.sId);
 		// Get User_ID from friendee
-		String friendeeID = getUserIDviaName( frt.friendsname );
+		int friendeeID = getUserIDviaName( frt.friendsname );
 		// Add to friend table
 		insertFriends(frienderID, friendeeID);
 	}

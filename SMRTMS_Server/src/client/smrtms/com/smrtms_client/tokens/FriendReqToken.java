@@ -11,7 +11,7 @@ public class FriendReqToken extends Token
     public boolean accept;
     public FriendReqToken(String search)
     {
-        super("FriendRequest");
+        super("FriendRequest", "0");
         friendsname = search;
         accept = false;
     }

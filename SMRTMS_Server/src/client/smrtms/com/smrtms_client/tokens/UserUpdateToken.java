@@ -9,7 +9,7 @@ public class UserUpdateToken extends Token
     public Double Latitude;
     public UserUpdateToken(Double lati, Double longi)
     {
-        super("UserUpdate");
+        super("UserUpdate", "0");
         Longitude = longi;
         Latitude = lati;
 
