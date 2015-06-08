@@ -55,11 +55,13 @@ public class TokenHandler implements Runnable {
 	public void ParseToken (Token t, String msg, WebSocket conn ) {
     	if (dbm.isConnected) {
     		JSONReader reader = new JSONReader<Token>();
+    		//int recievedID = msg.indexOf("Id") + 6; // Funktioniert nur mit einstlligen ids!
+    		//System.out.println("Recieved ID: " + recievedID);
     		
 	    	switch (t.sTag) {
 	    		case "Authentication":
 	    	    	AuthenticationToken auth = (AuthenticationToken)reader.readJson( msg , AuthenticationToken.class );
-	    			
+	    			//auth.sId = recievedID;
 	    	    	HandleAuthToken(auth, conn);
 	    			break;
 	    		case "Registration":
@@ -98,8 +100,8 @@ public class TokenHandler implements Runnable {
 		auth.access = result;
 		if (result == true)
 		{
-			auth.sId = dbm.getUserID( auth.email );
-			dbm.UpdateUserOnline(Integer.parseInt(auth.sId), true);
+			auth.id = dbm.getUserID( auth.email );
+			dbm.UpdateUserOnline(Integer.parseInt(auth.id), true);
 		}
 		
 		sendToken(auth, conn);
@@ -112,7 +114,7 @@ public class TokenHandler implements Runnable {
     	// Write ID back
     	if (reg.result == true)
 		{
-			reg.sId = dbm.getUserID( reg.email );	
+			reg.id = dbm.getUserID( reg.email );	
 		}
     	
     	sendToken( reg , conn);
@@ -120,22 +122,32 @@ public class TokenHandler implements Runnable {
     
     private void HandleUpdateToken ( UserUpdateToken uut, WebSocket conn ) {
     	authman.UpdateUser( uut );
+    	
+    	// Check if there is a open friendrequest for this user  	
+    	FriendReqToken frt = dbm.passOnFriendRequest( uut.id );
+    	
+    	if ( frt != null )
+    		sendToken(frt, conn);
     }
     
     private void HandleLogoutToken( LogoutToken lot ) {
-    	dbm.UpdateUserOnline(Integer.parseInt(lot.sId), false);
+    	dbm.UpdateUserOnline(Integer.parseInt(lot.id), false);
     }
     
     private void HandleFriendReqToken ( FriendReqToken frt, WebSocket conn ) {
-    	// For now, adds friends without consent. Yay!
-    	dbm.addFriend( frt );
-    	frt.accept = true;
     	
-    	sendToken( frt, conn);
+    	// The other friend accepted! Yeah!
+    	if(frt.accept == true){
+    		dbm.addFriend( frt );
+    	}
+    	else {	// Request was just sent, store it for later
+    		dbm.storeFriendReq( frt );
+    	}
+    	//sendToken( frt, conn);
     }
     
     private void HandleFriendListToken ( FriendListToken flt, WebSocket conn ) {
-    	ArrayList<User> friends = dbm.getUserfriends( flt.sId );
+    	ArrayList<User> friends = dbm.getUserfriends( flt.id );
     	flt.userList = friends;
     	
     	sendToken( flt, conn );

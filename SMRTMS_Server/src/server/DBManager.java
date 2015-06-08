@@ -2,6 +2,7 @@ package server;
 
 import static jooqdb.Tables.USER;
 import static jooqdb.Tables.USER_FRIENDS;
+import static jooqdb.Tables.FRIEND_REQUEST_STASH;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jooqdb.tables.FriendRequestStash;
 import jooqdb.tables.UserFriends;
 
 import org.jooq.DSLContext;
@@ -71,7 +73,7 @@ public class DBManager {
 		create.update(USER)
 				.set(USER.LONGITUDE, t.Longitude)
 				.set(USER.LATITUDE, t.Latitude)
-				.where(USER.ID.equal(Integer.parseInt(t.sId)))
+				.where(USER.ID.equal(Integer.parseInt(t.id)))
 				.execute();
 	}
 	
@@ -104,6 +106,20 @@ public class DBManager {
 		return null;
 	}
 	
+	public byte getUserOnlineStatus ( String id ) {
+		
+		Result<Record> result = create.select().from(USER).fetch();
+		
+		for (Record r : result) {
+			System.out.print("Is " + r.getValue(USER.ID).toString() + " the same as " + id + "? ");
+			if (r.getValue(USER.ID).toString().compareTo(id) == 0)
+				return r.getValue(USER.ISONLINE);
+			System.out.println("No... ");
+		}
+		
+		return -1;
+	}
+	
 	public String getUserID ( String email ) {
 		
 		Result<Record> result = create.select().from(USER).fetch();
@@ -122,8 +138,8 @@ public class DBManager {
 		return null;
 	}
 	
-public int getUserIDviaName ( String name ) {
-		
+	public int getUserIDviaName ( String name ) {
+			
 		Result<Record> result = create.select().from(USER).fetch();
 		
 		System.out.println(("Looking for User ID by checking name......"));
@@ -138,6 +154,24 @@ public int getUserIDviaName ( String name ) {
 		
 		System.out.println("========= ERROR: Couldn't find the User ID!!!! ========");
 		return -1;
+	}
+	
+	public String getUserNameviaID ( int id ) {
+		
+		Result<Record> result = create.select().from(USER).fetch();
+		
+		System.out.println(("Looking for User Name by checking id......"));
+		for (Record r : result) {
+			System.out.println("Is " + r.getValue(USER.ID).toString() + " the same as " + id + "? ");
+			if ( r.getValue(USER.ID) == id ) {
+				System.out.println("Found User Name! Its " + r.getValue(USER.USERNAME).toString());
+				return r.getValue(USER.USERNAME);
+			}
+			System.out.println("No...");
+		}
+		
+		System.out.println("========= ERROR: Couldn't find the User ID!!!! ========");
+		return null;
 	}
 	
 	public ArrayList<User> getUserfriends ( String id ) {
@@ -193,11 +227,56 @@ public int getUserIDviaName ( String name ) {
 	
 	public void addFriend ( FriendReqToken frt ) {
 		// Get User_ID from friender
-		int frienderID = Integer.parseInt(frt.sId);
+		int frienderID = Integer.parseInt(frt.id);
 		// Get User_ID from friendee
 		int friendeeID = getUserIDviaName( frt.friendsname );
 		// Add to friend table
 		insertFriends(frienderID, friendeeID);
+	}
+	
+	public void storeFriendReq ( FriendReqToken frt ) {
+		
+		// Get User_ID from friender
+		int friender_ID = Integer.parseInt(frt.id);
+		// Get User_ID from friendee
+		int friendee_ID = getUserIDviaName( frt.friendsname );
+		
+		create.insertInto(FRIEND_REQUEST_STASH)
+		.set(FRIEND_REQUEST_STASH.FRIENDER_ID, friender_ID)
+		.set(FRIEND_REQUEST_STASH.FRIENDEE_ID, friendee_ID)
+		.execute();
+		
+		System.out.println("Friends request stored into the DB!");
+	}
+	
+	public FriendReqToken passOnFriendRequest ( String friender_id ) {
+		//if ( getUserOnlineStatus( friender_id ) == 1 ) {
+		
+		Result<Record> result = create.select().from(FRIEND_REQUEST_STASH).fetch();
+		
+		System.out.println(("Looking for Friender ID by checking Friendee ID......"));
+		for (Record r : result) {
+			System.out.println("Is " + r.getValue(FRIEND_REQUEST_STASH.FRIENDER_ID).toString() + " the same as " + friender_id + "? ");
+			if (r.getValue(FRIEND_REQUEST_STASH.FRIENDER_ID).toString().compareTo(friender_id) == 0) {
+				System.out.println("Found Stashed Friend Request ID! Its " + r.getValue(FRIEND_REQUEST_STASH.FRIENDEE_ID).toString());
+				
+				
+				String FriendeeName = getUserNameviaID( r.getValue(FRIEND_REQUEST_STASH.FRIENDEE_ID) );
+				
+				// Build new frienreqtoken
+				FriendReqToken frt = new FriendReqToken(FriendeeName);
+				frt.accept = false;
+				
+				return frt;
+			}
+			System.out.println("No...");
+		}
+		
+		System.out.println("==== No stashed Friend Requests found ====");
+			
+		//}
+		
+		return null;
 	}
 	
 	public void Connect() {

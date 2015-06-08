@@ -16,12 +16,12 @@ package client.smrtms.com.smrtms_client.tokens;
 public class Token
 {
     public String sTag;
-    public String sId;
+    public String id;
 
     public Token(String tag, String id)
     {
         sTag = tag;
-        sId = id;
+        id = id;
 
     }
 
