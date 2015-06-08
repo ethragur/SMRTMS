@@ -13,7 +13,10 @@ import android.widget.TimePicker;
 import android.text.format.Time;
 
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.controller.Client;
+import client.smrtms.com.smrtms_client.controller.JSONReader;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
+import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 
 public class StartActivity extends Activity{
     final Context context=this;
@@ -24,6 +27,7 @@ public class StartActivity extends Activity{
         setContentView(R.layout.activity_the_one_button);
 
         LoginUser.getInstance().setmContext(this.context);
+        requestFriendList();
     }
 
     @Override
@@ -98,5 +102,17 @@ public class StartActivity extends Activity{
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    /* User should receive FriendList from Server before opening MainScreen
+
+     */
+    private void requestFriendList()
+    {
+        FriendListToken reqFL = new FriendListToken();
+        JSONReader<FriendListToken> FLjson = new JSONReader<>();
+        String request = FLjson.JSONWriter(reqFL);
+        Client.getInstance().WriteMsg(request);
     }
 }
