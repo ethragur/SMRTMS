@@ -19,6 +19,7 @@ import java.util.TimerTask;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.activity.LoginActivity;
 import client.smrtms.com.smrtms_client.activity.MainScreen;
+import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.LogoutToken;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
@@ -148,6 +149,15 @@ public class LoginUser extends User
 
     public void FriendReqIn(String name)
     {
+        for(FriendReqToken tmp : pendingFriendReq)
+        {
+            if(tmp.friendsname.equals(name))
+            {
+                //already got that one
+                return;
+            }
+        }
+
         Intent tmp = new Intent(mContext,MainScreen.class);
         PendingIntent mainScr = PendingIntent.getActivity(mContext, 0, tmp, 0);
 
@@ -166,31 +176,7 @@ public class LoginUser extends User
 
         pendingFriendReq.add(frReq);
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-
-        alert.setTitle("New Friend Request");
-        alert.setMessage("User: " + name + " wants to add you as a Friend");
-
-
-        alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton)
-            {
-                JSONReader<FriendReqToken> reader = new JSONReader<>();
-                String friendReq = reader.JSONWriter(pendingFriendReq.pop());
-
-                Client.getInstance().WriteMsg(friendReq);
-
-            }
-        });
-
-        alert.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-            }
-        });
-
-        alert.show();
-
+        Log.i("NewFriendReq", name + " added to FriendReqQueue");
     }
 
     public void setmContext(Context c)
@@ -225,11 +211,12 @@ public class LoginUser extends User
     }
 
     /*
-     * whenever an activity is resumed check all friendrequests
+     * whenever an activity is resumed check all Friendrequests
      */
     public void checkPendingFriendReq()
     {
-        if(isLogin) {
+        if(isLogin)
+        {
             if (pendingFriendReq != null) {
                 for (FriendReqToken x : pendingFriendReq) {
                     if (x != null) {
@@ -254,6 +241,8 @@ public class LoginUser extends User
 
                             }
                         });
+
+                        alert.show();
                     } else {
                         return;
                     }

@@ -44,9 +44,10 @@ public class MainScreen extends ActionBarActivity {
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
         }
-
-        LoginUser.getInstance().setmContext(this.context);
-
+        if(LoginUser.getInstance() != null) {
+            LoginUser.getInstance().setmContext(this.context);
+            LoginUser.getInstance().checkPendingFriendReq();
+        }
      //   LoginUser.getInstance().checkPendingFriendReq();
 
 
@@ -243,11 +244,14 @@ public class MainScreen extends ActionBarActivity {
 
    @Override
     protected void onStop() {
-        super.onStop();
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+       super.onStop();
+       if(LoginUser.getInstance() == null)
+       {
+           Intent intent = new Intent(Intent.ACTION_MAIN);
+           intent.addCategory(Intent.CATEGORY_HOME);
+           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+           startActivity(intent);
+           finish();
+       }
     }
 }
