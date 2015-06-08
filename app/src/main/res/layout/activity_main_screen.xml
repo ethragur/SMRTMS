@@ -16,6 +16,18 @@
         android:id="@+id/content_fragment"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="2" />
+        android:layout_weight="2" >
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:layout_gravity="center_horizontal|top"/>
+
+        <GridView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gridView"/>
+    </FrameLayout>
 
 </LinearLayout>

@@ -2,6 +2,7 @@
  * Created by effi on 4/28/15.
  */
 
+
 package client.smrtms.com.smrtms_client.controller;
 
 import android.util.Log;
@@ -26,7 +27,7 @@ public class Client
     {
         if(c == null) {
             try {
-                c = new ConnectionManager(new URI("wss://phil-m.eu:8887"), new Draft_10());
+                c = new ConnectionManager(new URI("ws://phil-m.eu:8887"), new Draft_10());
             } catch (URISyntaxException e) {
                 Log.d("Connection", "Wrong URI");
                 e.printStackTrace();

@@ -74,6 +74,7 @@ public class ConnectionManager extends WebSocketClient
 
     public boolean sendmsg(String SendMsg)
     {
+        Log.i("Message", SendMsg);
         if(isConnected())
         {
             Log.i("SendMsg", SendMsg);

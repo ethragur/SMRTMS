@@ -40,7 +40,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateHidden" > <!-- The label of the first screen defines the name of the app in the launcher for some reason -->
+            android:windowSoftInputMode="adjustPan|stateVisible" > <!-- The label of the first screen defines the name of the app in the launcher for some reason -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,27 +49,33 @@
         </activity>
         <activity
             android:name=".activity.MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name=".activity.MainScreen"
-            android:label="@string/title_activity_main_screen" >
+            android:label="@string/title_activity_main_screen"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name="com.firebase.androidchat.ChatActivity"
-            android:label="because it doesn&apos;t matters" >
+            android:label="because it doesn&apos;t matters"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name=".activity.RegisterActivity"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name=".activity.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name=".activity.StartActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
     </application>
 
