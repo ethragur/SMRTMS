@@ -126,8 +126,10 @@ public class TokenHandler implements Runnable {
     	// Check if there is a open friendrequest for this user  	
     	FriendReqToken frt = dbm.passOnFriendRequest( uut.id );
     	
-    	if ( frt != null )
+    	if ( frt != null ) {
+    		// Send that lucky person that new friendrequest
     		sendToken(frt, conn);
+    	}
     }
     
     private void HandleLogoutToken( LogoutToken lot ) {

@@ -267,6 +267,12 @@ public class DBManager {
 				FriendReqToken frt = new FriendReqToken(FriendeeName);
 				frt.accept = false;
 				
+				// Delete that stashed friend request. Its done now!
+				create.delete(FRIEND_REQUEST_STASH)
+					.where(FRIEND_REQUEST_STASH.FRIENDEE_ID.equal( r.getValue(FRIEND_REQUEST_STASH.FRIENDEE_ID) ))
+					.and(FRIEND_REQUEST_STASH.FRIENDER_ID.equal( Integer.parseInt(friender_id) ) )
+					.execute();
+				
 				return frt;
 			}
 			System.out.println("No...");
