@@ -98,10 +98,10 @@ public class MainScreen extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         // if this button is clicked, close
                         // current activity and open LoginActivity
-                        Intent myIntent = new Intent(MainScreen.this, LoginActivity.class);
-                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(myIntent);
                         LoginUser.getInstance().logout();
+                        Intent myIntent = new Intent(MainScreen.this, LoginActivity.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(myIntent);
                         finish();
                     }
                 })
@@ -229,5 +229,15 @@ public class MainScreen extends ActionBarActivity {
 
             }
         });
+    }
+
+   @Override
+    protected void onStop() {
+        super.onStop();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }

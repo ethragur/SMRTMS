@@ -408,10 +408,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // if this button is clicked, close
-                        // current activity and open LoginActivity
-                        Intent myIntent = new Intent(LoginActivity.this, LoginActivity.class);
-                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        //startActivity(myIntent);
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                         finish();
                     }
                 })
