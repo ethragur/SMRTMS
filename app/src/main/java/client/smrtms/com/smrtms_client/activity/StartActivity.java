@@ -67,10 +67,11 @@ public class StartActivity extends Activity{
                     public void onClick(DialogInterface dialog, int id) {
                         // if this button is clicked, close
                         // current activity and open LoginActivity
-                        Intent myIntent = new Intent(StartActivity.this, LoginActivity.class);
                         LoginUser.getInstance().logout();
+                        Intent myIntent = new Intent(StartActivity.this, LoginActivity.class);
                         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myIntent);
+
                         finish();
                     }
                 })

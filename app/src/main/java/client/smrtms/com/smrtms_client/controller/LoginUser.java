@@ -125,8 +125,12 @@ public class LoginUser extends User
         String toSend = Writer.JSONWriter(lt);
         Client.getInstance().WriteMsg(toSend);
         //cancel update timer
-        inst.timer.cancel();
-        logoutTimer.cancel();
+        if(inst.timer != null) {
+            inst.timer.cancel();
+        }
+        if(logoutTimer!=null) {
+            logoutTimer.cancel();
+        }
         //clear Instance
         inst = null;
     }
