@@ -13,7 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,18 +45,15 @@ public class LoginUser extends User
     Timer timer;
     Timer logoutTimer;
     private List<User> friendList;
-
+    private Queue<FriendReqToken> pendingFriendReq;
     public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
     {
-
         super(Username, ID, new Double(0), new Double(0));
         isLogin = new Boolean(false);
         mContext = Context;
         gpsTracker = new GPSTracker(mContext);
         friendList = new ArrayList<User>();
-
-
-
+        pendingFriendReq = new LinkedList<FriendReqToken>();
     }
 
 
@@ -158,6 +158,12 @@ public class LoginUser extends User
         notification.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(1000/*some int*/, notification);
 
+        FriendReqToken frReq = new FriendReqToken(name);
+        frReq.id = this.getID();
+        frReq.accept = true;
+
+        pendingFriendReq.add(frReq);
+
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
 
         alert.setTitle("New Friend Request");
@@ -165,7 +171,12 @@ public class LoginUser extends User
 
 
         alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                JSONReader<FriendReqToken> reader = new JSONReader<>();
+                String friendReq = reader.JSONWriter(pendingFriendReq.poll());
+
+                Client.getInstance().WriteMsg(friendReq);
 
             }
         });
@@ -209,6 +220,44 @@ public class LoginUser extends User
             }
         }, 0, 60000);
 
+    }
+
+    /*
+     * whenever an activity is resumed check all friendrequests
+     */
+    public void checkPendingFriendReq()
+    {
+        if(isLogin) {
+            if (pendingFriendReq != null) {
+                for (FriendReqToken x : pendingFriendReq) {
+                    if (x != null) {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+
+                        alert.setTitle("New Friend Request");
+                        alert.setMessage("User: " + x.friendsname + " wants to add you as a Friend");
+
+
+                        alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                JSONReader<FriendReqToken> reader = new JSONReader<>();
+                                String friendReq = reader.JSONWriter(pendingFriendReq.poll());
+
+                                Client.getInstance().WriteMsg(friendReq);
+
+                            }
+                        });
+
+                        alert.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+
+                            }
+                        });
+                    } else {
+                        return;
+                    }
+                }
+            }
+        }
     }
 
 

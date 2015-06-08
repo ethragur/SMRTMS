@@ -46,6 +46,7 @@ public class StartActivity extends Activity{
             remainingTime += 12*60;
         }
         LoginUser.getInstance().setRemainingTime(remainingTime);
+        LoginUser.getInstance().setIsLogin(true);
         LoginUser.getInstance().startUpdates();
         Intent myIntent = new Intent(StartActivity.this, MainScreen.class);
         StartActivity.this.startActivity(myIntent);
@@ -89,7 +90,8 @@ public class StartActivity extends Activity{
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             logoutDialog();
             return true;

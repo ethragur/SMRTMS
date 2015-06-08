@@ -47,6 +47,8 @@ public class MainScreen extends ActionBarActivity {
 
         LoginUser.getInstance().setmContext(this.context);
 
+     //   LoginUser.getInstance().checkPendingFriendReq();
+
 
     }
 
@@ -82,6 +84,13 @@ public class MainScreen extends ActionBarActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        LoginUser.getInstance().checkPendingFriendReq();
     }
 
     public void logoutDialog() {
@@ -171,7 +180,7 @@ public class MainScreen extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 if(input.getText() != null)
                 {
-                    JSONReader reader = new JSONReader();
+                    JSONReader<FriendReqToken> reader = new JSONReader<>();
                     FriendReqToken frToken = new FriendReqToken(input.getText().toString());
                     String friendReq = reader.JSONWriter(frToken);
 
