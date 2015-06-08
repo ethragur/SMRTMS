@@ -99,9 +99,9 @@ public class MainScreen extends ActionBarActivity {
                         // if this button is clicked, close
                         // current activity and open LoginActivity
                         Intent myIntent = new Intent(MainScreen.this, LoginActivity.class);
-                        LoginUser.getInstance().logout();
                         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myIntent);
+                        LoginUser.getInstance().logout();
                         finish();
                     }
                 })
