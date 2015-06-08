@@ -45,7 +45,7 @@ public class LoginUser extends User
     Timer timer;
     Timer logoutTimer;
     private List<User> friendList;
-    private Queue<FriendReqToken> pendingFriendReq;
+    private Stack<FriendReqToken> pendingFriendReq;
     public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
     {
         super(Username, ID, new Double(0), new Double(0));
@@ -53,7 +53,7 @@ public class LoginUser extends User
         mContext = Context;
         gpsTracker = new GPSTracker(mContext);
         friendList = new ArrayList<User>();
-        pendingFriendReq = new LinkedList<FriendReqToken>();
+        pendingFriendReq = new Stack<FriendReqToken>();
     }
 
 
@@ -178,7 +178,7 @@ public class LoginUser extends User
             public void onClick(DialogInterface dialog, int whichButton)
             {
                 JSONReader<FriendReqToken> reader = new JSONReader<>();
-                String friendReq = reader.JSONWriter(pendingFriendReq.poll());
+                String friendReq = reader.JSONWriter(pendingFriendReq.pop());
 
                 Client.getInstance().WriteMsg(friendReq);
 
@@ -244,7 +244,7 @@ public class LoginUser extends User
                         alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 JSONReader<FriendReqToken> reader = new JSONReader<>();
-                                String friendReq = reader.JSONWriter(pendingFriendReq.poll());
+                                String friendReq = reader.JSONWriter(pendingFriendReq.pop());
 
                                 Client.getInstance().WriteMsg(friendReq);
 
