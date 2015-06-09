@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import client.smrtms.com.smrtms_client.R;
 
@@ -19,7 +18,7 @@ public class EventListAdapter extends ArrayAdapter<Event>{
     private static class ViewHolder {
         TextView name;
         TextView description;
-        TextView coordinates;
+        TextView distance;
     }
 
     private Context context;
@@ -46,7 +45,7 @@ public class EventListAdapter extends ArrayAdapter<Event>{
             convertView = inflater.inflate(R.layout.item_event, parent,false);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.description = (TextView) convertView.findViewById(R.id.description);
-            viewHolder.coordinates = (TextView) convertView.findViewById(R.id.coordinates);
+            viewHolder.distance = (TextView) convertView.findViewById(R.id.distance);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -56,7 +55,7 @@ public class EventListAdapter extends ArrayAdapter<Event>{
 
         viewHolder.name.setText(item.getName());
         viewHolder.description.setText(item.getDescription());
-        viewHolder.coordinates.setText(item.getLongitude() + " " + item.getLatitude());
+        viewHolder.distance.setText("Distance: " + Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(item.getLatitude(), item.getLongitude()) * 1000) / 1000.0 + " km");
 
         return convertView;
     }

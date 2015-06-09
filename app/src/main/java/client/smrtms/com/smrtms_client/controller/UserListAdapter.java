@@ -16,7 +16,7 @@ public class UserListAdapter extends ArrayAdapter<User>{
 
     private static class ViewHolder {
         TextView name;
-        TextView coordinates;
+        TextView distance;
     }
 
     private Context context;
@@ -42,14 +42,14 @@ public class UserListAdapter extends ArrayAdapter<User>{
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_user, parent,false);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.coordinates = (TextView) convertView.findViewById(R.id.coordinates);
+            viewHolder.distance = (TextView) convertView.findViewById(R.id.distance);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.name.setText(item.getUsername());
-        viewHolder.coordinates.setText("Distance: " + Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(item.getLatitude(),item.getLongitude())*1000)/1000.0 + " km") ;
+        viewHolder.distance.setText("Distance: " + Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(item.getLatitude(), item.getLongitude()) * 1000) / 1000.0 + " km") ;
         return convertView;
     }
 }
