@@ -83,5 +83,11 @@ public class ServerTask
         friendListUpdateTimer.cancel();
     }
 
+    public GPSTracker getGpsTracker() {
+        return gpsTracker;
+    }
 
+    public void setGpsTracker(GPSTracker gpsTracker) {
+        this.gpsTracker = gpsTracker;
+    }
 }

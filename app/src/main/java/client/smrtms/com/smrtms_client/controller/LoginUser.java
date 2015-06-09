@@ -247,4 +247,12 @@ public class LoginUser extends User
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
     }
+
+    public ServerTask getServerTask() {
+        return serverTask;
+    }
+
+    public void setServerTask(ServerTask serverTask) {
+        this.serverTask = serverTask;
+    }
 }
