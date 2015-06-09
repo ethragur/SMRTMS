@@ -11,6 +11,7 @@ android {
     }
     defaultConfig {
         applicationId "client.smrtms.com.smrtms_client"
+        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
@@ -23,9 +24,6 @@ android {
         }
     }
 
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
 }
 
 
@@ -47,4 +45,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-wearable:7.0.0'
     compile 'com.firebase:firebase-client-android:2.2.3+'
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.9.5'
 }

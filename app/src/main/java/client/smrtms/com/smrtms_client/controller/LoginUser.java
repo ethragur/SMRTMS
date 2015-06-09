@@ -189,7 +189,10 @@ public class LoginUser extends User
     public void setRemainingTime(Integer remTim)
     {
         remainingTime = remTim;
-
+        if(remainingTime == 0)
+        {
+            logout();
+        }
         logoutTimer = new Timer();
 
         logoutTimer.scheduleAtFixedRate(new TimerTask() {
@@ -210,6 +213,11 @@ public class LoginUser extends User
             }
         }, 0, 60000);
 
+    }
+
+    public boolean isFriendReqEmpty()
+    {
+        return pendingFriendReq.isEmpty();
     }
 
     /*
