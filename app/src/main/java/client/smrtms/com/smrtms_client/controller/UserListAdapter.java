@@ -49,8 +49,7 @@ public class UserListAdapter extends ArrayAdapter<User>{
         }
 
         viewHolder.name.setText(item.getUsername());
-        viewHolder.coordinates.setText("Coordinates: " + item.getLongitude() + " " + item.getLatitude());
-
+        viewHolder.coordinates.setText("Distance: " + LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(item.getLongitude(),item.getLatitude())+ "km") ;
         return convertView;
     }
 }
