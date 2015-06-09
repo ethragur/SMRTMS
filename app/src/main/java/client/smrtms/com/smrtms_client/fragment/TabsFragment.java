@@ -112,12 +112,6 @@ public class TabsFragment extends Fragment {
         ));
 
         mTabs.add(new PagerItem(
-                getString(R.string.tab_chat), // Title
-                Color.RED, // Indicator color
-                Color.GRAY // Divider color
-        ));
-
-        mTabs.add(new PagerItem(
                 getString(R.string.tab_contacts), // Title
                 Color.YELLOW, // Indicator color
                 Color.GRAY // Divider color
@@ -218,12 +212,9 @@ public class TabsFragment extends Fragment {
                     // Map fragment
                     return new GMapFragment();
                 case 1:
-                    // chat fragment
-                    return new ChatFragment();
-                case 2:
                     // contacts fragment 
                     return new ContactsFragment();
-                case 3:
+                case 2:
                     // event fragment 
                     return new EventFragment();
             }
