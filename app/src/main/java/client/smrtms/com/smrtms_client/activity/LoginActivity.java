@@ -53,13 +53,6 @@ import client.smrtms.com.smrtms_client.controller.JSONReader;
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "a:a", "bar@example.com:world"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
@@ -80,6 +73,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //connect to server
         Client.getInstance();
 
 
@@ -174,9 +168,20 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+
+            if(!Client.getInstance().isConnected())
+            {
+                Client.getInstance().disconnect();
+                Client.getInstance();
+
+                Toast.makeText(context, "Can't connect to server. Please try again later, Server might be offline", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                showProgress(true);
+                mAuthTask = new UserLoginTask(email, password);
+                mAuthTask.execute((Void) null);
+            }
         }
     }
 
@@ -296,19 +301,20 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
             try {
-                // Simulate network access.
+
                 JSONReader reader = new JSONReader();
 
                 AuthenticationToken auth = new AuthenticationToken( mEmail, mPassword );
 
                 String authtoken = reader.JSONWriter(auth);
 
-                Client.getInstance().WriteMsg(authtoken);
+                if(Client.getInstance().isConnected())
+                {
+                    Client.getInstance().WriteMsg(authtoken);
+                }
 
-                Thread.sleep(2000);
+                Thread.sleep(2500);
 
             } catch (InterruptedException e) {
                 return false;
@@ -396,7 +402,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 toast.show();
 
             }
-        }, 1000);   // wait for 1000ms
+        }, 2000);   // wait for 1000ms
 
     }
 

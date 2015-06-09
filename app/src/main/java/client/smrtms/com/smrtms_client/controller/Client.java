@@ -128,6 +128,13 @@ public class Client extends WebSocketClient
         return false;
     }
 
+    public void disconnect()
+    {
+        close();
+
+        inst = null;
+    }
+
 
 }
 

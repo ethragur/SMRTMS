@@ -19,8 +19,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity>
     @Test
     public void testLogin()
     {
-        this.getActivity().getApplicationContext();
-        this.getActivity().attemptLogin();
+
     }
 
 }
