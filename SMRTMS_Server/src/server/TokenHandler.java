@@ -86,6 +86,18 @@ public class TokenHandler implements Runnable {
 	    			FriendReqToken frt = (FriendReqToken)reader.readJson( msg, FriendReqToken.class );
 	    			HandleFriendReqToken(frt, conn);
 	    			break;
+	    		case "CreateEvent":
+	    			Token cet = (Token)reader.readJson( msg, Token.class);
+	    			HandleCreateEventToken( cet );
+	    			break;
+	    		case "AttendEvent":
+	    			Token aet = (Token)reader.readJson( msg, Token.class);
+	    			HandleAttendEventToken( aet );
+	    			break;
+	    		case "GetEventList":
+	    			Token get = (Token)reader.readJson( msg, Token.class);
+	    			HandleEvenListToken( get, conn );
+	    			break;
 	    		default:
 	    			System.out.println("ERROR: Token could not be identified!!");
 	    	}
@@ -154,4 +166,16 @@ public class TokenHandler implements Runnable {
     	
     	sendToken( flt, conn );
     }
+    
+    private void HandleCreateEventToken( Token cet ) {
+    	
+    }
+    
+    private void HandleAttendEventToken( Token aet ) {
+    	
+    }
+	
+	private void HandleEvenListToken( Token get, WebSocket conn ) {
+		
+	}
 }
