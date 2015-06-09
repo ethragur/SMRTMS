@@ -60,14 +60,10 @@ public class ServerControl implements Runnable
         AuthenticationToken authT = readerA.readJson(input, AuthenticationToken.class);
         if(authT.access)
         {
-
-
-                LoginUser.getInstance().setID(authT.id);
-                LoginUser.getInstance().setIsLogin(true);
-                Log.d("Login", "Login Successful");
-
-
-
+            LoginUser.getInstance().setID(authT.id);
+            LoginUser.getInstance().setUsername(authT.email);
+            LoginUser.getInstance().setIsLogin(true);
+            Log.d("Login", "Login Successful");
 
         }
         else
@@ -98,7 +94,7 @@ public class ServerControl implements Runnable
         FriendListToken friendT = readerFL.readJson(input, FriendListToken.class);
         for(User n : friendT.userList)
         {
-            if(!n.getUsername().equals(LoginUser.getInstance().getUsername()))
+            if(! (n.getID().startsWith(LoginUser.getInstance().getID())))
             {
                 LoginUser.getInstance().addFriend(n);
             }

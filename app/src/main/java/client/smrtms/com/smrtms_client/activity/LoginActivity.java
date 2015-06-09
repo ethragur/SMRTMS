@@ -324,14 +324,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
 
 
-            if(LoginUser.getInstance().isLogin())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return LoginUser.getInstance().isLogin();
 
         }
 
