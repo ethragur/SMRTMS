@@ -155,7 +155,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         LoginUser.createInstance(email, "0", LoginActivity.this);
 
         //setup dummy
-        setUpDummyFriends();
+        //setUpDummyFriends();
 
 
         if (cancel) {
@@ -217,6 +217,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
                     mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });

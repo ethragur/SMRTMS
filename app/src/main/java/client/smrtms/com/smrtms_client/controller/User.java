@@ -16,6 +16,8 @@ public class User
     private Double Latitude;
     private Double Longitude;
 
+    Double distance;
+
 
     public User(String Username, String ID, Double Latitude, Double Longitude)
     {

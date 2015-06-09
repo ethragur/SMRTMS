@@ -47,12 +47,15 @@ public class Client extends WebSocketClient
     public void onMessage( String message)
     {
         Log.i("ServerMsg", message);
-        JSONParser<Token> reader = new JSONParser<>();
-        Token t = reader.readJson(message, Token.class);
-        ServerControl s = new ServerControl(message, t);
-        Thread x = new Thread(s);
+        if(message.startsWith("{"))
+        {
+            JSONParser<Token> reader = new JSONParser<>();
+            Token t = reader.readJson(message, Token.class);
+            ServerControl s = new ServerControl(message, t);
+            Thread x = new Thread(s);
 
-        x.start();
+            x.start();
+        }
 
     }
 
