@@ -44,6 +44,7 @@ public class ContactsFragment extends Fragment {
     @Override
     public void onResume()
     {
+        super.onResume();
         users = new ArrayList<>();
         for(User friend: LoginUser.getInstance().getFriendList())
         {
