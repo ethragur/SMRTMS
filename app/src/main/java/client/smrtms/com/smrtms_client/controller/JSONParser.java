@@ -11,7 +11,7 @@ import client.smrtms.com.smrtms_client.tokens.Token;
  */
 
 
-public class JSONReader<T extends Token>
+public class JSONParser<T extends Token>
 {
     //need to passt Class<T> becuase you cant call T.class
     public T readJson(String file, Class<T> sryForThat)

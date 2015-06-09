@@ -56,7 +56,7 @@ public class ServerControl implements Runnable
 
     private void handleAuth()
     {
-        JSONReader<AuthenticationToken> readerA = new JSONReader<AuthenticationToken>();
+        JSONParser<AuthenticationToken> readerA = new JSONParser<AuthenticationToken>();
         AuthenticationToken authT = readerA.readJson(input, AuthenticationToken.class);
         if(authT.access)
         {
@@ -80,7 +80,7 @@ public class ServerControl implements Runnable
 
     private void handleReg()
     {
-        JSONReader<RegistrationToken> readerR = new JSONReader<>();
+        JSONParser<RegistrationToken> readerR = new JSONParser<>();
         RegistrationToken retT = readerR.readJson(input, RegistrationToken.class);
         if(retT.result)
         {
@@ -94,7 +94,7 @@ public class ServerControl implements Runnable
 
     private void handleFriendList()
     {
-        JSONReader<FriendListToken> readerFL = new JSONReader<>();
+        JSONParser<FriendListToken> readerFL = new JSONParser<>();
         FriendListToken friendT = readerFL.readJson(input, FriendListToken.class);
         LoginUser.getInstance().setFriendList(friendT.userList);
 
@@ -102,7 +102,7 @@ public class ServerControl implements Runnable
 
     private void handleFriendReq()
     {
-        JSONReader<FriendReqToken> readerFr = new JSONReader<>();
+        JSONParser<FriendReqToken> readerFr = new JSONParser<>();
         FriendReqToken frReq = readerFr.readJson(input, FriendReqToken.class);
         if(frReq != null)
         {

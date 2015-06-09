@@ -14,7 +14,7 @@ import android.text.format.Time;
 
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.Client;
-import client.smrtms.com.smrtms_client.controller.JSONReader;
+import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 
@@ -111,7 +111,7 @@ public class StartActivity extends Activity{
     private void requestFriendList()
     {
         FriendListToken reqFL = new FriendListToken();
-        JSONReader<FriendListToken> FLjson = new JSONReader<>();
+        JSONParser<FriendListToken> FLjson = new JSONParser<>();
         String request = FLjson.JSONWriter(reqFL);
         Client.getInstance().WriteMsg(request);
     }

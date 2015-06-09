@@ -4,59 +4,77 @@
     android:layout_height="match_parent"
     android:background="@drawable/back1">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Username"
-        android:ems="10"
-        android:layout_marginTop="16dp"
-        android:id="@+id/editUsername"
-        android:layout_gravity="center_horizontal" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:hint="Email"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/editEmail" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:ems="10"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/editPW" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="Repeat Password"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/editPWre"/>
-
-    <Button
+    <ProgressBar android:id="@+id/auth_progress" style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="register"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/registerButton"
-        android:onClick="onRegisterClick"/>
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
-        android:id="@+id/backButton"
-        android:layout_gravity="center_horizontal"
-        android:onClick="changeToLogin"/>
+    <ScrollView android:id="@+id/auth_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout android:id="@+id/auth_email_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Username"
+                android:ems="10"
+                android:layout_marginTop="16dp"
+                android:id="@+id/editUsername"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:hint="Email"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/editEmail" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:ems="10"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/editPW" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Repeat Password"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/editPWre"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="register"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/registerButton"
+                android:onClick="onRegisterClick"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="back"
+                android:id="@+id/backButton"
+                android:layout_gravity="center_horizontal"
+                android:onClick="changeToLogin"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

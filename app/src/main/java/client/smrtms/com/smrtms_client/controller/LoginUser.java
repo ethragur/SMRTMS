@@ -13,14 +13,12 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.activity.LoginActivity;
 import client.smrtms.com.smrtms_client.activity.MainScreen;
-import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.LogoutToken;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
@@ -96,7 +94,7 @@ public class LoginUser extends User
                 this.setLongitude(gpsTracker.getLongitude());
 
                 UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(), this.getLongitude());
-                JSONReader<UserUpdateToken> Writer = new JSONReader<>();
+                JSONParser<UserUpdateToken> Writer = new JSONParser<>();
                 String toSend = Writer.JSONWriter(userUpdateToken);
                 Log.i("SendMsg", userUpdateToken.id);
                 Client.getInstance().WriteMsg(toSend);
@@ -122,7 +120,7 @@ public class LoginUser extends User
         isLogin = false;
         LogoutToken lt = new LogoutToken();
         //Send Server a logout token
-        JSONReader<LogoutToken> Writer = new JSONReader<>();
+        JSONParser<LogoutToken> Writer = new JSONParser<>();
         String toSend = Writer.JSONWriter(lt);
         Client.getInstance().WriteMsg(toSend);
         //cancel update timer
@@ -241,7 +239,7 @@ public class LoginUser extends User
 
                         alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                JSONReader<FriendReqToken> reader = new JSONReader<>();
+                                JSONParser<FriendReqToken> reader = new JSONParser<>();
                                 String friendReq = reader.JSONWriter(x);
 
                                 Client.getInstance().WriteMsg(friendReq);

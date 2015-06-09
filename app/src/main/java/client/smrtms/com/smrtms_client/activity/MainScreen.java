@@ -16,15 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.firebase.androidchat.ChatActivity;
 
 import client.smrtms.com.smrtms_client.controller.Client;
-import client.smrtms.com.smrtms_client.controller.GPSTracker;
-import client.smrtms.com.smrtms_client.controller.JSONReader;
+import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
-import client.smrtms.com.smrtms_client.View.OnSwipeTouchListener;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.fragment.TabsFragment;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
@@ -181,7 +176,7 @@ public class MainScreen extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 if(input.getText() != null)
                 {
-                    JSONReader<FriendReqToken> reader = new JSONReader<>();
+                    JSONParser<FriendReqToken> reader = new JSONParser<>();
                     FriendReqToken frToken = new FriendReqToken(input.getText().toString());
                     String friendReq = reader.JSONWriter(frToken);
 

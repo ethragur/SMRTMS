@@ -47,7 +47,7 @@ public class Client extends WebSocketClient
     public void onMessage( String message)
     {
         Log.i("ServerMsg", message);
-        JSONReader<Token> reader = new JSONReader<>();
+        JSONParser<Token> reader = new JSONParser<>();
         Token t = reader.readJson(message, Token.class);
         ServerControl s = new ServerControl(message, t);
         Thread x = new Thread(s);

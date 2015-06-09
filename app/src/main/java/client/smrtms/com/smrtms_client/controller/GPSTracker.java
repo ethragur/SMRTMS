@@ -156,6 +156,7 @@ public class GPSTracker implements LocationListener {
     }
 
     public final static double AVERAGE_RADIUS_OF_EARTH = 6371;
+
     public Double calculateDistance(Double destLat, Double destLng)
     {
         double userLat = getLatitude();

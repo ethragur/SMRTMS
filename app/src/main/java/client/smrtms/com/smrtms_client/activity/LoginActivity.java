@@ -32,19 +32,16 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
 
-import org.apache.http.auth.AuthenticationException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.Event;
-import client.smrtms.com.smrtms_client.controller.JSONReader;
+import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.User;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
-import client.smrtms.com.smrtms_client.controller.JSONReader;
 
 
 /**
@@ -303,7 +300,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected Boolean doInBackground(Void... params) {
             try {
 
-                JSONReader reader = new JSONReader();
+                JSONParser reader = new JSONParser();
 
                 AuthenticationToken auth = new AuthenticationToken( mEmail, mPassword );
 

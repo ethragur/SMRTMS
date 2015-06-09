@@ -1,11 +1,10 @@
 import junit.framework.TestCase;
-import junit.framework.TestResult;
 
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import client.smrtms.com.smrtms_client.controller.JSONReader;
+import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.ServerControl;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 
@@ -24,7 +23,7 @@ public class ServerControlTest extends TestCase
         testController = Mockito.mock(ServerControl.class);
         AuthenticationToken testAToken = new AuthenticationToken("test@test.com", "test");
 
-        JSONReader<AuthenticationToken> testParser = new JSONReader<>();
+        JSONParser<AuthenticationToken> testParser = new JSONParser<>();
         String testInput = testParser.JSONWriter(testAToken);
         assertTrue(testAToken.email.equals(testParser.readJson(testInput, AuthenticationToken.class).email));
         testController.input = testInput;

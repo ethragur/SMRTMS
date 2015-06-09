@@ -841,7 +841,7 @@
                   <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="dqAhPlz20kBD" name="JSONWriter">
                    <UML:BehavioralFeature.parameter>
                     <UML:Parameter kind="return" xmi.id="frPhxBJYzREO" type="YDpV1qstEvWI"/>
-                    <UML:Parameter visibility="private" isSpecification="false" xmi.id="c7HjFSJL1oJ3" type="client.smrtms.com.smrtms_client.controller.JSONReader.T" value="" name="toGson"/>
+                    <UML:Parameter visibility="private" isSpecification="false" xmi.id="c7HjFSJL1oJ3" type="client.smrtms.com.smrtms_client.controller.JSONParser.T" value="" name="toGson"/>
                    </UML:BehavioralFeature.parameter>
                   </UML:Operation>
                  </UML:Classifier.feature>
