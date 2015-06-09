@@ -37,6 +37,7 @@ public class LoginUser extends User
     private Context mContext;
     private Boolean isLogin;
     private int remainingTime = 0;
+    private NotificationManager notificationManager;
 
 
     Timer timer;
@@ -161,10 +162,10 @@ public class LoginUser extends User
         Intent tmp = new Intent(mContext,MainScreen.class);
         PendingIntent mainScr = PendingIntent.getActivity(mContext, 0, tmp, 0);
 
-        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         final Notification notification = new NotificationCompat.Builder(mContext)
-                .setSmallIcon(R.drawable.icon)
-                .setContentTitle("You got a new friend Request"/*your notification title*/)
+                .setSmallIcon(R.drawable.join)
+                .setContentTitle("You got a new friend Request")
                 .setContentIntent(mainScr)
                 .build();
         notification.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
@@ -217,8 +218,11 @@ public class LoginUser extends User
     {
         if(isLogin)
         {
-            if (pendingFriendReq != null) {
-                for (FriendReqToken x : pendingFriendReq) {
+            if(pendingFriendReq != null && !pendingFriendReq.empty())
+            {
+                while(!pendingFriendReq.empty())
+                {
+                    FriendReqToken x = pendingFriendReq.peek();
                     if (x != null) {
                         AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
 
@@ -233,12 +237,18 @@ public class LoginUser extends User
 
                                 Client.getInstance().WriteMsg(friendReq);
 
+                                //nothing to do in here ;)
+                                //but cancel that Notification
+                                notificationManager.cancel(1000);
+
                             }
                         });
 
                         alert.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-
+                                //nothing to do in here ;)
+                                //but cancel that Notification
+                                notificationManager.cancel(1000);
                             }
                         });
 

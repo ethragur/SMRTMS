@@ -43,6 +43,10 @@ public class ContactsFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
+        if(LoginUser.getInstance() != null)
+        {
+            LoginUser.getInstance().checkPendingFriendReq();
+        }
         // Construct the data source
         final ArrayList<User> users = new ArrayList<>();
 

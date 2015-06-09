@@ -44,7 +44,10 @@ public class EventFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-
+        if(LoginUser.getInstance() != null)
+        {
+            LoginUser.getInstance().checkPendingFriendReq();
+        }
 
         // Construct the data source
         final ArrayList<Event> events = new ArrayList<>();
