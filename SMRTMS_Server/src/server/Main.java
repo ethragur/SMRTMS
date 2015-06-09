@@ -43,7 +43,7 @@ public class Main {
 	
 	private static boolean startServer() {
 		// Do the server stuff
-				WebSocketImpl.DEBUG = true;
+				WebSocketImpl.DEBUG = false;
 				
 				try {
 					Server server = new Server(8887);

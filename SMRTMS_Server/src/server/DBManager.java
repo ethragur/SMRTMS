@@ -177,17 +177,19 @@ public class DBManager {
 	public ArrayList<User> getUserfriends ( String id ) {
 		
 		Result<Record> result = create.select().from(USER_FRIENDS).fetch();
+		Result<Record> fresult = create.select().from(USER).fetch();
 		
 		ArrayList<User> friends = new ArrayList<User>();
 		
 		// Find ID of friends
 		for (Record r : result) {
-			if (r.getValue(USER_FRIENDS.FRIENDER_ID).toString().compareTo( id ) == 0)
+			if (r.getValue(USER_FRIENDS.FRIENDER_ID).toString().compareTo( id ) == 0
+				|| r.getValue(USER_FRIENDS.FRIENDEE_ID).toString().compareTo( id ) == 0)
 			{
 				System.out.println("Found Friend!");
 				// Find data of that friend
 				System.out.println(("Looking for User ID......"));
-				for (Record p : result) {
+				for (Record p : fresult) {
 					System.out.println("Is " + p.getValue(USER.ID).toString() + " the same as " + r.getValue(USER_FRIENDS.FRIENDEE_ID) + "? ");
 					if (p.getValue(USER.ID).toString().compareTo(r.getValue(USER_FRIENDS.FRIENDEE_ID).toString()) == 0) {
 						System.out.println("Found User ID! Its " + p.getValue(USER.ID).toString());
@@ -249,28 +251,28 @@ public class DBManager {
 		System.out.println("Friends request stored into the DB!");
 	}
 	
-	public FriendReqToken passOnFriendRequest ( String friender_id ) {
+	public FriendReqToken passOnFriendRequest ( String friendee_id ) {
 		//if ( getUserOnlineStatus( friender_id ) == 1 ) {
 		
 		Result<Record> result = create.select().from(FRIEND_REQUEST_STASH).fetch();
 		
 		System.out.println(("Looking for Friender ID by checking Friendee ID......"));
 		for (Record r : result) {
-			System.out.println("Is " + r.getValue(FRIEND_REQUEST_STASH.FRIENDER_ID).toString() + " the same as " + friender_id + "? ");
-			if (r.getValue(FRIEND_REQUEST_STASH.FRIENDER_ID).toString().compareTo(friender_id) == 0) {
-				System.out.println("Found Stashed Friend Request ID! Its " + r.getValue(FRIEND_REQUEST_STASH.FRIENDEE_ID).toString());
+			System.out.println("Is " + r.getValue(FRIEND_REQUEST_STASH.FRIENDEE_ID).toString() + " the same as " + friendee_id + "? ");
+			if (r.getValue(FRIEND_REQUEST_STASH.FRIENDEE_ID).toString().compareTo(friendee_id) == 0) {
+				System.out.println("Found Stashed Friend Request ID! Its " + r.getValue(FRIEND_REQUEST_STASH.FRIENDER_ID).toString());
 				
 				
-				String FriendeeName = getUserNameviaID( r.getValue(FRIEND_REQUEST_STASH.FRIENDEE_ID) );
+				String FrienderName = getUserNameviaID( r.getValue(FRIEND_REQUEST_STASH.FRIENDER_ID) );
 				
 				// Build new frienreqtoken
-				FriendReqToken frt = new FriendReqToken(FriendeeName);
+				FriendReqToken frt = new FriendReqToken(FrienderName);
 				frt.accept = false;
 				
 				// Delete that stashed friend request. Its done now!
 				create.delete(FRIEND_REQUEST_STASH)
-					.where(FRIEND_REQUEST_STASH.FRIENDEE_ID.equal( r.getValue(FRIEND_REQUEST_STASH.FRIENDEE_ID) ))
-					.and(FRIEND_REQUEST_STASH.FRIENDER_ID.equal( Integer.parseInt(friender_id) ) )
+					.where(FRIEND_REQUEST_STASH.FRIENDER_ID.equal( r.getValue(FRIEND_REQUEST_STASH.FRIENDER_ID) ))
+					.and(FRIEND_REQUEST_STASH.FRIENDEE_ID.equal( Integer.parseInt(friendee_id) ) )
 					.execute();
 				
 				return frt;
