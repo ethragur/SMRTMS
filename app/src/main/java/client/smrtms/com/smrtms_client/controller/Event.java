@@ -2,12 +2,15 @@ package client.smrtms.com.smrtms_client.controller;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Event {
 
     private int ID;
     private String name;
     private String description;
+    private Date startDate;
+    private Date endDate;
     private double latitude;
     private double longitude;
     private boolean joined = false;
@@ -74,5 +77,21 @@ public class Event {
 
     public boolean isJoined() {
         return joined;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
