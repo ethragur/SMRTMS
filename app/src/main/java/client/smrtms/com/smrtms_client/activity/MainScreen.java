@@ -48,7 +48,7 @@ public class MainScreen extends ActionBarActivity {
             LoginUser.getInstance().setmContext(this.context);
             LoginUser.getInstance().checkPendingFriendReq();
         }
-     //   LoginUser.getInstance().checkPendingFriendReq();
+        LoginUser.getInstance().checkPendingFriendReq();
 
 
     }

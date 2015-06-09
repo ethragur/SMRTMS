@@ -22,7 +22,15 @@ public class GMapFragment extends SupportMapFragment
     private View rootView;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
 
+        if(LoginUser.getInstance() != null)
+        {
+            LoginUser.getInstance().checkPendingFriendReq();
+        }
+    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 

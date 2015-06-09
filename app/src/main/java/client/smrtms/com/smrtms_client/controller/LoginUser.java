@@ -11,6 +11,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 import java.util.Timer;
@@ -44,7 +45,7 @@ public class LoginUser extends User
     Timer logoutTimer;
     private List<User> friendList;
     private List<Event> eventList;
-    private Stack<FriendReqToken> pendingFriendReq;
+    private LinkedList<FriendReqToken> pendingFriendReq;
     public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
     {
         super(Username, ID, new Double(0), new Double(0));
@@ -53,7 +54,7 @@ public class LoginUser extends User
         gpsTracker = new GPSTracker(mContext);
         friendList = new ArrayList<User>();
         eventList = new ArrayList<Event>();
-        pendingFriendReq = new Stack<FriendReqToken>();
+        pendingFriendReq = new LinkedList<FriendReqToken>();
     }
 
 
@@ -218,11 +219,11 @@ public class LoginUser extends User
     {
         if(isLogin)
         {
-            if(pendingFriendReq != null && !pendingFriendReq.empty())
+            if(pendingFriendReq != null && !pendingFriendReq.isEmpty())
             {
-                while(!pendingFriendReq.empty())
+                while(!pendingFriendReq.isEmpty())
                 {
-                    FriendReqToken x = pendingFriendReq.peek();
+                    final FriendReqToken x = pendingFriendReq.pop();
                     if (x != null) {
                         AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
 
@@ -233,7 +234,7 @@ public class LoginUser extends User
                         alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 JSONReader<FriendReqToken> reader = new JSONReader<>();
-                                String friendReq = reader.JSONWriter(pendingFriendReq.pop());
+                                String friendReq = reader.JSONWriter(x);
 
                                 Client.getInstance().WriteMsg(friendReq);
 
