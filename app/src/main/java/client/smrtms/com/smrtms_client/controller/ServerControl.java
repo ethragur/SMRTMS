@@ -96,8 +96,14 @@ public class ServerControl implements Runnable
     {
         JSONParser<FriendListToken> readerFL = new JSONParser<>();
         FriendListToken friendT = readerFL.readJson(input, FriendListToken.class);
-        LoginUser.getInstance().setFriendList(friendT.userList);
+        for(User n : friendT.userList)
+        {
+            if(!n.getUsername().equals(LoginUser.getInstance().getUsername()))
+            {
+                LoginUser.getInstance().addFriend(n);
+            }
 
+        }
     }
 
     private void handleFriendReq()
