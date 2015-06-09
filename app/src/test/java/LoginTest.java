@@ -1,3 +1,4 @@
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
@@ -18,7 +19,8 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity>
     @Test
     public void testLogin()
     {
-
+        this.getActivity().getApplicationContext();
+        this.getActivity().attemptLogin();
     }
 
 }

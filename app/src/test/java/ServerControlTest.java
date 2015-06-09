@@ -26,18 +26,18 @@ public class ServerControlTest extends TestCase
 
         JSONReader<AuthenticationToken> testParser = new JSONReader<>();
         String testInput = testParser.JSONWriter(testAToken);
-        assertEquals(testParser, testParser.readJson(testInput, AuthenticationToken.class));
+        assertTrue(testAToken.email.equals(testParser.readJson(testInput, AuthenticationToken.class).email));
         testController.input = testInput;
         testController.t = testAToken;
 
 
-        Thread x = new Thread();
+        Thread x = new Thread(testController);
         x.start();
 
 
 
-        //was method called
-        Mockito.verify(testController).parseString();
+        //was method called Thread called
+        Mockito.verify(testController, Mockito.times(1)).run();
         //check if thread is finished
         assertFalse(x.isAlive());
 
