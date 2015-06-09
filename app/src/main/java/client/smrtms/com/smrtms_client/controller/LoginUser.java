@@ -80,6 +80,13 @@ public class LoginUser extends User
     }
 
     public void addFriend(User newFriend) {
+        for(User n : friendList)
+        {
+            if(n.getID().equals(newFriend.getID()))
+            {
+                return;
+            }
+        }
         friendList.add(newFriend);
     }
 
@@ -161,11 +168,9 @@ public class LoginUser extends User
 
         logoutTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
-            public void run()
-            {
+            public void run() {
                 remainingTime--;
-                if(remainingTime < 0)
-                {
+                if (remainingTime < 0) {
                     Log.i("Logout", "Doing Logout and Stuff");
                     Intent myIntent = new Intent(mContext, LoginActivity.class);
                     Context tmp = mContext;
