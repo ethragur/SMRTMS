@@ -13,6 +13,7 @@ public class Event {
     private Date endDate;
     private double latitude;
     private double longitude;
+    private double distance;
     private boolean joined = false;
 
     private ArrayList<User> attendees = new ArrayList<>();
@@ -93,5 +94,13 @@ public class Event {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }
