@@ -72,12 +72,7 @@ public class GMapFragment extends SupportMapFragment
     @Override
     public void onResume() {
         super.onResume();
-        LatLng coordinate;
-        if ((coordinate = sendCoordinates.getCoordinates()) != null) {
-            mapZoom(coordinate);
-        } else {
-           mapZoom(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude()));
-        }
+
     }
 
     private void mapZoom(LatLng coordinate) {
@@ -86,6 +81,22 @@ public class GMapFragment extends SupportMapFragment
 
         mMap.moveCamera(location);
         mMap.animateCamera(zoom);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mMap != null) {
+            LatLng coordinate;
+            if ((coordinate = sendCoordinates.getCoordinates()) != null) {
+                mapZoom(coordinate);
+            } else {
+                mapZoom(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude()));
+            }
+            // load data here
+        }else{
+            // fragment is no longer visible
+        }
     }
 
 }
