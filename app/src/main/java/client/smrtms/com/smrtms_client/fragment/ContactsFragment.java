@@ -30,12 +30,25 @@ public class ContactsFragment extends Fragment {
 
     User selectedFriend;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.activity_contacts, container, false);
         return rootView;
+    }
+    ArrayList<User> users;
+
+    @Override
+    public void onResume()
+    {
+        users = new ArrayList<>();
+        for(User friend: LoginUser.getInstance().getFriendList())
+        {
+            users.add(friend);
+        }
     }
 
     @Override
@@ -48,7 +61,7 @@ public class ContactsFragment extends Fragment {
             LoginUser.getInstance().checkPendingFriendReq();
         }
         // Construct the data source
-        final ArrayList<User> users = new ArrayList<>();
+        users = new ArrayList<>();
 
         for(User friend: LoginUser.getInstance().getFriendList()) {
             users.add(friend);
@@ -117,6 +130,8 @@ public class ContactsFragment extends Fragment {
             }
 
         });
+
+
 
 
 
