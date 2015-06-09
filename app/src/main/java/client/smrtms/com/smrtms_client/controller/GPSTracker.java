@@ -28,7 +28,7 @@ public class GPSTracker implements LocationListener {
     // Flag for GPS status
     boolean canGetLocation = false;
 
-    Location location; // Location
+    public Location location; // Location
     double latitude; // Latitude
     double longitude; // Longitude
 
@@ -155,7 +155,23 @@ public class GPSTracker implements LocationListener {
         return this.canGetLocation;
     }
 
+    public final static double AVERAGE_RADIUS_OF_EARTH = 6371;
+    public Double calculateDistance(Double destLat, Double destLng)
+    {
+        double userLat = getLatitude();
+        double userLng = getLongitude();
+        double latDistance = Math.toRadians(userLat - destLat);
+        double lngDistance = Math.toRadians(userLng - destLng);
 
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(destLat))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return AVERAGE_RADIUS_OF_EARTH * c;
+
+    }
 
 
 
