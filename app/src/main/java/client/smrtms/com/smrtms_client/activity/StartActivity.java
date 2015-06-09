@@ -27,7 +27,7 @@ public class StartActivity extends Activity{
         setContentView(R.layout.activity_the_one_button);
 
         LoginUser.getInstance().setmContext(this.context);
-        requestFriendList();
+        LoginUser.getInstance().serverTask.getNewFriendList();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class StartActivity extends Activity{
         }
         LoginUser.getInstance().setRemainingTime(remainingTime);
         LoginUser.getInstance().setIsLogin(true);
-        LoginUser.getInstance().startUpdates();
+        LoginUser.getInstance().serverTask.startUpdates();
         Intent myIntent = new Intent(StartActivity.this, MainScreen.class);
         StartActivity.this.startActivity(myIntent);
         finish();
@@ -105,14 +105,4 @@ public class StartActivity extends Activity{
     }
 
 
-    /* User should receive FriendList from Server before opening MainScreen
-
-     */
-    private void requestFriendList()
-    {
-        FriendListToken reqFL = new FriendListToken();
-        JSONParser<FriendListToken> FLjson = new JSONParser<>();
-        String request = FLjson.JSONWriter(reqFL);
-        Client.getInstance().WriteMsg(request);
-    }
 }

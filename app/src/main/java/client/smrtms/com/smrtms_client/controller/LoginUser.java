@@ -21,57 +21,45 @@ import client.smrtms.com.smrtms_client.activity.LoginActivity;
 import client.smrtms.com.smrtms_client.activity.MainScreen;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.LogoutToken;
-import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
 
 /**
  * Created by effi on 4/13/15.
  * Singleton of the current active User
- * When instance is created User gets new GPS location every 10 sec
  */
 public class LoginUser extends User
 {
 
     private static LoginUser inst;
-    private GPSTracker gpsTracker;
     private Context mContext;
     private Boolean isLogin;
     private int remainingTime = 0;
     private NotificationManager notificationManager;
 
+    public ServerTask serverTask;
 
-    Timer timer;
     Timer logoutTimer;
     private List<User> friendList;
     private List<Event> eventList;
     private LinkedList<FriendReqToken> pendingFriendReq;
-    public LoginUser(String Username, String ID, Double Latitude, Double Longitude, Context Context)
+
+    public LoginUser(String Username, String ID, Context Context)
     {
         super(Username, ID, new Double(0), new Double(0));
         isLogin = new Boolean(false);
         mContext = Context;
-        gpsTracker = new GPSTracker(mContext);
         friendList = new ArrayList<User>();
         eventList = new ArrayList<Event>();
         pendingFriendReq = new LinkedList<FriendReqToken>();
+        serverTask = new ServerTask(Context);
     }
 
 
     //start sending user updates to server
-    public void startUpdates()
-    {
-        timer = new Timer();
 
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                getNewCoordinates();
-            }
-        }, 0, 10000);
-    }
 
     public static void createInstance(String Username, String ID, Context Context)
     {
-        inst = new LoginUser("Username", "0",new Double(0), new Double(0), Context);
+        inst = new LoginUser("Username", "0", Context);
     }
 
     public static LoginUser getInstance()
@@ -85,26 +73,6 @@ public class LoginUser extends User
         return inst;
     }
     // get current GPS Data and send it to the server
-    private synchronized void getNewCoordinates()
-    {
-        if(isLogin)
-        {
-            if (gpsTracker.canGetLocation()) {
-                this.setLatitude(gpsTracker.getLatitude());
-                this.setLongitude(gpsTracker.getLongitude());
-
-                UserUpdateToken userUpdateToken = new UserUpdateToken(this.getLatitude(), this.getLongitude());
-                JSONParser<UserUpdateToken> Writer = new JSONParser<>();
-                String toSend = Writer.JSONWriter(userUpdateToken);
-                Log.i("SendMsg", userUpdateToken.id);
-                Client.getInstance().WriteMsg(toSend);
-
-            } else {
-                //ToDo: throw some exception when it can't get GPS Data
-                Log.d("Error", "Can't get GPS data");
-            }
-        }
-    }
 
     public List<User> getFriendList()
     {
@@ -124,9 +92,7 @@ public class LoginUser extends User
         String toSend = Writer.JSONWriter(lt);
         Client.getInstance().WriteMsg(toSend);
         //cancel update timer
-        if(inst.timer != null) {
-            inst.timer.cancel();
-        }
+        serverTask.stopUpdates();
         if(logoutTimer!=null) {
             logoutTimer.cancel();
         }
@@ -247,6 +213,8 @@ public class LoginUser extends User
                                 //nothing to do in here ;)
                                 //but cancel that Notification
                                 notificationManager.cancel(1000);
+
+                                serverTask.getNewFriendList();
 
                             }
                         });
