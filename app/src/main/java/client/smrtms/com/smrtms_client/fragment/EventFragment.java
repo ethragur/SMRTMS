@@ -1,6 +1,5 @@
 package client.smrtms.com.smrtms_client.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.firebase.androidchat.ChatActivity;
 import com.google.android.gms.maps.model.LatLng;
 
 import net.londatiga.android.ActionItem;
@@ -19,20 +17,19 @@ import net.londatiga.android.QuickAction;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.EventListAdapter;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
-import client.smrtms.com.smrtms_client.controller.User;
+import client.smrtms.com.smrtms_client.controller.ServerControl;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 
 
 public class EventFragment extends Fragment {
 
     private Event selectedEvent;
-
+    ArrayList<Event> events;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,6 +37,25 @@ public class EventFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_event, container, false);
 
         return rootView;
+    }
+
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser )
+        {
+            // Construct the data source
+            if(ServerControl.gotNewEventList)
+            {
+                events = new ArrayList<>();
+                setUpEventList();
+                ServerControl.gotNewEventList = false;
+            }
+
+        }
+        else
+        {
+            // fragment is no longer visible
+        }
     }
 
     @Override
@@ -51,9 +67,18 @@ public class EventFragment extends Fragment {
             LoginUser.getInstance().checkPendingFriendReq();
         }
 
-        // Construct the data source
-        final ArrayList<Event> events = new ArrayList<>();
+        // Construct the data source;
+        events = new ArrayList<>();
+        setUpEventList();
 
+
+
+
+    }
+
+
+    private void setUpEventList()
+    {
         for(Event event: LoginUser.getInstance().getEventList())
         {
             event.setDistance(Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(event.getLatitude(), event.getLongitude()) * 1000) / 1000.0);
@@ -116,10 +141,6 @@ public class EventFragment extends Fragment {
             }
         });
 
-
-
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -134,4 +155,5 @@ public class EventFragment extends Fragment {
         });
 
     }
+
 }

@@ -10,7 +10,7 @@ import client.smrtms.com.smrtms_client.controller.LoginUser;
  */
 public class EventListToken extends Token
 {
-    List<Event> eventList;
+    public List<Event> eventList;
     public EventListToken()
     {
         super("EventList", LoginUser.getInstance().getID());
