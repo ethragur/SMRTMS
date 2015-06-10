@@ -8,7 +8,7 @@
         <uses-library android:name="android.test.runner" />
     </application>
 
-    <instrumentation android:name="android.test.InstrumentationTestRunner"
+    <instrumentation android:name="com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
                      android:targetPackage="client.smrtms.com.smrtms_client"
                      android:handleProfiling="false"
                      android:functionalTest="false"

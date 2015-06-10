@@ -312,7 +312,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     Client.getInstance().WriteMsg(authtoken);
                 }
 
-                Thread.sleep(2500);
+                Thread.sleep(5000);
 
             } catch (InterruptedException e) {
                 return false;

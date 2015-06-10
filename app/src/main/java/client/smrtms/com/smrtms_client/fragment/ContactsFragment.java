@@ -52,6 +52,88 @@ public class ContactsFragment extends Fragment {
         }
     }
 
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser )
+        {
+            users = new ArrayList<>();
+            for(User friend: LoginUser.getInstance().getFriendList())
+            {
+                users.add(friend);
+            }
+
+            UserListAdapter adapter = new UserListAdapter(getActivity(), users);
+            // Attach the adapter to a ListView
+            ListView listView = (ListView) getActivity().findViewById(R.id.listFriend);
+            listView.setAdapter(adapter);
+
+
+            ActionItem chat     = new ActionItem(1, "chat", getResources().getDrawable(R.drawable.chat));
+            ActionItem map     = new ActionItem(2, "map", getResources().getDrawable(R.drawable.globe));
+            ActionItem delete     = new ActionItem(3, "delete", getResources().getDrawable(R.drawable.delete));
+
+            //create QuickAction. Use QuickAction.VERTICAL or QuickAction.HORIZONTAL param to define layout
+            //orientation
+            final QuickAction quickAction = new QuickAction(getActivity(), QuickAction.HORIZONTAL);
+
+            //add action items into QuickAction
+            quickAction.addActionItem(chat);
+            quickAction.addActionItem(map);
+            quickAction.addActionItem(delete);
+
+            //Set listener for action item clicked
+            quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+                @Override
+                public void onItemClick(QuickAction source, int pos, int actionId) {
+                    //here we can filter which action item was clicked with pos or actionId parameter
+                    ActionItem actionItem = quickAction.getActionItem(pos);
+
+                /* chat is selected */
+                    if (actionItem.getActionId() == 1) {
+                        Intent myIntent = new Intent(getActivity(), ChatActivity.class);
+                        myIntent.putExtra("UserKey", selectedFriend.getID());
+                        getActivity().startActivity(myIntent);
+
+                /* map is selected */
+                    } else if (actionItem.getActionId() == 2) {
+                        // send message
+                        sendCoordinates.setCoordinates(new LatLng(selectedFriend.getLatitude(), selectedFriend.getLongitude()));
+                        // switch t Map fragment
+                        TabsFragment tf = (TabsFragment) getParentFragment();
+                        tf.setTabPostion(0);
+                /* delete is selected */
+                    } else if (actionItem.getActionId() == 3) {
+                        //TODO delete friend
+                    }
+
+                }
+            });
+
+
+
+
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                    quickAction.show(view);
+                    selectedFriend = (User) parent.getItemAtPosition(position);
+                    Toast.makeText(getActivity().getApplicationContext(), selectedFriend.getUsername(), Toast.LENGTH_SHORT).show();
+
+
+                }
+
+            });
+
+            // load data here
+        }
+        else
+        {
+            // fragment is no longer visible
+        }
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 

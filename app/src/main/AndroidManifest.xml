@@ -59,8 +59,7 @@
         </activity>
         <activity
             android:name="com.firebase.androidchat.ChatActivity"
-            android:label="because it doesn&apos;t matters"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
+            android:label="because it doesn&apos;t matters" >
         </activity>
         <activity
             android:name=".activity.RegisterActivity"
