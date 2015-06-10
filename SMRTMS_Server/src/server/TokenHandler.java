@@ -182,7 +182,7 @@ public class TokenHandler implements Runnable {
     }
     
     private void HandleAttendEventToken( JoinEventToken elt ) {
-    	
+    	dbm.attendevent( elt.EventName );
     }
 	
 	private void HandleEvenListToken( FriendListToken flt, WebSocket connection ) {

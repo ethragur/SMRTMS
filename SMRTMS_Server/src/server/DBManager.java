@@ -348,6 +348,22 @@ public class DBManager {
 		System.out.println("==== Event added to the DB! ====");
 	}
 	
+	public void attendevent( String Eventname ) {
+		Result<Record> result = create.select().from(EVENT).fetch();
+		
+		for (Record r : result) {
+			if ( r.getValue(EVENT.NAME).compareTo(Eventname)  == 0) {
+				System.out.println("Found Event! Its " + r.getValue(EVENT.NAME));
+				
+				create.update(EVENT)
+				.set(EVENT.ATTENDEES, r.getValue(EVENT.ATTENDEES) + 1)
+				.where(EVENT.NAME.equal(Eventname))
+				.execute();
+				
+			}
+		}
+	}
+	
 	public ArrayList<ServerClasses.Event> getEvents( String UserID ) {
 		ArrayList<ServerClasses.Event> events = new ArrayList<ServerClasses.Event>();
 		

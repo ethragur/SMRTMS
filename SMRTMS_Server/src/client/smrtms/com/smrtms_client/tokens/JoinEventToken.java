@@ -5,7 +5,7 @@ package client.smrtms.com.smrtms_client.tokens;
  */
 public class JoinEventToken extends Token
 {
-    String EventName;
+    public String EventName;
     public JoinEventToken(String EventName)
     {
         super("JoinEvent", "0");
