@@ -18,6 +18,9 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.UserListAdapter;
@@ -59,8 +62,17 @@ public class ContactsFragment extends Fragment {
             users = new ArrayList<>();
             for(User friend: LoginUser.getInstance().getFriendList())
             {
+                friend.setDistance(Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(friend.getLatitude(), friend.getLongitude()) * 1000) / 1000.0);
                 users.add(friend);
             }
+
+            Collections.sort(users, new Comparator<User>(){
+                public int compare(User o1, User o2){
+                    if(o1.getDistance() == o2.getDistance())
+                        return 0;
+                    return o1.getDistance() < o2.getDistance() ? -1 : 1;
+                }
+            });
 
             UserListAdapter adapter = new UserListAdapter(getActivity(), users);
             // Attach the adapter to a ListView

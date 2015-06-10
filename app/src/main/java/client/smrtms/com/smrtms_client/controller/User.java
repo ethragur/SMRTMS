@@ -15,8 +15,7 @@ public class User
     private String ID;
     private Double Latitude;
     private Double Longitude;
-
-    Double distance;
+    private Double distance;
 
 
     public User(String Username, String ID, Double Latitude, Double Longitude)
@@ -57,6 +56,12 @@ public class User
 
     public void setLongitude(Double longitude) {
         Longitude = longitude;
+    }
+
+    public Double getDistance() { return distance;}
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
 
