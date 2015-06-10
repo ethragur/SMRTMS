@@ -1781,12 +1781,12 @@ containing a value of this type.
         public static final int classic=0x7f0d0030;
         public static final int collapseActionView=0x7f0d001d;
         public static final int content_fragment=0x7f0d0066;
-        public static final int coordinates=0x7f0d007b;
         public static final int decor_content_parent=0x7f0d0044;
         public static final int default_activity_button=0x7f0d0039;
         public static final int description=0x7f0d007c;
         public static final int dialog=0x7f0d0021;
         public static final int disableHome=0x7f0d000c;
+        public static final int distance=0x7f0d007b;
         public static final int donate_with_google=0x7f0d002f;
         public static final int dropdown=0x7f0d0022;
         public static final int editEmail=0x7f0d006e;

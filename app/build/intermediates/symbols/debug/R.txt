@@ -509,12 +509,12 @@ int id checkbox 0x7f0d003e
 int id classic 0x7f0d0030
 int id collapseActionView 0x7f0d001d
 int id content_fragment 0x7f0d0066
-int id coordinates 0x7f0d007b
 int id decor_content_parent 0x7f0d0044
 int id default_activity_button 0x7f0d0039
 int id description 0x7f0d007c
 int id dialog 0x7f0d0021
 int id disableHome 0x7f0d000c
+int id distance 0x7f0d007b
 int id donate_with_google 0x7f0d002f
 int id dropdown 0x7f0d0022
 int id editEmail 0x7f0d006e
