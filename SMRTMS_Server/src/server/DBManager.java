@@ -191,7 +191,8 @@ public class DBManager {
 				System.out.println(("Looking for User ID......"));
 				for (Record p : fresult) {
 					System.out.println("Is " + p.getValue(USER.ID).toString() + " the same as " + r.getValue(USER_FRIENDS.FRIENDEE_ID) + "? ");
-					if (p.getValue(USER.ID).toString().compareTo(r.getValue(USER_FRIENDS.FRIENDEE_ID).toString()) == 0) {
+					if (p.getValue(USER.ID).toString().compareTo(r.getValue(USER_FRIENDS.FRIENDEE_ID).toString()) == 0
+							|| p.getValue(USER.ID).toString().compareTo(r.getValue(USER_FRIENDS.FRIENDER_ID).toString()) == 0 ) {
 						System.out.println("Found User ID! Its " + p.getValue(USER.ID).toString());
 						
 						// Build User and add to list
