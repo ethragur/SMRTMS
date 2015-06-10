@@ -40,6 +40,7 @@ import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.controller.ServerControl;
 import client.smrtms.com.smrtms_client.controller.User;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 
@@ -312,7 +313,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     Client.getInstance().WriteMsg(authtoken);
                 }
 
-                Thread.sleep(5000);
+                while(!ServerControl.gotAuthToken)
+                {
+                    Thread.sleep(100);
+                }
 
             } catch (InterruptedException e) {
                 return false;

@@ -18,8 +18,9 @@ public class ServerControl implements Runnable
     public String input;
     public Token t;
 
-    public static boolean gotNewFriendList;
-    public static boolean gotNewEventList;
+    public static boolean gotNewFriendList = false;
+    public static boolean gotNewEventList = false;
+    public static boolean gotAuthToken = false;
     public ServerControl(String input, Token t)
     {
         this.input = input;
@@ -77,6 +78,7 @@ public class ServerControl implements Runnable
             Log.d("Login", "Wrong Username or Password");
             LoginUser.getInstance().setIsLogin(false);
         }
+        gotAuthToken = true;
 
     }
 
