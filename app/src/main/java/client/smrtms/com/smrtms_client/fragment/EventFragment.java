@@ -86,11 +86,10 @@ public class EventFragment extends Fragment {
                 /* join is selected */
                 if (actionItem.getActionId() == 1)
                 {
-                    selectedEvent.join(LoginUser.getInstance());
+
 
                 /* leave is selected */
                 } else if (actionItem.getActionId() == 2) {
-                    selectedEvent.leave(LoginUser.getInstance());
                     //TODO leave event
 
                 /* map is selected */

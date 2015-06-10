@@ -7,9 +7,11 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
@@ -60,18 +62,23 @@ public class GMapFragment extends SupportMapFragment
 
         for(User friend: LoginUser.getInstance().getFriendList())
         {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getUsername()));
+            mMap.addMarker(new MarkerOptions().position(new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getUsername()))
+                    .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.user));;
+
         }
 
         for(Event event: LoginUser.getInstance().getEventList())
         {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(event.getLatitude(), event.getLongitude())).title(event.getName()));
+
+            mMap.addMarker(new MarkerOptions().position(new LatLng(event.getLatitude(), event.getLongitude())).title(event.getName()))
+                    .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.andorid));
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        setUpMap();
 
     }
 
@@ -87,6 +94,7 @@ public class GMapFragment extends SupportMapFragment
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && mMap != null) {
+            setUpMap();
             LatLng coordinate;
             if ((coordinate = sendCoordinates.getCoordinates()) != null) {
                 mapZoom(coordinate);

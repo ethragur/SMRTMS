@@ -363,7 +363,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             LoginUser.getInstance().addFriend(new User("dummy"+i,"000"+i,(Math.random()+47),(Math.random())+11));
         }
         for (int i = 0; i < 10; i++) {
-            LoginUser.getInstance().addEvent(new Event(i,"event"+i,"description"+i,(Math.random()+47),(Math.random())+11));
+            LoginUser.getInstance().addEvent(new Event("event"+i,"description"+i,(Math.random()+47),(Math.random())+11));
         }
 
 
