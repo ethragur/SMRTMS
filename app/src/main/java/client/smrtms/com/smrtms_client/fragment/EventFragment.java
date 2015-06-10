@@ -17,6 +17,8 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import client.smrtms.com.smrtms_client.R;
@@ -52,9 +54,19 @@ public class EventFragment extends Fragment {
         // Construct the data source
         final ArrayList<Event> events = new ArrayList<>();
 
-        for(Event event: LoginUser.getInstance().getEventList()) {
+        for(Event event: LoginUser.getInstance().getEventList())
+        {
+            event.setDistance(Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(event.getLatitude(), event.getLongitude()) * 1000) / 1000.0);
             events.add(event);
         }
+
+        Collections.sort(events, new Comparator<Event>() {
+            public int compare(Event o1, Event o2) {
+                if (o1.getDistance() == o2.getDistance())
+                    return 0;
+                return o1.getDistance() < o2.getDistance() ? -1 : 1;
+            }
+        });
 
         // Create the adapter to convert the array to views
         EventListAdapter adapter = new EventListAdapter(getActivity(), events);
