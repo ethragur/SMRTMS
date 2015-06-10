@@ -102,7 +102,11 @@ public class DBManager {
 	
 	public String getUserPassword ( String email ) {
 			
+		System.out.println("TEST1");
+		
 		Result<Record> result = create.select().from(USER).fetch();
+		
+		System.out.println("TEST2");
 		
 		for (Record r : result) {
 			System.out.print("Is " + r.getValue(USER.EMAIL).toString() + " the same as " + email + "? ");

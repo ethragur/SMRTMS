@@ -11,6 +11,7 @@ import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.EventListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
+import client.smrtms.com.smrtms_client.tokens.JoinEventToken;
 import client.smrtms.com.smrtms_client.tokens.LogoutToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
@@ -25,14 +26,14 @@ public class TokenHandler implements Runnable {
 	String message;
 	WebSocket connection;
 	
-	public TokenHandler(Token t, String message, WebSocket conn) {
+	public TokenHandler(Token t, String msg, WebSocket conn) {
 		dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
         //dbm.printUser();
-        //System.out.println("Database connectionection is ready!");
+        //System.out.println("Database connection is ready!");
         
         token = t;
-        message = message;
+        message = msg;
         connection = conn;
 	}
 	
@@ -41,7 +42,7 @@ public class TokenHandler implements Runnable {
 		dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
         dbm.printUser();
-        System.out.println("Database connectionection is ready!");
+        System.out.println("Database connection is ready!");
 	}
 	
 	private void sendToken( Token tok, WebSocket connection ) {
@@ -86,6 +87,8 @@ public class TokenHandler implements Runnable {
 	    		case "FriendList":
 	    			FriendListToken flt = (FriendListToken)reader.readJson( message, FriendListToken.class );
 	    			HandleFriendListToken(flt, connection);
+	    			//EventListToken get = (EventListToken)reader.readJson( message, EventListToken.class);
+	    			HandleEvenListToken( flt, connection );
 	    			break;
 	    		case "FriendRequest":
 	    			FriendReqToken frt = (FriendReqToken)reader.readJson( message, FriendReqToken.class );
@@ -96,13 +99,13 @@ public class TokenHandler implements Runnable {
 	    			HandleCreateEventToken( cet );
 	    			break;
 	    		case "AttendEvent":
-	    			Token aet = (Token)reader.readJson( message, Token.class);
+	    			JoinEventToken aet = (JoinEventToken)reader.readJson( message, JoinEventToken.class);
 	    			HandleAttendEventToken( aet );
 	    			break;
-	    		case "EventList":
+	    		/*case "EventList":
 	    			EventListToken get = (EventListToken)reader.readJson( message, EventListToken.class);
 	    			HandleEvenListToken( get, connection );
-	    			break;
+	    			break;*/
 	    		default:
 	    			System.out.println("ERROR: Token could not be identified!!");
 	    			result = "Undefinable";
@@ -178,12 +181,14 @@ public class TokenHandler implements Runnable {
     	dbm.createevent( cet );
     }
     
-    private void HandleAttendEventToken( Token elt ) {
+    private void HandleAttendEventToken( JoinEventToken elt ) {
     	
     }
 	
-	private void HandleEvenListToken( EventListToken elt, WebSocket connection ) {
-		ArrayList<ServerClasses.Event> events = dbm.getEvents( elt.id );
+	private void HandleEvenListToken( FriendListToken flt, WebSocket connection ) {
+		ArrayList<ServerClasses.Event> events = dbm.getEvents( flt.id );
+		
+		EventListToken elt = new EventListToken(flt.id);
 		elt.eventList = events;
 		
 		sendToken( elt, connection );

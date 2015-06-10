@@ -10,7 +10,7 @@ import server.DBManager;
 
 public class AuthenticationManager {
 	
-	private DBManager dbm;
+	private DBManager dbm = null;
 	
 	public AuthenticationManager( DBManager dbmanager ) {
 		dbm = dbmanager;
@@ -18,7 +18,9 @@ public class AuthenticationManager {
 	
 	public boolean AuthenticateUser( AuthenticationToken t ) {
 
+		System.out.println("HEEEEYYY!!!");
 		String pw = dbm.getUserPassword( t.email );
+		System.out.println("KJÖLKJÖLKJ");
 		if (pw != null) {
 			System.out.println("Yes! Found password! Its: " + pw);
 		}

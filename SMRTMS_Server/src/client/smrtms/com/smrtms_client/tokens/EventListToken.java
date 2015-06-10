@@ -14,7 +14,7 @@ public class EventListToken extends Token
 	
 	public List<Event> eventList;
 	
-    public EventListToken()
+    public EventListToken(String id)
     {
         super("EventList", "0");
         eventList = new ArrayList<Event>();
