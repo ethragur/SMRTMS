@@ -11,18 +11,16 @@ public class AddEventToken extends Token
 {
     String name;
     String description;
-    Date startDate;
-    Date endDate;
+    Integer toEnd;
     Double Latitude;
     Double Longitude;
 
-    public AddEventToken(String name, String description, Date startDate, Date endDate, Double Latitude, Double Longitude)
+    public AddEventToken(String name, String description, Integer toEnd, Double Latitude, Double Longitude)
     {
         super("AddEvent", LoginUser.getInstance().getID());
         this.name = name;
         this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.toEnd = this.toEnd;
         this.Latitude = Latitude;
         this.Longitude = Longitude;
     }

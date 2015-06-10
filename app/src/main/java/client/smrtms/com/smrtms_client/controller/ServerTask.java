@@ -74,7 +74,7 @@ public class ServerTask
             public void run() {
                 getNewFriendList();
             }
-        }, 4000, 60000);
+        }, 4000, 20000);
     }
 
     public void stopUpdates()

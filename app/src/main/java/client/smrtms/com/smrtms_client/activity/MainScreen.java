@@ -11,17 +11,24 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import java.sql.Time;
 
 import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.fragment.TabsFragment;
+import client.smrtms.com.smrtms_client.tokens.AddEventToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 
 
@@ -204,37 +211,62 @@ public class MainScreen extends ActionBarActivity {
         //used right now for testing purposes
     public void addEvent(View view)
     {
-        //TODO sth else then interface testing
-        Intent tmp = new Intent(context,MainScreen.class);
-        PendingIntent mainScr = PendingIntent.getActivity(context, 0, tmp, 0);
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        final Notification notification = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.icon)
-                .setContentTitle("You got a new friend Request"/*your notification title*/)
-                .setContentText("test" + " wants to be your friend"/*notifcation message*/)
-                .setContentIntent(mainScr)
-                .build();
-        notification.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
-        notificationManager.notify(1000/*some int*/, notification);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Add Event");
+        // Set an EditText view to get user input
+        final EditText name = new EditText(this);
+        name.setHint("Event Name");
 
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        final EditText descr = new EditText(this);
+        descr.setHint("Event Description");
 
-        alert.setTitle("New Friend Request");
-        alert.setMessage("User:  wants to add you as a Friend");
+        final EditText time = new EditText(this);
 
 
-        alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+        time.setText("End Time");
+        time.setFocusable(false);
+        time.setActivated(false);
+        final TimePicker tp = new TimePicker(this);
+
+        LinearLayout lay = new LinearLayout(this);
+        lay.setOrientation(LinearLayout.VERTICAL);
+
+        lay.addView(name);
+        lay.addView(descr);
+        lay.addView(time);
+        lay.addView(tp);
+
+        alert.setView(lay);
+
+
+        alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                if (name.getText().toString().matches("") || descr.getText().toString().matches("") || tp.getCurrentMinute() == null) {
+                    Toast.makeText(context, "Some Field was left out", Toast.LENGTH_SHORT).show();
+                } else {
+                    JSONParser<AddEventToken> reader = new JSONParser<>();
+                    String eName = name.getText().toString();
+                    String eDescr = descr.getText().toString();
+                    Integer endTime = (tp.getCurrentHour() * 60) + tp.getCurrentMinute();
+
+
+                    AddEventToken aET = new AddEventToken(eName, eDescr, endTime, LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude());
+                    String addEvent = reader.JSONWriter(aET);
+
+                    Client.getInstance().WriteMsg(addEvent);
+                }
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
             }
         });
 
-        alert.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-            }
-        });
+        alert.show();
     }
 
    @Override
