@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Event extends TableImpl<EventRecord> {
 
-	private static final long serialVersionUID = 1954972440;
+	private static final long serialVersionUID = -1143571535;
 
 	/**
 	 * The reference instance of <code>SMRTMS.Event</code>
@@ -58,6 +58,11 @@ public class Event extends TableImpl<EventRecord> {
 	 * The column <code>SMRTMS.Event.Name</code>.
 	 */
 	public final TableField<EventRecord, String> NAME = createField("Name", org.jooq.impl.SQLDataType.CHAR.length(50), this, "");
+
+	/**
+	 * The column <code>SMRTMS.Event.Time</code>.
+	 */
+	public final TableField<EventRecord, Integer> TIME = createField("Time", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>SMRTMS.Event.Description</code>.

@@ -3,6 +3,8 @@ package server;
 import static jooqdb.Tables.USER;
 import static jooqdb.Tables.USER_FRIENDS;
 import static jooqdb.Tables.FRIEND_REQUEST_STASH;
+import static jooqdb.Tables.EVENT;
+import static jooqdb.Tables.EVENT_ATTENDEES;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,6 +13,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.sound.sampled.ReverbType;
+
+import jooqdb.tables.Event;
 import jooqdb.tables.FriendRequestStash;
 import jooqdb.tables.UserFriends;
 
@@ -23,6 +28,7 @@ import org.jooq.util.derby.sys.Sys;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 import ServerClasses.User;
+import client.smrtms.com.smrtms_client.tokens.AddEventToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
@@ -35,6 +41,8 @@ public class DBManager {
 	Connection conn = null;
 	DSLContext create = null;
 	public boolean isConnected = false;
+	
+	public final static double AVERAGE_RADIUS_OF_EARTH = 6371;
 	
 	public DBManager() {
 		Connect();
@@ -174,6 +182,42 @@ public class DBManager {
 		return null;
 	}
 	
+	final class Location {
+	    private final double longitude;
+	    private final double latiutude;
+
+	    public Location(double first, double second) {
+	        this.longitude = first;
+	        this.latiutude = second;
+	    }
+
+	    public double getLong() {
+	        return longitude;
+	    }
+
+	    public double getLat() {
+	        return latiutude;
+	    }
+	}
+	
+	public Location getUserPosition ( int id ) {
+		
+		Result<Record> result = create.select().from(USER).fetch();
+		
+		System.out.println(("Looking for User Name by checking id......"));
+		for (Record r : result) {
+			System.out.println("Is " + r.getValue(USER.ID).toString() + " the same as " + id + "? ");
+			if ( r.getValue(USER.ID) == id ) {
+				System.out.println("Found User Name! Its " + r.getValue(USER.USERNAME).toString());
+				return new Location( r.getValue(USER.LONGITUDE), r.getValue(USER.LATITUDE));
+			}
+			System.out.println("No...");
+		}
+		
+		System.out.println("========= ERROR: Couldn't find the User ID!!!! ========");
+		return null;
+	}
+	
 	public ArrayList<User> getUserfriends ( String id ) {
 		
 		Result<Record> result = create.select().from(USER_FRIENDS).fetch();
@@ -287,6 +331,62 @@ public class DBManager {
 		
 		return null;
 	}
+	
+	public void createevent( AddEventToken aet ) {
+		create.insertInto(EVENT)
+		.set(EVENT.DESCRIPTION, aet.description)
+		.set(EVENT.NAME, aet.name)
+		.set(EVENT.TIME, aet.toEnd)
+		.set(EVENT.LATITUDE, aet.Latitude)
+		.set(EVENT.LONGITUDE, aet.Latitude)
+		.execute();
+		
+		System.out.println("==== Event added to the DB! ====");
+	}
+	
+	public ArrayList<ServerClasses.Event> getEvents( String UserID ) {
+		ArrayList<ServerClasses.Event> events = new ArrayList<ServerClasses.Event>();
+		
+		Result<Record> result = create.select().from(EVENT).fetch();
+	
+		System.out.println(("Grabbing all the events and packing em up....."));
+		for (Record r : result) {
+				ServerClasses.Event newevent = new ServerClasses.Event();
+				newevent.setName(r.getValue(EVENT.NAME));
+				newevent.setDescription(r.getValue(EVENT.DESCRIPTION));
+				newevent.setEndDate(r.getValue(EVENT.TIME));
+				newevent.setLatitude(r.getValue(EVENT.LATITUDE));
+				newevent.setLongitude(r.getValue(EVENT.LONGITUDE));
+				newevent.setAttendees(r.getValue(EVENT.ATTENDEES));
+				
+				Location loc = getUserPosition( Integer.parseInt(UserID) );
+				
+				double dist = calculateDistance(loc.getLat(), loc.getLong(), r.getValue(EVENT.LATITUDE), r.getValue(EVENT.LONGITUDE));
+				
+				newevent.setDistance(dist);
+				
+				events.add(newevent);
+			}
+		
+		return events;
+	}
+	
+	public Double calculateDistance(Double srcLat, Double srcLng, Double destLat, Double destLng)
+    {
+        double userLat = srcLat;
+        double userLng = srcLng;
+        double latDistance = Math.toRadians(userLat - destLat);
+        double lngDistance = Math.toRadians(userLng - destLng);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(destLat))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return AVERAGE_RADIUS_OF_EARTH * c;
+
+    }
 	
 	public void Connect() {
 		System.out.println("Connecting to DB...");

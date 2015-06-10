@@ -6,7 +6,9 @@ import ServerClasses.*;
 
 import org.java_websocket.WebSocket;
 
+import client.smrtms.com.smrtms_client.tokens.AddEventToken;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.EventListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
 import client.smrtms.com.smrtms_client.tokens.LogoutToken;
@@ -23,88 +25,93 @@ public class TokenHandler implements Runnable {
 	String message;
 	WebSocket connection;
 	
-	public TokenHandler(Token t, String msg, WebSocket conn) {
+	public TokenHandler(Token t, String message, WebSocket conn) {
 		dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
         //dbm.printUser();
-        //System.out.println("Database Connection is ready!");
+        //System.out.println("Database connectionection is ready!");
         
         token = t;
-        message = msg;
+        message = message;
         connection = conn;
 	}
 	
-	// The constructer to init the database connection when the server starts!
+	// The constructer to init the database connectionection when the server starts!
 	public TokenHandler() {
 		dbm = new DBManager();
         authman = new AuthenticationManager(dbm);
         dbm.printUser();
-        System.out.println("Database Connection is ready!");
+        System.out.println("Database connectionection is ready!");
 	}
 	
-	private void sendToken( Token tok, WebSocket conn ) {
+	private void sendToken( Token tok, WebSocket connection ) {
 		JSONReader reader = new JSONReader<Token>();
 		String answer = reader.JSONWriter( tok );
-		conn.send( answer );
+		connection.send( answer );
 	}
 	
 	public void run() {
-		ParseToken(token, message, connection);
+		ParseToken(token, false);
 	}
 	
-	public void ParseToken (Token t, String msg, WebSocket conn ) {
-    	if (dbm.isConnected) {
+	public String ParseToken (Token t, boolean testing) {
+    	String result = null;
+		if (dbm.isConnected) {
     		JSONReader reader = new JSONReader<Token>();
-    		//int recievedID = msg.indexOf("Id") + 6; // Funktioniert nur mit einstlligen ids!
+    		//int recievedID = message.indexOf("Id") + 6; // Funktioniert nur mit einstlligen ids!
     		//System.out.println("Recieved ID: " + recievedID);
+    		
+    		result = t.sTag;
     		
 	    	switch (t.sTag) {
 	    		case "Authentication":
-	    	    	AuthenticationToken auth = (AuthenticationToken)reader.readJson( msg , AuthenticationToken.class );
+	    	    	AuthenticationToken auth = (AuthenticationToken)reader.readJson( message , AuthenticationToken.class );
 	    			//auth.sId = recievedID;
-	    	    	HandleAuthToken(auth, conn);
+	    	    	HandleAuthToken(auth, connection);
 	    			break;
 	    		case "Registration":
-	    			RegistrationToken reg = (RegistrationToken)reader.readJson( msg , RegistrationToken.class );
+	    			RegistrationToken reg = (RegistrationToken)reader.readJson( message , RegistrationToken.class );
 	    			
-	    			HandleRegistToken( reg, conn );
+	    			HandleRegistToken( reg, connection );
 	    			break;
 	    		case "UserUpdate":
-	    			UserUpdateToken uut = (UserUpdateToken)reader.readJson( msg, UserUpdateToken.class );
+	    			UserUpdateToken uut = (UserUpdateToken)reader.readJson( message, UserUpdateToken.class );
 	    			
-	    			HandleUpdateToken ( uut, conn );
+	    			HandleUpdateToken ( uut, connection );
 	    			break;
 	    		case "Logout":
-	    			LogoutToken lot = (LogoutToken)reader.readJson( msg, LogoutToken.class);
+	    			LogoutToken lot = (LogoutToken)reader.readJson( message, LogoutToken.class);
 	    			HandleLogoutToken ( lot );		
 	    			break;
 	    		case "FriendList":
-	    			FriendListToken flt = (FriendListToken)reader.readJson( msg, FriendListToken.class );
-	    			HandleFriendListToken(flt, conn);
+	    			FriendListToken flt = (FriendListToken)reader.readJson( message, FriendListToken.class );
+	    			HandleFriendListToken(flt, connection);
 	    			break;
 	    		case "FriendRequest":
-	    			FriendReqToken frt = (FriendReqToken)reader.readJson( msg, FriendReqToken.class );
-	    			HandleFriendReqToken(frt, conn);
+	    			FriendReqToken frt = (FriendReqToken)reader.readJson( message, FriendReqToken.class );
+	    			HandleFriendReqToken(frt, connection);
 	    			break;
-	    		case "CreateEvent":
-	    			Token cet = (Token)reader.readJson( msg, Token.class);
+	    		case "AddEvent":
+	    			AddEventToken cet = (AddEventToken)reader.readJson( message, AddEventToken.class);
 	    			HandleCreateEventToken( cet );
 	    			break;
 	    		case "AttendEvent":
-	    			Token aet = (Token)reader.readJson( msg, Token.class);
+	    			Token aet = (Token)reader.readJson( message, Token.class);
 	    			HandleAttendEventToken( aet );
 	    			break;
-	    		case "GetEventList":
-	    			Token get = (Token)reader.readJson( msg, Token.class);
-	    			HandleEvenListToken( get, conn );
+	    		case "EventList":
+	    			EventListToken get = (EventListToken)reader.readJson( message, EventListToken.class);
+	    			HandleEvenListToken( get, connection );
 	    			break;
 	    		default:
 	    			System.out.println("ERROR: Token could not be identified!!");
+	    			result = "Undefinable";
 	    	}
     	}
+		return result;
     }
     
-    private void HandleAuthToken( AuthenticationToken auth, WebSocket conn ) {
+    private void HandleAuthToken( AuthenticationToken auth, WebSocket connection ) {
     	boolean result = authman.AuthenticateUser( auth );
 		System.out.println("Legit login: " + result);
 		
@@ -116,10 +123,10 @@ public class TokenHandler implements Runnable {
 			dbm.UpdateUserOnline(Integer.parseInt(auth.id), true);
 		}
 		
-		sendToken(auth, conn);
+		sendToken(auth, connection);
     }
     
-    private void HandleRegistToken ( RegistrationToken reg, WebSocket conn ) {
+    private void HandleRegistToken ( RegistrationToken reg, WebSocket connection ) {
     	authman.RegisterUser( reg );
     	reg.result = true;
     	
@@ -129,10 +136,10 @@ public class TokenHandler implements Runnable {
 			reg.id = dbm.getUserID( reg.email );	
 		}
     	
-    	sendToken( reg , conn);
+    	sendToken( reg , connection);
     }
     
-    private void HandleUpdateToken ( UserUpdateToken uut, WebSocket conn ) {
+    private void HandleUpdateToken ( UserUpdateToken uut, WebSocket connection ) {
     	authman.UpdateUser( uut );
     	
     	// Check if there is a open friendrequest for this user  	
@@ -140,7 +147,7 @@ public class TokenHandler implements Runnable {
     	
     	if ( frt != null ) {
     		// Send that lucky person that new friendrequest
-    		sendToken(frt, conn);
+    		sendToken(frt, connection);
     	}
     }
     
@@ -148,7 +155,7 @@ public class TokenHandler implements Runnable {
     	dbm.UpdateUserOnline(Integer.parseInt(lot.id), false);
     }
     
-    private void HandleFriendReqToken ( FriendReqToken frt, WebSocket conn ) {
+    private void HandleFriendReqToken ( FriendReqToken frt, WebSocket connection ) {
     	
     	// The other friend accepted! Yeah!
     	if(frt.accept == true){
@@ -157,25 +164,28 @@ public class TokenHandler implements Runnable {
     	else {	// Request was just sent, store it for later
     		dbm.storeFriendReq( frt );
     	}
-    	//sendToken( frt, conn);
+    	//sendToken( frt, connection);
     }
     
-    private void HandleFriendListToken ( FriendListToken flt, WebSocket conn ) {
+    private void HandleFriendListToken ( FriendListToken flt, WebSocket connection ) {
     	ArrayList<User> friends = dbm.getUserfriends( flt.id );
     	flt.userList = friends;
     	
-    	sendToken( flt, conn );
+    	sendToken( flt, connection );
     }
     
-    private void HandleCreateEventToken( Token cet ) {
-    	
+    private void HandleCreateEventToken( AddEventToken cet ) {
+    	dbm.createevent( cet );
     }
     
-    private void HandleAttendEventToken( Token aet ) {
+    private void HandleAttendEventToken( Token elt ) {
     	
     }
 	
-	private void HandleEvenListToken( Token get, WebSocket conn ) {
+	private void HandleEvenListToken( EventListToken elt, WebSocket connection ) {
+		ArrayList<ServerClasses.Event> events = dbm.getEvents( elt.id );
+		elt.eventList = events;
 		
+		sendToken( elt, connection );
 	}
 }
