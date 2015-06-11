@@ -32,6 +32,8 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -303,19 +305,31 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             try {
 
                 JSONParser reader = new JSONParser();
-
-                AuthenticationToken auth = new AuthenticationToken( mEmail, mPassword );
-
-                String authtoken = reader.JSONWriter(auth);
-
-                if(Client.getInstance().isConnected())
+                String hashedPW = null;
+                try
                 {
-                    Client.getInstance().WriteMsg(authtoken);
+                    MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+                    messageDigest.update(mPassword.getBytes());
+                    hashedPW = new String(messageDigest.digest());
+
                 }
-
-                while(!ServerControl.gotAuthToken)
+                catch (NoSuchAlgorithmException e)
                 {
-                    Thread.sleep(100);
+                    e.printStackTrace();
+                }
+                if(hashedPW != null)
+                {
+                    AuthenticationToken auth = new AuthenticationToken(mEmail, hashedPW);
+
+                    String authtoken = reader.JSONWriter(auth);
+
+                    if (Client.getInstance().isConnected()) {
+                        Client.getInstance().WriteMsg(authtoken);
+                    }
+
+                    while (!ServerControl.gotAuthToken) {
+                        Thread.sleep(100);
+                    }
                 }
 
             } catch (InterruptedException e) {

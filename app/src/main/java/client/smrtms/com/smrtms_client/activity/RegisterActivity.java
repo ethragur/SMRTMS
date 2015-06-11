@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.JSONParser;
@@ -84,24 +87,30 @@ public class RegisterActivity extends ActionBarActivity
         String PasswrodRe = mPasswordReView.getText().toString();
         if(Password.compareTo(PasswrodRe) == 0)
         {
-            RegistrationToken rt = new RegistrationToken();
-            rt.email = Email;
-            rt.username = Username;
-            rt.password = Password;
-            rt.result = false;
-            JSONParser<RegistrationToken> writer = new JSONParser<>();
-            String toSend;
-            toSend = writer.JSONWriter(rt);
+            try {
+                RegistrationToken rt = new RegistrationToken();
+                rt.email = Email;
+                rt.username = Username;
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+                messageDigest.update(Password.getBytes());
+                String hashedPW = new String(messageDigest.digest());
+                rt.password = hashedPW;
+                rt.result = false;
+                JSONParser<RegistrationToken> writer = new JSONParser<>();
+                String toSend;
+                toSend = writer.JSONWriter(rt);
 
-            if(Client.getInstance().WriteMsg(toSend))
-            {
-                showProgress(true);
-                mAuthTask = new WaitForServerResponse();
-                mAuthTask.execute((Void) null);
+                if (Client.getInstance().WriteMsg(toSend)) {
+                    showProgress(true);
+                    mAuthTask = new WaitForServerResponse();
+                    mAuthTask.execute((Void) null);
+                } else {
+                    Toast.makeText(this.getApplicationContext(), "Client is not connected to Server", Toast.LENGTH_SHORT).show();
+                }
             }
-            else
+            catch (NoSuchAlgorithmException e)
             {
-                Toast.makeText(this.getApplicationContext(), "Client is not connected to Server", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
 
         }
