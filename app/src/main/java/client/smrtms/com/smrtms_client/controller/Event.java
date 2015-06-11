@@ -20,6 +20,7 @@ public class Event {
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.attendees = 0;
     }
 
 
@@ -62,4 +63,6 @@ public class Event {
     public void setDistance(double distance) {
         this.distance = distance;
     }
+
+    public Integer getAttendees() { return attendees; }
 }

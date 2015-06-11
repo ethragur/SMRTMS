@@ -19,6 +19,7 @@ public class EventListAdapter extends ArrayAdapter<Event>{
         TextView name;
         TextView description;
         TextView distance;
+        TextView attendees;
     }
 
     private Context context;
@@ -46,6 +47,7 @@ public class EventListAdapter extends ArrayAdapter<Event>{
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.description = (TextView) convertView.findViewById(R.id.description);
             viewHolder.distance = (TextView) convertView.findViewById(R.id.distance);
+            viewHolder.attendees = (TextView) convertView.findViewById(R.id.attendees);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -56,6 +58,7 @@ public class EventListAdapter extends ArrayAdapter<Event>{
         viewHolder.name.setText(item.getName());
         viewHolder.description.setText(item.getDescription());
         viewHolder.distance.setText("Distance: " + Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(item.getLatitude(), item.getLongitude()) * 1000) / 1000.0 + " km");
+        viewHolder.attendees.setText("Attendees: " + item.getAttendees());
 
         return convertView;
     }

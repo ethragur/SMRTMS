@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    >
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/name"
@@ -22,18 +21,19 @@
         android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/name"
-        android:layout_toRightOf="@+id/name"
-        android:text="Distance"/>
+        android:text="Distance"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/ivEventIcon"
+        android:layout_toEndOf="@+id/ivEventIcon" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
-        android:layout_below="@+id/name"
-        android:layout_toRightOf="@+id/ivEventIcon"
-        android:layout_toEndOf="@+id/ivEventIcon"/>
+        android:layout_below="@+id/distance"
+        android:layout_alignLeft="@+id/distance"
+        android:layout_alignStart="@+id/distance" />
 
     <ImageView
         android:layout_alignParentLeft="true"
@@ -43,6 +43,13 @@
         android:layout_height="30dp"
         android:src="@drawable/calendar" />
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/attendees"
+        android:text="attendees"
+        android:layout_alignTop="@+id/description"
+        android:layout_toRightOf="@+id/name"
+        android:layout_toEndOf="@+id/name" />
 
 </RelativeLayout>
