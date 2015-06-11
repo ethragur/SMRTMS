@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.activity.StartActivity;
 import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
@@ -94,6 +95,7 @@ public class GMapFragment extends SupportMapFragment
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && mMap != null) {
+	        LoginUser.getInstance().serverTask.getGpsTracker().getLocation();
             setUpMap();
             LatLng coordinate;
             if ((coordinate = sendCoordinates.getCoordinates()) != null) {

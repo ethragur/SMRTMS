@@ -1,7 +1,10 @@
 package client.smrtms.com.smrtms_client.controller;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.LocationListener;
 import android.location.Location;
 import android.location.LocationManager;
@@ -45,6 +48,7 @@ public class GPSTracker implements LocationListener {
         this.mContext = context;
         getLocation();
 
+
     }
 
 
@@ -65,7 +69,7 @@ public class GPSTracker implements LocationListener {
                     .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isGPSEnabled && !isNetworkEnabled) {
-                // No network provider is enabled
+
             } else {
                 this.canGetLocation = true;
                 if (isNetworkEnabled) {
@@ -173,6 +177,8 @@ public class GPSTracker implements LocationListener {
         return AVERAGE_RADIUS_OF_EARTH * c;
 
     }
+
+
 
 
 
