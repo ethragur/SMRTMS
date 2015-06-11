@@ -24,6 +24,7 @@ import java.util.Comparator;
 
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.activity.StartActivity;
+import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.ServerControl;
 import client.smrtms.com.smrtms_client.controller.UserListAdapter;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
@@ -98,8 +99,19 @@ public class ContactsFragment extends Fragment {
     private void setUpFriendList()
     {
         for(User friend: LoginUser.getInstance().getFriendList()) {
+            friend.setDistance(Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(friend.getLatitude(), friend.getLongitude()) * 1000) / 1000.0);
             users.add(friend);
         }
+
+        Collections.sort(users, new Comparator<User>() {
+            public int compare(User o1, User o2) {
+                if (o1.getDistance() == o2.getDistance())
+                    return 0;
+                return o1.getDistance() < o2.getDistance() ? -1 : 1;
+            }
+        });
+
+
         // Create the adapter to convert the array to views
         UserListAdapter adapter = new UserListAdapter(getActivity(), users);
         // Attach the adapter to a ListView
