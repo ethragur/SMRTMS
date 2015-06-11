@@ -1,5 +1,6 @@
 package client.smrtms.com.smrtms_client.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.firebase.androidchat.ChatActivity;
 import com.google.android.gms.maps.model.LatLng;
 
 import net.londatiga.android.ActionItem;
@@ -19,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.activity.StartActivity;
 import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.EventListAdapter;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
@@ -46,6 +49,7 @@ public class EventFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser )
         {
+	        LoginUser.getInstance().serverTask.getGpsTracker().getLocation();
             // Construct the data source
             if(ServerControl.gotNewEventList)
             {
@@ -110,12 +114,12 @@ public class EventFragment extends Fragment {
         // Create the adapter to convert the array to views
         EventListAdapter adapter = new EventListAdapter(getActivity(), events);
         // Attach the adapter to a ListView
-
+	    listView = (ListView) getActivity().findViewById(R.id.listEvent);
         listView.setAdapter(adapter);
 
 
         ActionItem join     = new ActionItem(1, "join", getResources().getDrawable(R.drawable.join));
-        ActionItem leave     = new ActionItem(2, "leave", getResources().getDrawable(R.drawable.leave));
+        ActionItem leave     = new ActionItem(2, "Chat", getResources().getDrawable(R.drawable.chat));
         ActionItem map     = new ActionItem(3, "map", getResources().getDrawable(R.drawable.globe));
 
         //create QuickAction. Use QuickAction.VERTICAL or QuickAction.HORIZONTAL param to define layout
@@ -142,6 +146,10 @@ public class EventFragment extends Fragment {
                 /* leave is selected */
                 } else if (actionItem.getActionId() == 2) {
                     //TODO leave event
+	                Intent myIntent = new Intent(getActivity(), ChatActivity.class);
+	                myIntent.putExtra("UserKey", "Event");
+	                myIntent.putExtra("EventName", selectedEvent.getName());
+	                getActivity().startActivity(myIntent);
 
                 /* map is selected */
                 } else if (actionItem.getActionId() == 3) {

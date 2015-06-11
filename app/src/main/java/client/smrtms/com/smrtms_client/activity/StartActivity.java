@@ -28,6 +28,8 @@ public class StartActivity extends Activity{
 
         LoginUser.getInstance().setmContext(this.context);
         LoginUser.getInstance().serverTask.getNewFriendList();
+	    buildAlertMessageNoGps();
+
     }
 
     @Override
@@ -104,5 +106,27 @@ public class StartActivity extends Activity{
         return super.onKeyDown(keyCode, event);
     }
 
+
+    private void buildAlertMessageNoGps()
+    {
+        if(!LoginUser.getInstance().serverTask.getGpsTracker().canGetLocation()) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                            context.startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                            dialog.cancel();
+                        }
+                    });
+            final AlertDialog alert = builder.create();
+            alert.show();
+        }
+
+    }
 
 }

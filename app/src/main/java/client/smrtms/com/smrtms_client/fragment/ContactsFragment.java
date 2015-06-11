@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.activity.StartActivity;
 import client.smrtms.com.smrtms_client.controller.ServerControl;
 import client.smrtms.com.smrtms_client.controller.UserListAdapter;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
@@ -62,6 +63,7 @@ public class ContactsFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser )
         {
+	        LoginUser.getInstance().serverTask.getGpsTracker().getLocation();
             if(ServerControl.gotNewFriendList)
             {
                 users = new ArrayList<>();

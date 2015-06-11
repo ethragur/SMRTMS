@@ -46,18 +46,20 @@ public class ChatActivity extends ListActivity {
 
         //get UserID from chat Partner
         Intent origin = getIntent();
-        String chatPartnerID = origin.getStringExtra("UserKey");
-
         String chatName;
-
-        //Bigger UserID always first string so chat is equivalent
-        if(Integer.parseInt(LoginUser.getInstance().getID()) > Integer.parseInt(chatPartnerID))
+        String chatPartnerID = origin.getStringExtra("UserKey");
+        if(chatPartnerID.contains("Event"))
         {
-            chatName = LoginUser.getInstance().getID() + chatPartnerID;
+            chatName = origin.getStringExtra("EventName");
         }
-        else
-        {
-            chatName = chatPartnerID + LoginUser.getInstance().getID();
+        else {
+
+            //Bigger UserID always first string so chat is equivalent
+            if (Integer.parseInt(LoginUser.getInstance().getID()) > Integer.parseInt(chatPartnerID)) {
+                chatName = LoginUser.getInstance().getID() + chatPartnerID;
+            } else {
+                chatName = chatPartnerID + LoginUser.getInstance().getID();
+            }
         }
         setTitle("Chatting as " + mUsername);
 

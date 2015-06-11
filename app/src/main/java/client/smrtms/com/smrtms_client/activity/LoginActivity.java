@@ -336,6 +336,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 return false;
             }
 
+            ServerControl.gotAuthToken = false;
+
             if((mEmail.compareTo("admin") == 0) && mPassword.compareTo("password") == 0)
             {
                 return true;
