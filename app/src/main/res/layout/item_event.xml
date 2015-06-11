@@ -48,8 +48,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/attendees"
         android:text="attendees"
-        android:layout_alignTop="@+id/description"
-        android:layout_toRightOf="@+id/name"
-        android:layout_toEndOf="@+id/name" />
+        android:layout_below="@+id/description"
+        android:layout_alignLeft="@+id/description"
+        android:layout_alignStart="@+id/description" />
 
 </RelativeLayout>

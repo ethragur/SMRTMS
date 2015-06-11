@@ -20,12 +20,11 @@
 
     <TextView
         android:id="@+id/distance"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Distance"
         android:layout_below="@+id/name"
-        android:layout_alignRight="@+id/name"
-        android:layout_alignStart="@+id/name" />
+        android:layout_alignRight="@+id/name" />
 
     <ImageView
         android:layout_alignParentLeft="true"

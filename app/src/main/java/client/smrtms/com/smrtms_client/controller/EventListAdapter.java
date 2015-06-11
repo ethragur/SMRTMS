@@ -58,8 +58,8 @@ public class EventListAdapter extends ArrayAdapter<Event>{
         viewHolder.name.setText(item.getName());
         viewHolder.description.setText(item.getDescription());
         viewHolder.distance.setText("Distance: " + Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(item.getLatitude(), item.getLongitude()) * 1000) / 1000.0 + " km");
-        viewHolder.attendees.setText("Attendees: " + item.getAttendees());
+        viewHolder.attendees.setText("Attendees: " + (item.getAttendees() != null ? item.getAttendees() : 0));
 
         return convertView;
     }
-}
+    }
