@@ -49,13 +49,11 @@
         </activity>
         <activity
             android:name=".activity.MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
+            android:label="@string/title_activity_maps" >
         </activity>
         <activity
             android:name=".activity.MainScreen"
-            android:label="@string/title_activity_main_screen"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
+            android:label="@string/title_activity_main_screen">
         </activity>
         <activity
             android:name="com.firebase.androidchat.ChatActivity"
@@ -63,18 +61,15 @@
         </activity>
         <activity
             android:name=".activity.RegisterActivity"
-            android:label="@string/title_activity_register"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
+            android:label="@string/title_activity_register" >
         </activity>
         <activity
             android:name=".activity.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
+            android:label="@string/title_activity_settings" >
         </activity>
         <activity
             android:name=".activity.StartActivity"
-            android:label="@string/title_activity_settings"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
