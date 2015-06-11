@@ -30,11 +30,14 @@ public class EventFragment extends Fragment {
 
     private Event selectedEvent;
     ArrayList<Event> events;
+    ListView listView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.activity_event, container, false);
+        listView = (ListView) getActivity().findViewById(R.id.listEvent);
 
         return rootView;
     }
@@ -59,8 +62,9 @@ public class EventFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        listView = (ListView) getActivity().findViewById(R.id.listEvent);
         super.onViewCreated(view, savedInstanceState);
         if(LoginUser.getInstance() != null)
         {
@@ -74,6 +78,16 @@ public class EventFragment extends Fragment {
 
 
 
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        listView = (ListView) getActivity().findViewById(R.id.listEvent);
+        events = new ArrayList<>();
+        setUpEventList();
+        ServerControl.gotNewEventList = false;
     }
 
 
@@ -96,7 +110,7 @@ public class EventFragment extends Fragment {
         // Create the adapter to convert the array to views
         EventListAdapter adapter = new EventListAdapter(getActivity(), events);
         // Attach the adapter to a ListView
-        ListView listView = (ListView) getActivity().findViewById(R.id.listEvent);
+
         listView.setAdapter(adapter);
 
 

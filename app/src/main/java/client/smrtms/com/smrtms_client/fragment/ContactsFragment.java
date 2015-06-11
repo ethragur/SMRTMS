@@ -33,7 +33,7 @@ import client.smrtms.com.smrtms_client.controller.User;
 public class ContactsFragment extends Fragment {
 
     User selectedFriend;
-
+    ListView listView;
 
 
     @Override
@@ -41,6 +41,7 @@ public class ContactsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.activity_contacts, container, false);
+        listView =  (ListView) getActivity().findViewById(R.id.listFriend);
         return rootView;
     }
     ArrayList<User> users;
@@ -49,6 +50,7 @@ public class ContactsFragment extends Fragment {
     public void onResume()
     {
         super.onResume();
+        listView =  (ListView) getActivity().findViewById(R.id.listFriend);
         users = new ArrayList<>();
         for(User friend: LoginUser.getInstance().getFriendList())
         {
@@ -78,7 +80,7 @@ public class ContactsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-
+        listView =  (ListView) getActivity().findViewById(R.id.listFriend);
         if(LoginUser.getInstance() != null)
         {
             LoginUser.getInstance().checkPendingFriendReq();
@@ -99,7 +101,7 @@ public class ContactsFragment extends Fragment {
         // Create the adapter to convert the array to views
         UserListAdapter adapter = new UserListAdapter(getActivity(), users);
         // Attach the adapter to a ListView
-        ListView listView = (ListView) getActivity().findViewById(R.id.listFriend);
+
         listView.setAdapter(adapter);
 
 
