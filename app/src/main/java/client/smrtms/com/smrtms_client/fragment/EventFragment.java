@@ -22,11 +22,15 @@ import java.util.Comparator;
 
 import client.smrtms.com.smrtms_client.R;
 import client.smrtms.com.smrtms_client.activity.StartActivity;
+import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.EventListAdapter;
+import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.ServerControl;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
+import client.smrtms.com.smrtms_client.tokens.AddEventToken;
+import client.smrtms.com.smrtms_client.tokens.JoinEventToken;
 
 
 public class EventFragment extends Fragment {
@@ -142,6 +146,12 @@ public class EventFragment extends Fragment {
                 /* join is selected */
                 if (actionItem.getActionId() == 1)
                 {
+                    JSONParser<JoinEventToken> reader = new JSONParser<>();
+                    JoinEventToken jet = new JoinEventToken(selectedEvent.getName());
+
+                    String addEvent = reader.JSONWriter(jet);
+
+                    Client.getInstance().WriteMsg(addEvent);
 
 
                 /* leave is selected */
