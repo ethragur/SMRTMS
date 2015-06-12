@@ -262,8 +262,13 @@ public class DBManager {
 							String friendid = p.getValue(USER.ID).toString();
 							Double friendlong = p.getValue(USER.LONGITUDE);
 							Double friendlatt = p.getValue(USER.LATITUDE);
+							byte bytefriendonline = p.getValue(USER.ISONLINE);
+							
+							boolean friendonline = true;
+							if (bytefriendonline == 0)
+								friendonline = false;
 
-							User newfriend = new User(friendname, friendid, friendlatt, friendlong);
+							User newfriend = new User(friendname, friendid, friendlatt, friendlong, friendonline);
 							friends.add(newfriend);
 						}
 						System.out.println("No...");

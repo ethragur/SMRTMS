@@ -15,14 +15,16 @@ public class User
     private String ID;
     private Double Latitude;
     private Double Longitude;
+    private boolean Online;
 
 
-    public User(String Username, String ID, Double Latitude, Double Longitude)
+    public User(String Username, String ID, Double Latitude, Double Longitude, boolean Online)
     {
         this.Username = Username;
         this.ID = ID;
         this.Latitude = Latitude;
         this.Longitude = Longitude;
+        this.Online = Online;
     }
 
     public String getID() {
@@ -56,7 +58,14 @@ public class User
     public void setLongitude(Double longitude) {
         Longitude = longitude;
     }
+    
+    public boolean getOnline() {
+    	return Online;
+    }
 
+    public void setOnline( boolean online) {
+    	Online = online;
+    }
 
 
     public String toString()
