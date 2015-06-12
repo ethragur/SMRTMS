@@ -1,6 +1,8 @@
 package server;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import ServerClasses.*;
 
@@ -22,7 +24,7 @@ public class TokenHandler implements Runnable {
 	private DBManager dbm;
 	private AuthenticationManager authman;
 	
-	public Map<WebSocket, String> openConnections = new HashMap<WebSocket, String>(); 
+	public static Map<WebSocket, String> openConnections = new HashMap<WebSocket, String>(); 
 	Token token;
 	String message;
 	WebSocket connection;

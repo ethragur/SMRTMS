@@ -28,6 +28,7 @@ import org.jooq.tools.json.JSONParser;
 import org.jooq.util.derby.sys.Sys;
 
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.LogoutToken;
 import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
 import client.smrtms.com.smrtms_client.tokens.Token;
 import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
@@ -84,7 +85,7 @@ public class Server extends WebSocketServer
     	System.out.println( "Recieved Token tag: " + t.sTag );
     	
     	TokenHandler tokenhandler = new TokenHandler( t, message, conn );
-        Thread x = new Thread(tokenHandler);
+        Thread x = new Thread(tokenhandler);
         x.start();
     }
 
