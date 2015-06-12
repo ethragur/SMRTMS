@@ -22,6 +22,7 @@ public class TokenHandler implements Runnable {
 	private DBManager dbm;
 	private AuthenticationManager authman;
 	
+	public Map<WebSocket, String> openConnections = new HashMap<WebSocket, String>(); 
 	Token token;
 	String message;
 	WebSocket connection;
@@ -125,6 +126,7 @@ public class TokenHandler implements Runnable {
 		{
 			auth.id = dbm.getUserID( auth.email );
 			dbm.UpdateUserOnline(Integer.parseInt(auth.id), true);
+			openConnections.put(connection, auth.id);
 		}
 		
 		sendToken(auth, connection);
