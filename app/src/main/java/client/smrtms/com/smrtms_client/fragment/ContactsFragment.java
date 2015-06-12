@@ -36,7 +36,7 @@ public class ContactsFragment extends Fragment {
 
     User selectedFriend;
     ListView listView;
-
+    ArrayList<User> users;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +46,7 @@ public class ContactsFragment extends Fragment {
         listView =  (ListView) getActivity().findViewById(R.id.listFriend);
         return rootView;
     }
-    ArrayList<User> users;
+
 
     @Override
     public void onResume()
@@ -54,10 +54,8 @@ public class ContactsFragment extends Fragment {
         super.onResume();
         listView =  (ListView) getActivity().findViewById(R.id.listFriend);
         users = new ArrayList<>();
-        for(User friend: LoginUser.getInstance().getFriendList())
-        {
-            users.add(friend);
-        }
+        setUpFriendList();
+        ServerControl.gotNewFriendList = false;
     }
 
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -91,7 +89,7 @@ public class ContactsFragment extends Fragment {
         // Construct the data source
         users = new ArrayList<>();
         setUpFriendList();
-
+        ServerControl.gotNewFriendList = false;
 
 
     }

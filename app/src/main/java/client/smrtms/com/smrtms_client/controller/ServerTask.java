@@ -41,20 +41,6 @@ public class ServerTask
             Client.getInstance().WriteMsg(toSend);
     }
 
-    public void refreshUserCoord()
-    {
-        if (gpsTracker.canGetLocation())
-        {
-            LoginUser.getInstance().setLongitude(gpsTracker.getLongitude());
-            LoginUser.getInstance().setLatitude(gpsTracker.getLatitude());
-        }
-        else
-        {
-            //ToDo: throw some exception when it can't get GPS Data
-            Log.d("Error", "Can't get GPS data");
-        }
-    }
-
     public void startUpdates()
     {
         userUpdateTimer = new Timer();
@@ -62,7 +48,6 @@ public class ServerTask
         userUpdateTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                refreshUserCoord();
                 userUpdates();
             }
         }, 0, 10000);
