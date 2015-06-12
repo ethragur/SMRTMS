@@ -18,6 +18,10 @@ public class User
     private Double distance;
 
 
+
+    private boolean Online;
+
+
     public User(String Username, String ID, Double Latitude, Double Longitude)
     {
         this.Username = Username;
@@ -64,7 +68,13 @@ public class User
         this.distance = distance;
     }
 
+    public boolean isOnline() {
+        return Online;
+    }
 
+    public void setOnline(boolean online) {
+        this.Online = online;
+    }
 
     public String toString()
     {

@@ -62,9 +62,12 @@ public class GMapFragment extends SupportMapFragment implements GoogleMap.OnMyLo
 
         for(User friend: LoginUser.getInstance().getFriendList())
         {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getUsername()))
-                    .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.user));;
-
+            if(friend.isOnline())
+            {
+                mMap.addMarker(new MarkerOptions().position(new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getUsername()))
+                        .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.user));
+                ;
+            }
         }
 
         for(Event event: LoginUser.getInstance().getEventList())
