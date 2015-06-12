@@ -44,22 +44,21 @@ public class StartActivity extends Activity{
         TimePicker t = (TimePicker) findViewById(R.id.timePicker);
         Integer Hour;
         Integer Min;
-        Integer remainingTime;
-        if(t != null)
-        {
-            Hour = t.getCurrentHour();
-            Min = t.getCurrentMinute();
-            Time now = new Time();
-            now.setToNow();
-            remainingTime = ((Hour - now.hour) * 60) + (Min - now.minute);
-            if (remainingTime < 0) {
-                remainingTime += 12 * 60;
-            }
+        Integer remainingTime = 120;
+
+        Hour = t.getCurrentHour();
+        Min = t.getCurrentMinute();
+        Time now = new Time();
+        now.setToNow();
+        remainingTime = ((Hour - now.hour) * 60) + (Min - now.minute);
+        if (remainingTime < 0) {
+            remainingTime += 12 * 60;
         }
-        else
+        if(remainingTime == 0)
         {
             remainingTime = 120;
         }
+
         LoginUser.getInstance().setRemainingTime(remainingTime);
         LoginUser.getInstance().setIsLogin(true);
         LoginUser.getInstance().serverTask.startUpdates();

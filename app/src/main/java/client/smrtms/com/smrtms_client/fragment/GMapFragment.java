@@ -1,5 +1,6 @@
 package client.smrtms.com.smrtms_client.fragment;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,16 +13,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import client.smrtms.com.smrtms_client.R;
-import client.smrtms.com.smrtms_client.activity.StartActivity;
 import client.smrtms.com.smrtms_client.controller.Event;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
 
 
-public class GMapFragment extends SupportMapFragment
+public class GMapFragment extends SupportMapFragment implements GoogleMap.OnMyLocationChangeListener
 {
-
+    private Location mLocation;
     private View rootView;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
@@ -39,10 +39,9 @@ public class GMapFragment extends SupportMapFragment
 
     rootView = null;
         super.onActivityCreated(savedInstanceState);
-
         mMap = getMap();
-
-        setUpMap();
+        mLocation = new Location(LoginUser.getInstance().serverTask.getGpsTracker().getLocation());
+        setUpMap(mLocation);
 
     }
 
@@ -51,14 +50,14 @@ public class GMapFragment extends SupportMapFragment
      * just add a marker near Africa.
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
+     * @param location
      */
-    private void setUpMap()
+    private void setUpMap(Location location)
     {
         //clear Map, so that all the new Markers will be drawn
         mMap.clear();
-        mMap.addMarker(new MarkerOptions().position(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude())).title("Your Position"));
-       // mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude())));
-        mapZoom(new LatLng(LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude()));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("Your Position"));
+
         //draw map for each Friend
 
         for(User friend: LoginUser.getInstance().getFriendList())
@@ -76,10 +75,16 @@ public class GMapFragment extends SupportMapFragment
         }
     }
 
+    private void zoomTo(Location l)
+    {
+        mapZoom(new LatLng(l.getLatitude(), l.getLongitude()));
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        setUpMap();
+        setUpMap(mLocation);
+        zoomTo(mLocation);
 
     }
 
@@ -96,7 +101,8 @@ public class GMapFragment extends SupportMapFragment
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && mMap != null) {
 	        LoginUser.getInstance().serverTask.getGpsTracker().getLocation();
-            setUpMap();
+            setUpMap(mLocation);
+            zoomTo(mLocation);
             LatLng coordinate;
             if ((coordinate = sendCoordinates.getCoordinates()) != null) {
                 mapZoom(coordinate);
@@ -109,4 +115,12 @@ public class GMapFragment extends SupportMapFragment
         }
     }
 
+
+    @Override
+    public void onMyLocationChange(Location location)
+    {
+        mLocation = location;
+        setUpMap(mLocation);
+
+    }
 }
