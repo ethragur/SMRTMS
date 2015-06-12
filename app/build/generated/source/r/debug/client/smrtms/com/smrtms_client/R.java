@@ -1760,13 +1760,14 @@ containing a value of this type.
         public static final int action_mode_bar_stub=0x7f0d0042;
         public static final int action_mode_close_button=0x7f0d0035;
         public static final int activity_chooser_view_content=0x7f0d0036;
-        public static final int addEvent=0x7f0d0084;
-        public static final int addFriend=0x7f0d0083;
+        public static final int addEvent=0x7f0d0085;
+        public static final int addFriend=0x7f0d0084;
         public static final int adjust_height=0x7f0d0017;
         public static final int adjust_width=0x7f0d0018;
         public static final int always=0x7f0d001c;
-        public static final int arrow_down=0x7f0d0080;
-        public static final int arrow_up=0x7f0d007f;
+        public static final int arrow_down=0x7f0d0081;
+        public static final int arrow_up=0x7f0d0080;
+        public static final int attendees=0x7f0d007d;
         public static final int auth_email_form=0x7f0d006c;
         public static final int auth_form=0x7f0d006b;
         public static final int auth_progress=0x7f0d006a;
@@ -1822,7 +1823,7 @@ containing a value of this type.
         public static final int login=0x7f0d005f;
         public static final int login_form=0x7f0d005b;
         public static final int login_progress=0x7f0d005a;
-        public static final int logout=0x7f0d0082;
+        public static final int logout=0x7f0d0083;
         public static final int map=0x7f0d0069;
         public static final int match_parent=0x7f0d002b;
         public static final int message=0x7f0d0076;
@@ -1844,7 +1845,7 @@ containing a value of this type.
         public static final int sample_main_layout=0x7f0d0065;
         public static final int sandbox=0x7f0d0027;
         public static final int satellite=0x7f0d001a;
-        public static final int scroller=0x7f0d007d;
+        public static final int scroller=0x7f0d007e;
         public static final int search_badge=0x7f0d004a;
         public static final int search_bar=0x7f0d0049;
         public static final int search_button=0x7f0d004b;
@@ -1857,7 +1858,7 @@ containing a value of this type.
         public static final int search_voice_btn=0x7f0d0053;
         public static final int selectionDetails=0x7f0d002a;
         public static final int sendButton=0x7f0d0064;
-        public static final int settings=0x7f0d0081;
+        public static final int settings=0x7f0d0082;
         public static final int shortcut=0x7f0d003f;
         public static final int showCustom=0x7f0d000f;
         public static final int showHome=0x7f0d0010;
@@ -1872,7 +1873,7 @@ containing a value of this type.
         public static final int terrain=0x7f0d001b;
         public static final int timePicker=0x7f0d0074;
         public static final int title=0x7f0d003c;
-        public static final int tracks=0x7f0d007e;
+        public static final int tracks=0x7f0d007f;
         public static final int tv_title=0x7f0d0055;
         public static final int up=0x7f0d0008;
         public static final int useLogo=0x7f0d0012;

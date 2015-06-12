@@ -9,6 +9,8 @@ import android.location.LocationListener;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 
@@ -193,6 +195,7 @@ public class GPSTracker implements LocationListener {
 
     @Override
     public void onProviderDisabled(String provider) {
+
     }
 
 
@@ -205,5 +208,30 @@ public class GPSTracker implements LocationListener {
     public void onStatusChanged(String provider, int status, Bundle extras) {
     }
 
+/*
+	private final Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			if(msg.arg1 == 1){
+				if (!isFinishing()) { // Without this in certain cases application will show ANR
+					AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+					builder.setMessage("Your GPS is disabled! Would you like to enable it?").setCancelable(false).setPositiveButton("Enable GPS", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+							Activity.startActivity(gpsOptionsIntent);
+						}
+					});
+					builder.setNegativeButton("Do nothing", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.cancel();
+						}
+					});
+					AlertDialog alert = builder.create();
+					alert.show();
+				}
+			}
+
+
+		}
+	};*/
 
 }
