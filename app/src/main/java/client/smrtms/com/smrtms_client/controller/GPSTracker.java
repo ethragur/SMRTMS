@@ -188,9 +188,12 @@ public class GPSTracker implements LocationListener {
     @Override
     public void onLocationChanged(Location location)
     {
-        this.location = location;
-        LoginUser.getInstance().setLatitude(location.getLatitude());
-        LoginUser.getInstance().setLongitude(location.getLongitude());
+        if(LoginUser.getInstance() != null)
+        {
+            this.location = location;
+            LoginUser.getInstance().setLatitude(location.getLatitude());
+            LoginUser.getInstance().setLongitude(location.getLongitude());
+        }
     }
 
 

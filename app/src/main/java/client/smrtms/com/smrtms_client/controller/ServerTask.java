@@ -66,6 +66,7 @@ public class ServerTask
     {
         userUpdateTimer.cancel();
         friendListUpdateTimer.cancel();
+        gpsTracker.stopUsingGPS();
     }
 
     public GPSTracker getGpsTracker() {
