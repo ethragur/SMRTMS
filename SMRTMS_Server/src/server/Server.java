@@ -69,7 +69,7 @@ public class Server extends WebSocketServer
         TokenHandler tokenHandler = new TokenHandler ( t, message, conn );
 
         Thread x = new Thread(tokenHandler);
-        x.start;
+        x.start();
 
     }
 
@@ -85,7 +85,7 @@ public class Server extends WebSocketServer
     	
     	TokenHandler tokenhandler = new TokenHandler( t, message, conn );
         Thread x = new Thread(tokenHandler);
-        x.start;
+        x.start();
     }
 
 
