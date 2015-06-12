@@ -54,22 +54,25 @@ public class Server extends WebSocketServer
     @Override
     public void onOpen( WebSocket conn, ClientHandshake handshake ) {
         this.sendToAll( "new connection: " + handshake.getResourceDescriptor() );
-        System.out.println( conn.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!" );
+        System.out.println(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!");
     }
 
     @Override
     public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
         this.sendToAll(conn + " has disconnected!");
-        System.out.println( conn + " has disconnected!" );
+        System.out.println(conn + " has disconnected!");
 	    LogoutToken t = new LogoutToken();
         t.id = TokenHandler.openConnections.get(conn);
-
-        JSONReader<LogoutToken> reader = new JSONReader<LogoutToken>();
-        String message = reader.JSONWriter(t);
-        TokenHandler tokenHandler = new TokenHandler ( t, message, conn );
-
-        Thread x = new Thread(tokenHandler);
-        x.start();
+        if(t.id != null)
+        {
+            TokenHandler.openConnections.remove(conn);
+            JSONReader<LogoutToken> reader = new JSONReader<LogoutToken>();
+            String message = reader.JSONWriter(t);
+            TokenHandler tokenHandler = new TokenHandler(t, message, conn);
+            TokenHandler.openConnections.remove(conn);
+            Thread x = new Thread(tokenHandler);
+            x.start();
+        }
 
     }
 
