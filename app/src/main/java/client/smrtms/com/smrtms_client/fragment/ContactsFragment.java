@@ -18,18 +18,18 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
 import client.smrtms.com.smrtms_client.R;
-import client.smrtms.com.smrtms_client.activity.StartActivity;
-import client.smrtms.com.smrtms_client.controller.Event;
+import client.smrtms.com.smrtms_client.controller.Client;
+import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.ServerControl;
 import client.smrtms.com.smrtms_client.controller.UserListAdapter;
 import client.smrtms.com.smrtms_client.controller.sendCoordinates;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.controller.User;
+import client.smrtms.com.smrtms_client.tokens.DeleteFriendToken;
 
 
 public class ContactsFragment extends Fragment {
@@ -167,8 +167,14 @@ public class ContactsFragment extends Fragment {
                     TabsFragment tf = (TabsFragment) getParentFragment();
                     tf.setTabPostion(0);
                 /* delete is selected */
-                } else if (actionItem.getActionId() == 3) {
-                    //TODO delete friend
+                } else if (actionItem.getActionId() == 3)
+                {
+                    JSONParser<DeleteFriendToken> reader = new JSONParser<>();
+                    DeleteFriendToken delFriend = new DeleteFriendToken(selectedFriend.getUsername());
+
+                    String del = reader.JSONWriter(delFriend);
+
+                    Client.getInstance().WriteMsg(del);
                 }
 
             }
