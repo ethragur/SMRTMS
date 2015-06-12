@@ -102,10 +102,26 @@ public class ContactsFragment extends Fragment {
         }
 
         Collections.sort(users, new Comparator<User>() {
-            public int compare(User o1, User o2) {
-                if (o1.getDistance() == o2.getDistance())
+            public int compare(User o1, User o2)
+            {
+                if(o1.isOnline() && o2.isOnline())
+                {
+                    if (o1.getDistance() == o2.getDistance())
+                        return 0;
+                    return o1.getDistance() < o2.getDistance() ? -1 : 1;
+                }
+                else if(o1.isOnline() && !o2.isOnline())
+                {
+                    return -1;
+                }
+                else if(!o1.isOnline() && o2.isOnline())
+                {
+                    return 1;
+                }
+                else
+                {
                     return 0;
-                return o1.getDistance() < o2.getDistance() ? -1 : 1;
+                }
             }
         });
 
