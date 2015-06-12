@@ -49,7 +49,16 @@ public class UserListAdapter extends ArrayAdapter<User>{
         }
 
         viewHolder.name.setText(item.getUsername());
-        viewHolder.distance.setText("Distance: " + item.getDistance());//Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(item.getLatitude(), item.getLongitude()) * 1000) / 1000.0 + " km") ;
+        if(item.isOnline())
+        {
+            viewHolder.distance.setText("Distance: " + item.getDistance());
+        }
+        else
+        {
+            viewHolder.distance.setText("User is offline");
+        }
+
+
         return convertView;
     }
 }
