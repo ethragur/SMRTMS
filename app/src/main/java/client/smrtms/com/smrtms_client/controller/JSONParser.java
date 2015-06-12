@@ -13,7 +13,7 @@ import client.smrtms.com.smrtms_client.tokens.Token;
 
 public class JSONParser<T extends Token>
 {
-    //need to passt Class<T> becuase you cant call T.class
+    //need to pass Class<T> because you cant call T.class
     public T readJson(String file, Class<T> sryForThat)
     {
         Gson gson = new Gson();
@@ -24,7 +24,7 @@ public class JSONParser<T extends Token>
         return obj;
     }
 
-    //Takes an Obejct and Converts it to a JSON string
+    //Takes an Object and Converts it to a JSON string
     public String JSONWriter(T toGson)
     {
 

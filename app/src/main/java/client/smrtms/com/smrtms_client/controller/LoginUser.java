@@ -45,7 +45,7 @@ public class LoginUser extends User
     public LoginUser(String Username, String ID, Context Context)
     {
         super(Username, ID, new Double(0), new Double(0));
-        isLogin = new Boolean(false);
+        isLogin = false;
         mContext = Context;
         friendList = new ArrayList<User>();
         eventList = new ArrayList<Event>();

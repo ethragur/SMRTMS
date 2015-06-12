@@ -152,7 +152,7 @@ public class EventFragment extends Fragment {
                     String addEvent = reader.JSONWriter(jet);
 
                     Client.getInstance().WriteMsg(addEvent);
-                    if(selectedEvent == null)
+                    if(selectedEvent.attendees == null)
                     {
                         selectedEvent.attendees = 1;
                     }

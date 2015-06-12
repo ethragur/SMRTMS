@@ -304,7 +304,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected Boolean doInBackground(Void... params) {
             try {
 
-                JSONParser reader = new JSONParser();
+                JSONParser<AuthenticationToken> reader = new JSONParser();
                 String hashedPW = null;
                 try
                 {

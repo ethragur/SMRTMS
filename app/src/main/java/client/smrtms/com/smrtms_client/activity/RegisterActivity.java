@@ -84,8 +84,8 @@ public class RegisterActivity extends ActionBarActivity
         String Username = mUsernameView.getText().toString();
         String Email = mEmailView.getText().toString();
         String Password = mPasswordView.getText().toString();
-        String PasswrodRe = mPasswordReView.getText().toString();
-        if(Password.compareTo(PasswrodRe) == 0)
+        String PasswordRe = mPasswordReView.getText().toString();
+        if(Password.compareTo(PasswordRe) == 0)
         {
             try {
                 RegistrationToken rt = new RegistrationToken();

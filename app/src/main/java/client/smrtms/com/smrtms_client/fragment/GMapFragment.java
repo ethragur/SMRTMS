@@ -50,7 +50,7 @@ public class GMapFragment extends SupportMapFragment implements GoogleMap.OnMyLo
      * just add a marker near Africa.
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
-     * @param location
+     * @param location User Location
      */
     private void setUpMap(Location location)
     {

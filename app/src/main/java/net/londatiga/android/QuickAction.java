@@ -73,7 +73,7 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
      * Constructor allowing orientation override
      * 
      * @param context    Context
-     * @param orientation Layout orientation, can be vartical or horizontal
+     * @param orientation Layout orientation, can be vertical or horizontal
      */
     public QuickAction(Context context, int orientation) {
         super(context);
@@ -117,7 +117,7 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
 
 		mScroller	= (ScrollView) mRootView.findViewById(R.id.scroller);
 		
-		//This was previously defined on show() method, moved here to prevent force close that occured
+		//This was previously defined on show() method, moved here to prevent force close that occurred
 		//when tapping fastly on a view to show quickaction dialog.
 		//Thanx to zammbi (github.com/zammbi)
 		mRootView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));

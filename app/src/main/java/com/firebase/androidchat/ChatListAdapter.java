@@ -40,15 +40,16 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         // Map a Chat object to an entry in our listview
         String author = chat.getAuthor();
         TextView authorText = (TextView) view.findViewById(R.id.author);
+
         authorText.setText(author + ": ");
 
-        //Toast.makeText(su, "Tobi is scheisse", Toast.LENGTH_SHORT).show();
         // If the message was sent by this user, color it differently
         if (author != null && author.equals(mUsername)) {
             authorText.setTextColor(Color.GREEN);
         } else {
             authorText.setTextColor(Color.MAGENTA);
         }
+        authorText.setTextSize(12);
         ((TextView) view.findViewById(R.id.message)).setText(chat.getMessage());
     }
 }
