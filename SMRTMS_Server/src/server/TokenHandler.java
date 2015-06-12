@@ -111,6 +111,7 @@ public class TokenHandler implements Runnable {
 	    			result = "Undefinable";
 	    	}
     	}
+		dbm.Disconnect();
 		return result;
     }
     

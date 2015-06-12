@@ -48,7 +48,7 @@ public class Main {
 				try {
 					Server server = new Server(8887);
 					server.start();
-			        System.out.println( "Clubbr v0.3 Server started on port: " + server.getPort() );
+			        System.out.println( "Clubbr v0.8 Server started on port: " + server.getPort() );
 			        TokenHandler tokenhandlerinit = new TokenHandler();
 			        System.out.println( "Ready!" );
 			        

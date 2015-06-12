@@ -420,6 +420,16 @@ public class DBManager {
 		}
 	}
 	
+	public void Disconnect() {
+		System.out.println("Disconnecting from DB...");
+		try {
+			conn.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public byte[] hash(String password) throws NoSuchAlgorithmException {
 	    MessageDigest sha256 = MessageDigest.getInstance("SHA-256");        
 	    byte[] passBytes = password.getBytes();
