@@ -95,6 +95,7 @@ public class EventFragment extends Fragment {
     }
 
 
+
     private void setUpEventList()
     {
         for(Event event: LoginUser.getInstance().getEventList())
@@ -114,7 +115,7 @@ public class EventFragment extends Fragment {
         // Create the adapter to convert the array to views
         EventListAdapter adapter = new EventListAdapter(getActivity(), events);
         // Attach the adapter to a ListView
-	    listView = (ListView) getActivity().findViewById(R.id.listEvent);
+
         listView.setAdapter(adapter);
 
 
@@ -177,5 +178,6 @@ public class EventFragment extends Fragment {
         });
 
     }
+
 
 }
