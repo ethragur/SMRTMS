@@ -373,17 +373,19 @@ public class DBManager {
 	}
 	
 	public void attendevent( String Eventname ) {
-		Result<Record> result = create.select().from(EVENT).fetch();
-		
-		for (Record r : result) {
-			if ( r.getValue(EVENT.NAME).compareTo(Eventname)  == 0) {
-				System.out.println("Found Event! Its " + r.getValue(EVENT.NAME));
-				
-				create.update(EVENT)
-				.set(EVENT.ATTENDEES, r.getValue(EVENT.ATTENDEES) + 1)
-				.where(EVENT.NAME.equal(Eventname))
-				.execute();
-				
+		synchronized (DBManager.class) {
+			Result<Record> result = create.select().from(EVENT).fetch();
+
+			for (Record r : result) {
+				if (r.getValue(EVENT.NAME).compareTo(Eventname) == 0) {
+					System.out.println("Found Event! Its " + r.getValue(EVENT.NAME));
+
+					create.update(EVENT)
+							.set(EVENT.ATTENDEES, r.getValue(EVENT.ATTENDEES) + 1)
+							.where(EVENT.NAME.equal(Eventname))
+							.execute();
+
+				}
 			}
 		}
 	}
