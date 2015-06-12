@@ -38,6 +38,7 @@ public class Server extends WebSocketServer
 {
 
 	private DBManager dbm;
+    private Map<Websocket, Integer> openConnections;
 	
     public Server( int port ) throws UnknownHostException {
         super(new InetSocketAddress(port));
@@ -50,6 +51,7 @@ public class Server extends WebSocketServer
         super(address);
         dbm = new DBManager();
         dbm.bla();
+        openConnections = new HashMap<>();
     }
 
 
@@ -74,7 +76,7 @@ public class Server extends WebSocketServer
     	JSONReader reader = new JSONReader<Token>();
     	Token t = (Token)reader.readJson( message , Token.class );
     	System.out.println( "Recieved Token tag: " + t.sTag );
-    	
+
     	ParseToken(t);
     }
 
