@@ -59,8 +59,18 @@ public class Server extends WebSocketServer
 
     @Override
     public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
-        this.sendToAll( conn + " has disconnected!" );
+        this.sendToAll(conn + " has disconnected!");
         System.out.println( conn + " has disconnected!" );
+	    LogoutToken t = new LogoutToken();
+        t.id = TokenHandler.openConnections.get(conn);
+
+        JSONReader<LogoutToken> reader = new JSONReader<LogoutToken>();
+        String message = reader.JSONWriter(t);
+        TokenHandler tokenHandler = new TokenHandler ( t, message, conn );
+
+        Thread x = new Thread(tokenHandler);
+        x.start;
+
     }
 
     // Received a string from a client
@@ -74,7 +84,8 @@ public class Server extends WebSocketServer
     	System.out.println( "Recieved Token tag: " + t.sTag );
     	
     	TokenHandler tokenhandler = new TokenHandler( t, message, conn );
-    	tokenhandler.run();
+        Thread x = new Thread(tokenHandler);
+        x.start;
     }
 
 
