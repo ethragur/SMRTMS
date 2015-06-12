@@ -108,6 +108,7 @@ public class ServerControl implements Runnable
             }
 
         }
+        gotNewFriendList = true;
     }
 
     private void handleFriendReq()
