@@ -42,14 +42,23 @@ public class StartActivity extends Activity{
     public void changeToMainScreen(View view)
     {
         TimePicker t = (TimePicker) findViewById(R.id.timePicker);
-        Integer Hour = t.getCurrentHour();
-        Integer Min = t.getCurrentMinute();
-        Time now = new Time();
-        now.setToNow();
-        Integer remainingTime = ((Hour - now.hour)*60) + (Min - now.minute);
-        if(remainingTime < 0)
+        Integer Hour;
+        Integer Min;
+        Integer remainingTime;
+        if(t != null)
         {
-            remainingTime += 12*60;
+            Hour = t.getCurrentHour();
+            Min = t.getCurrentMinute();
+            Time now = new Time();
+            now.setToNow();
+            remainingTime = ((Hour - now.hour) * 60) + (Min - now.minute);
+            if (remainingTime < 0) {
+                remainingTime += 12 * 60;
+            }
+        }
+        else
+        {
+            remainingTime = 120;
         }
         LoginUser.getInstance().setRemainingTime(remainingTime);
         LoginUser.getInstance().setIsLogin(true);
