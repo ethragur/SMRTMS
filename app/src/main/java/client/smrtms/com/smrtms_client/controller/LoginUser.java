@@ -84,6 +84,9 @@ public class LoginUser extends User
         {
             if(n.getID().equals(newFriend.getID()))
             {
+                n.setLatitude(newFriend.getLatitude());
+                n.setLongitude(newFriend.getLongitude());
+                n.setOnline(newFriend.isOnline());
                 return;
             }
         }
