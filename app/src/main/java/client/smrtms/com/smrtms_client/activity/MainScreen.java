@@ -69,12 +69,7 @@ public class MainScreen extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.settings) {
-            Intent myIntent = new Intent(this, SettingsActivity.class);
-            startActivity(myIntent);
-            return true;
-        }
-        else if (id == R.id.logout) {
+        if (id == R.id.logout) {
             logoutDialog();
             return true;
         } else if (id == R.id.addFriend) {
@@ -222,37 +217,26 @@ public class MainScreen extends ActionBarActivity {
         final EditText descr = new EditText(this);
         descr.setHint("Event Description");
 
-        final EditText time = new EditText(this);
-
-
-        time.setText("End Time");
-        time.setFocusable(false);
-        time.setActivated(false);
-        final TimePicker tp = new TimePicker(this);
-
         LinearLayout lay = new LinearLayout(this);
         lay.setOrientation(LinearLayout.VERTICAL);
 
         lay.addView(name);
         lay.addView(descr);
-        lay.addView(time);
-        lay.addView(tp);
 
         alert.setView(lay);
 
 
         alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                if (name.getText().toString().matches("") || descr.getText().toString().matches("") || tp.getCurrentMinute() == null) {
+                if (name.getText().toString().matches("") || descr.getText().toString().matches("")) {
                     Toast.makeText(context, "Some Field was left out", Toast.LENGTH_SHORT).show();
                 } else {
                     JSONParser<AddEventToken> reader = new JSONParser<>();
                     String eName = name.getText().toString();
                     String eDescr = descr.getText().toString();
-                    Integer endTime = (tp.getCurrentHour() * 60) + tp.getCurrentMinute();
 
 
-                    AddEventToken aET = new AddEventToken(eName, eDescr, endTime, LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude());
+                    AddEventToken aET = new AddEventToken(eName, eDescr, 0, LoginUser.getInstance().getLatitude(), LoginUser.getInstance().getLongitude());
                     String addEvent = reader.JSONWriter(aET);
 
                     Client.getInstance().WriteMsg(addEvent);

@@ -4,10 +4,6 @@
     tools:context="client.smrtms.com.smrtms_client.activity.MainScreen">
 
     <item
-        android:id="@+id/settings"
-        android:title="Settings">
-    </item>
-    <item
         android:id="@+id/logout"
         android:title="Logout">
     </item>

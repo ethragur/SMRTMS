@@ -1761,8 +1761,8 @@ containing a value of this type.
         public static final int action_mode_bar_stub=0x7f0d0042;
         public static final int action_mode_close_button=0x7f0d0035;
         public static final int activity_chooser_view_content=0x7f0d0036;
-        public static final int addEvent=0x7f0d0085;
-        public static final int addFriend=0x7f0d0084;
+        public static final int addEvent=0x7f0d0084;
+        public static final int addFriend=0x7f0d0083;
         public static final int adjust_height=0x7f0d0017;
         public static final int adjust_width=0x7f0d0018;
         public static final int always=0x7f0d001c;
@@ -1824,7 +1824,7 @@ containing a value of this type.
         public static final int login=0x7f0d005f;
         public static final int login_form=0x7f0d005b;
         public static final int login_progress=0x7f0d005a;
-        public static final int logout=0x7f0d0083;
+        public static final int logout=0x7f0d0082;
         public static final int map=0x7f0d0069;
         public static final int match_parent=0x7f0d002b;
         public static final int message=0x7f0d0076;
@@ -1859,7 +1859,6 @@ containing a value of this type.
         public static final int search_voice_btn=0x7f0d0053;
         public static final int selectionDetails=0x7f0d002a;
         public static final int sendButton=0x7f0d0064;
-        public static final int settings=0x7f0d0082;
         public static final int shortcut=0x7f0d003f;
         public static final int showCustom=0x7f0d000f;
         public static final int showHome=0x7f0d0010;

@@ -489,8 +489,8 @@ int id action_mode_bar 0x7f0d0043
 int id action_mode_bar_stub 0x7f0d0042
 int id action_mode_close_button 0x7f0d0035
 int id activity_chooser_view_content 0x7f0d0036
-int id addEvent 0x7f0d0085
-int id addFriend 0x7f0d0084
+int id addEvent 0x7f0d0084
+int id addFriend 0x7f0d0083
 int id adjust_height 0x7f0d0017
 int id adjust_width 0x7f0d0018
 int id always 0x7f0d001c
@@ -552,7 +552,7 @@ int id list_item 0x7f0d003a
 int id login 0x7f0d005f
 int id login_form 0x7f0d005b
 int id login_progress 0x7f0d005a
-int id logout 0x7f0d0083
+int id logout 0x7f0d0082
 int id map 0x7f0d0069
 int id match_parent 0x7f0d002b
 int id message 0x7f0d0076
@@ -587,7 +587,6 @@ int id search_src_text 0x7f0d004f
 int id search_voice_btn 0x7f0d0053
 int id selectionDetails 0x7f0d002a
 int id sendButton 0x7f0d0064
-int id settings 0x7f0d0082
 int id shortcut 0x7f0d003f
 int id showCustom 0x7f0d000f
 int id showHome 0x7f0d0010
