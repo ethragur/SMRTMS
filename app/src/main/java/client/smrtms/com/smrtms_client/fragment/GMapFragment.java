@@ -65,7 +65,7 @@ public class GMapFragment extends SupportMapFragment implements GoogleMap.OnMyLo
             if(friend.isOnline())
             {
                 mMap.addMarker(new MarkerOptions().position(new LatLng(friend.getLatitude(), friend.getLongitude())).title(friend.getUsername()))
-                        .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.user));
+                        .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.user_map));
                 ;
             }
         }
@@ -74,7 +74,7 @@ public class GMapFragment extends SupportMapFragment implements GoogleMap.OnMyLo
         {
 
             mMap.addMarker(new MarkerOptions().position(new LatLng(event.getLatitude(), event.getLongitude())).title(event.getName()))
-                    .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.andorid));
+                    .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.event));
         }
     }
 
