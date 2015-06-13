@@ -395,12 +395,37 @@ public class DBManager {
 		}
 	}
 
-	public void deleteFriend( String userName, String id ) {
+	public void deleteFriend( String userName, String your_id ) {
 		synchronized (DBManager.class) {
 			//TODO delete Friend
 			//please remeber that you have to check both entries
 			// so ( id1 == sql(id1) && id2 == sql(2) ) || ( id1 == sql(id2) && id2 == sql(1) )
+			
+			Result<Record> result = create.select().from(USER_FRIENDS).fetch();
+			
+			Integer exfriend_id = getUserIDviaName(userName);
+			String exfriend = exfriend_id.toString();
 
+			for (Record r : result) {
+				if ((r.getValue(USER_FRIENDS.FRIENDER_ID).toString().compareTo(your_id) == 0
+						&& r.getValue(USER_FRIENDS.FRIENDEE_ID).toString().compareTo(exfriend) == 0)
+						|| (r.getValue(USER_FRIENDS.FRIENDER_ID).toString().compareTo(exfriend) == 0
+								&& r.getValue(USER_FRIENDS.FRIENDEE_ID).toString().compareTo(your_id) == 0)) {
+					
+					System.out.println("Found the Friendship bond! Destroying it now...");
+					
+					// Delete the friend relation
+					create.delete(USER_FRIENDS)
+							.where(USER_FRIENDS.FRIENDEE_ID.equal(exfriend_id))
+							.and(USER_FRIENDS.FRIENDER_ID.equal(Integer.parseInt(your_id)))
+							.execute();
+					
+					create.delete(USER_FRIENDS)
+							.where(USER_FRIENDS.FRIENDEE_ID.equal(Integer.parseInt(your_id)))
+							.and(USER_FRIENDS.FRIENDER_ID.equal(exfriend_id))
+					.		execute();
+				}
+			}
 		}
 	}
 	

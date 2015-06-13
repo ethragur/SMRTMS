@@ -10,6 +10,7 @@ import org.java_websocket.WebSocket;
 
 import client.smrtms.com.smrtms_client.tokens.AddEventToken;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import client.smrtms.com.smrtms_client.tokens.DeleteFriendToken;
 import client.smrtms.com.smrtms_client.tokens.EventListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendListToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
@@ -106,7 +107,7 @@ public class TokenHandler implements Runnable {
 	    			HandleAttendEventToken( aet );
 	    			break;
 				case "DeleteFriend":
-					DeleteFriendToken dft = (DeleteFriendToken) reader.readJson (message, DeleteFriendToken.class):
+					DeleteFriendToken dft = (DeleteFriendToken) reader.readJson (message, DeleteFriendToken.class);
 					HandleDeleteFriendToken ( dft );
 					break;
 	    		/*case "EventList":
