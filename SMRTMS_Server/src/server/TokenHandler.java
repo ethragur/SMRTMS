@@ -51,7 +51,7 @@ public class TokenHandler implements Runnable {
 	private void sendToken( Token tok, WebSocket connection ) {
 		JSONReader reader = new JSONReader<Token>();
 		String answer = reader.JSONWriter( tok );
-		connection.send( answer );
+		connection.send(answer);
 	}
 	
 	public void run() {
@@ -105,6 +105,10 @@ public class TokenHandler implements Runnable {
 	    			JoinEventToken aet = (JoinEventToken)reader.readJson( message, JoinEventToken.class);
 	    			HandleAttendEventToken( aet );
 	    			break;
+				case "DeleteFriend":
+					DeleteFriendToken dft = (DeleteFriendToken) reader.readJson (message, DeleteFriendToken.class):
+					HandleDeleteFriendToken ( dft );
+					break;
 	    		/*case "EventList":
 	    			EventListToken get = (EventListToken)reader.readJson( message, EventListToken.class);
 	    			HandleEvenListToken( get, connection );
@@ -135,7 +139,7 @@ public class TokenHandler implements Runnable {
     }
     
     private void HandleRegistToken ( RegistrationToken reg, WebSocket connection ) {
-    	authman.RegisterUser( reg );
+    	authman.RegisterUser(reg);
     	reg.result = true;
     	
     	// Write ID back
@@ -183,11 +187,11 @@ public class TokenHandler implements Runnable {
     }
     
     private void HandleCreateEventToken( AddEventToken cet ) {
-    	dbm.createevent( cet );
+    	dbm.createevent(cet);
     }
     
     private void HandleAttendEventToken( JoinEventToken elt ) {
-    	dbm.attendevent( elt.EventName );
+    	dbm.attendevent(elt.EventName);
     }
 	
 	private void HandleEvenListToken( FriendListToken flt, WebSocket connection ) {
@@ -196,6 +200,11 @@ public class TokenHandler implements Runnable {
 		EventListToken elt = new EventListToken(flt.id);
 		elt.eventList = events;
 		
-		sendToken( elt, connection );
+		sendToken(elt, connection);
+	}
+
+	private void HandleDeleteFriendToken( DeleteFriendToken dft )
+	{
+		dbm.deleteFriend(dft.name, dft.id);
 	}
 }

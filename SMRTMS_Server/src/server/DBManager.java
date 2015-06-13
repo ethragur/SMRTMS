@@ -394,6 +394,15 @@ public class DBManager {
 			}
 		}
 	}
+
+	public void deleteFriend( String userName, String id ) {
+		synchronized (DBManager.class) {
+			//TODO delete Friend
+			//please remeber that you have to check both entries
+			// so ( id1 == sql(id1) && id2 == sql(2) ) || ( id1 == sql(id2) && id2 == sql(1) )
+
+		}
+	}
 	
 	public ArrayList<ServerClasses.Event> getEvents( String UserID ) {
 		synchronized (DBManager.class) {
