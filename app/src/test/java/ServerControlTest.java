@@ -19,7 +19,6 @@ public class ServerControlTest extends TestCase
    @Test
    public void testMethodExecutions()
    {
-
         testController = Mockito.mock(ServerControl.class);
         AuthenticationToken testAToken = new AuthenticationToken("test@test.com", "test");
 
@@ -32,9 +31,11 @@ public class ServerControlTest extends TestCase
 
         Thread x = new Thread(testController);
         x.start();
-
-
-
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e)
+        {}
         //was method called Thread called
         Mockito.verify(testController, Mockito.times(1)).run();
         //check if thread is finished
