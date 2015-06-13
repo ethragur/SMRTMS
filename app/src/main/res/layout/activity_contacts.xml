@@ -20,11 +20,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/adduser"
+        android:background="@android:color/transparent"
+        android:id="@+id/imageButton"
+        android:onClick="addFriend"
+        android:layout_marginLeft="210dp"
+        android:layout_marginStart="210dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@android:color/transparent"
-        android:layout_alignParentStart="true"
-        android:id="@+id/imageButton"
-        android:onClick="addFriend" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
