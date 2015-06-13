@@ -426,7 +426,10 @@ public class DBManager {
 
 				newevent.setDistance(dist);
 
-				events.add(newevent);
+				if(dist < 4.0)
+				{
+					events.add(newevent);
+				}
 			}
 
 			return events;
