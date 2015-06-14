@@ -72,12 +72,12 @@ public class ServerControl implements Runnable
             LoginUser.getInstance().setID(authT.id);
             LoginUser.getInstance().setUsername(authT.email);
             LoginUser.getInstance().setIsLogin(true);
-            Log.d("Login", "Login Successful");
+           // Log.d("Login", "Login Successful");
 
         }
         else
         {
-            Log.d("Login", "Wrong Username or Password");
+          //  Log.d("Login", "Wrong Username or Password");
             LoginUser.getInstance().setIsLogin(false);
         }
         gotAuthToken = true;
