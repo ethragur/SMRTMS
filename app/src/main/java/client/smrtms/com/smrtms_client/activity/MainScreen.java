@@ -27,6 +27,7 @@ import client.smrtms.com.smrtms_client.controller.Client;
 import client.smrtms.com.smrtms_client.controller.JSONParser;
 import client.smrtms.com.smrtms_client.controller.LoginUser;
 import client.smrtms.com.smrtms_client.R;
+import client.smrtms.com.smrtms_client.controller.ServerControl;
 import client.smrtms.com.smrtms_client.fragment.TabsFragment;
 import client.smrtms.com.smrtms_client.tokens.AddEventToken;
 import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
@@ -68,8 +69,9 @@ public class MainScreen extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        if (id == R.id.logout) {
+        if (id == R.id.refresh) {
+            refresh();
+        } else if (id == R.id.logout) {
             logoutDialog();
             return true;
         } else if (id == R.id.addFriend) {
@@ -162,6 +164,36 @@ public class MainScreen extends ActionBarActivity {
         Intent myIntent = new Intent(MainScreen.this, MainActivity.class);
         MainScreen.this.startActivity(myIntent);
     }*/
+
+
+    //asks for a UserData and Restarts the activity, Timeouts after 10sec
+    private void refresh()
+    {
+        ServerControl.gotNewFriendList = false;
+        if(LoginUser.getInstance() != null)
+        {
+            LoginUser.getInstance().serverTask.getNewFriendList();
+        }
+        int i = 0;
+        while(!ServerControl.gotNewFriendList)
+        {
+            if(i >= 100)
+            {
+                Toast.makeText(this, "Something went wrong, Server might be offline", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            i++;
+        }
+        Intent refresh = new Intent(this, MainScreen.class);
+        this.startActivity(refresh);
+        this.finish();
+    }
+
 
     public void addFriend(View view)
     {

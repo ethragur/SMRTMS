@@ -2,6 +2,8 @@ package client.smrtms.com.smrtms_client.controller;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import client.smrtms.com.smrtms_client.activity.RegisterActivity;
 import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
 import client.smrtms.com.smrtms_client.tokens.EventListToken;
@@ -100,15 +102,17 @@ public class ServerControl implements Runnable
     {
         JSONParser<FriendListToken> readerFL = new JSONParser<>();
         FriendListToken friendT = readerFL.readJson(input, FriendListToken.class);
-        for(User n : friendT.userList)
+        if(LoginUser.getInstance() != null)
         {
-            if(! (n.getID().startsWith(LoginUser.getInstance().getID())))
-            {
-                LoginUser.getInstance().addFriend(n);
-            }
+            LoginUser.getInstance().setFriendList(new ArrayList<User>());
+            for (User n : friendT.userList) {
+                if (!(n.getID().startsWith(LoginUser.getInstance().getID()))) {
+                    LoginUser.getInstance().addFriend(n);
+                }
 
+            }
+            gotNewFriendList = true;
         }
-        gotNewFriendList = true;
     }
 
     private void handleFriendReq()

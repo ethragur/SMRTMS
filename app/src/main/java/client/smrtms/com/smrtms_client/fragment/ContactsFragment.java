@@ -1,6 +1,7 @@
 package client.smrtms.com.smrtms_client.fragment;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,8 +97,18 @@ public class ContactsFragment extends Fragment {
 
     private void setUpFriendList()
     {
-        for(User friend: LoginUser.getInstance().getFriendList()) {
-            friend.setDistance(Math.round(LoginUser.getInstance().getServerTask().getGpsTracker().calculateDistance(friend.getLatitude(), friend.getLongitude()) * 1000) / 1000.0);
+        for(User friend: LoginUser.getInstance().getFriendList())
+        {
+            float[] result = new float[5];
+
+            Location.distanceBetween(LoginUser.getInstance().getLatitude(),
+                    LoginUser.getInstance().getLongitude(),
+                    friend.getLatitude(),
+                    friend.getLongitude(),
+                    result);
+            friend.setDistance((double) Math.round(result[0] * 10) / 10);
+
+
             users.add(friend);
         }
 

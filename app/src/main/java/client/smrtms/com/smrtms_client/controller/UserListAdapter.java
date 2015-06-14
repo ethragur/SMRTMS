@@ -51,7 +51,7 @@ public class UserListAdapter extends ArrayAdapter<User>{
         viewHolder.name.setText(item.getUsername());
         if(item.isOnline())
         {
-            viewHolder.distance.setText("Distance: " + item.getDistance());
+            viewHolder.distance.setText("Distance: " + item.getDistance().toString() + "m");
         }
         else
         {

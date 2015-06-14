@@ -79,17 +79,8 @@ public class LoginUser extends User
         return friendList;
     }
 
-    public void addFriend(User newFriend) {
-        for(User n : friendList)
-        {
-            if(n.getID().equals(newFriend.getID()))
-            {
-                n.setLatitude(newFriend.getLatitude());
-                n.setLongitude(newFriend.getLongitude());
-                n.setOnline(newFriend.isOnline());
-                return;
-            }
-        }
+    public void addFriend(User newFriend)
+    {
         friendList.add(newFriend);
     }
 
