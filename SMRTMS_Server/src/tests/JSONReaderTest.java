@@ -16,6 +16,7 @@ public class JSONReaderTest {
     public void testWriter()
     {
 		Token n = new Token("token", "0");
+        n.id = "0";
 		JSONReader<Token> tokenReader = new JSONReader<Token>();
         String t = tokenReader.JSONWriter(n);
         assertEquals(new String("{\"sTag\":\"token\",\"id\":\"0\"}"), t);
