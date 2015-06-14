@@ -6,6 +6,21 @@ targetCompatibility = 1.7
 sourceSets.main.java.srcDirs = ['.']
 libsDirName = '../repo'
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ["."]
+            exclude "./src/test/java*"
+        }
+    }
+    test {
+        java {
+            srcDirs = ["./src/test/java"]
+            include "*"
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -22,6 +37,12 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
     runtime 'com.h2database:h2:1.4.177'
     testCompile 'junit:junit:4.12'
+}
+
+test {
+    testLogging {
+        events 'started', 'passed'
+    }
 }
 
 
