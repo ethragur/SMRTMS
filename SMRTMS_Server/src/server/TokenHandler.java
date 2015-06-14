@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import ServerClasses.*;
+import server.ServerClasses.*;
 
 import org.java_websocket.WebSocket;
 
-import client.smrtms.com.smrtms_client.tokens.AddEventToken;
-import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
-import client.smrtms.com.smrtms_client.tokens.DeleteFriendToken;
-import client.smrtms.com.smrtms_client.tokens.EventListToken;
-import client.smrtms.com.smrtms_client.tokens.FriendListToken;
-import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
-import client.smrtms.com.smrtms_client.tokens.JoinEventToken;
-import client.smrtms.com.smrtms_client.tokens.LogoutToken;
-import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
-import client.smrtms.com.smrtms_client.tokens.Token;
-import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
+import server.tokens.AddEventToken;
+import server.tokens.AuthenticationToken;
+import server.tokens.DeleteFriendToken;
+import server.tokens.EventListToken;
+import server.tokens.FriendListToken;
+import server.tokens.FriendReqToken;
+import server.tokens.JoinEventToken;
+import server.tokens.LogoutToken;
+import server.tokens.RegistrationToken;
+import server.tokens.Token;
+import server.tokens.UserUpdateToken;
 
 public class TokenHandler implements Runnable {
 	

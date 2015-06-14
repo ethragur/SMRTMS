@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.jooq.tools.json.JSONParser;
 import org.junit.Test;
 
-import client.smrtms.com.smrtms_client.tokens.Token;
-import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
-import ServerClasses.User;
+import server.tokens.Token;
+import server.UserUpdateToken;
+import server.ServerClasses.User;
 import server.JSONReader;
 
 public class JSONReaderTest {

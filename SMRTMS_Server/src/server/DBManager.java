@@ -27,11 +27,11 @@ import org.jooq.impl.DSL;
 import org.jooq.util.derby.sys.Sys;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
-import ServerClasses.User;
-import client.smrtms.com.smrtms_client.tokens.AddEventToken;
-import client.smrtms.com.smrtms_client.tokens.FriendReqToken;
-import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
-import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
+import server.ServerClasses.User;
+import server.tokens.AddEventToken;
+import server.tokens.FriendReqToken;
+import server.tokens.RegistrationToken;
+import server.tokens.UserUpdateToken;
 
 public class DBManager {
 	String userName = "root";

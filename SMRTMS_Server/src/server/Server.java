@@ -27,11 +27,11 @@ import org.jooq.tools.json.JSONObject;
 import org.jooq.tools.json.JSONParser;
 import org.jooq.util.derby.sys.Sys;
 
-import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
-import client.smrtms.com.smrtms_client.tokens.LogoutToken;
-import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
-import client.smrtms.com.smrtms_client.tokens.Token;
-import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
+import server.tokens.AuthenticationToken;
+import server.tokens.LogoutToken;
+import server.tokens.RegistrationToken;
+import server.tokens.Token;
+import server.tokens.UserUpdateToken;
 import server.AuthenticationManager;
 import server.DBManager;
 

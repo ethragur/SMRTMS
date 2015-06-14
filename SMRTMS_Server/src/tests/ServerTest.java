@@ -18,8 +18,8 @@ import org.java_websocket.server.WebSocketServer;
 import org.jooq.tools.json.JSONParser;
 import org.junit.Test;
 
-import client.smrtms.com.smrtms_client.tokens.LogoutToken;
-import client.smrtms.com.smrtms_client.tokens.Token;
+import server.tokens.LogoutToken;
+import server.tokens.Token;
 import server.JSONReader;
 import server.Server;
 import server.TokenHandler;

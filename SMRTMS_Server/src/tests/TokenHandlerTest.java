@@ -14,7 +14,7 @@ import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ClientHandshakeBuilder;
 import org.junit.Test;
 
-import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
+import server.tokens.AuthenticationToken;
 import server.TokenHandler;
 
 public class TokenHandlerTest {

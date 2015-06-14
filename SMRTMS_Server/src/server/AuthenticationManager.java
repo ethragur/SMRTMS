@@ -3,9 +3,9 @@ package server;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import client.smrtms.com.smrtms_client.tokens.AuthenticationToken;
-import client.smrtms.com.smrtms_client.tokens.RegistrationToken;
-import client.smrtms.com.smrtms_client.tokens.UserUpdateToken;
+import server.tokens.AuthenticationToken;
+import server.tokens.RegistrationToken;
+import server.tokens.UserUpdateToken;
 import server.DBManager;
 
 public class AuthenticationManager {
