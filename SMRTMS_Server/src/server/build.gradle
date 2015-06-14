@@ -22,7 +22,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
     runtime 'com.h2database:h2:1.4.177'
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.9.5' 
 }
 
 
