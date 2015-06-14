@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.lang.Exception;
+import java.lang.Thread;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.NotYetConnectedException;
@@ -20,27 +22,37 @@ import server.DBManager;
 
 public class TokenHandlerTest {
 	
-	
+	@Mock
+	WebSocket connection;
 	@Test
 	public void tesTokenHandling() {
 	//	DBManager dbm = Mockito.mock(DBManager.class);
 		
 		try {
-		TokenHandler tok = new TokenHandler();
-		
-		String result;
-		
-		AuthenticationToken auth = new AuthenticationToken("test@gmail.com", "123");
-		result = tok.ParseToken(auth, true);
+			connection = Mockito.mock(WebSocket.class);
+
+			String result;
+
+			AuthenticationToken auth = new AuthenticationToken("test@gmail.com", "123");
+			JSONReader<AuthenticationToken> tokenReader = new JSONReader<AuthenticationToken>();
+			String t = tokenReader.JSONWriter(auth);
+			TokenHandler tok = new TokenHandler(auth, t, connection);
+			Thread x = new Thread(tok);
+			x.start();
+			assertTrue(x.isAlive());
+			Thread.sleep(1000);
+			assertFalse(x.isAlive());
+
 		}
 		catch (Exception e) {
 
 		}	
-		
+
 		
 		
 		//fail("Not yet implemented");
-		assertTrue(true);
 	}
+
+
 
 }
