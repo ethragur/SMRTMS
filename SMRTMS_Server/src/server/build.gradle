@@ -3,8 +3,20 @@ apply plugin: 'java'
 version = '0.1'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
-sourceSets.main.java.srcDirs = ['.']
 libsDirName = '../repo'
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["."]
+        }
+    }
+    test {
+        java {
+            srcDirs = ["../tests"]
+        }
+    }
+}
 
 repositories {
     mavenCentral()
@@ -21,7 +33,13 @@ dependencies {
     compile 'mysql:mysql-connector-java:+'
     compile 'com.google.code.gson:gson:2.3.1'
     runtime 'com.h2database:h2:1.4.177'
-    testCompile 'junit:junit:[4,)'
+    testCompile 'junit:junit:4.12'
+}
+
+test {
+    testLogging {
+        events 'started', 'passed'
+    }
 }
 
 
