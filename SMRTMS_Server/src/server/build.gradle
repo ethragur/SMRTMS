@@ -109,7 +109,7 @@ jar {
 
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Implementation-Title': 'Server for the TreasureHunt App',
+        attributes 'Implementation-Title': 'Server for SEPM',
                 'Implementation-Version': version,
                 'Main-Class':  'server.Main'
     }

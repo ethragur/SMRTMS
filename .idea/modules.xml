@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SMRTMS.iml" filepath="$PROJECT_DIR$/SMRTMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SMRTMS_Server/src/server/SMRTMS_Server_src_server.iml" filepath="$PROJECT_DIR$/SMRTMS_Server/src/server/SMRTMS_Server_src_server.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
