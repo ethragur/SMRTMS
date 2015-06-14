@@ -6,7 +6,7 @@ import org.jooq.tools.json.JSONParser;
 import org.junit.Test;
 
 import server.tokens.Token;
-import server.UserUpdateToken;
+import server.tokens.UserUpdateToken;
 import server.ServerClasses.User;
 import server.JSONReader;
 
