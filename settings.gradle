@@ -1,2 +1,0 @@
-include ':app'
-include ':SMRTMS_Server/src/server'
