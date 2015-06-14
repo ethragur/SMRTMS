@@ -20,6 +20,7 @@ import org.java_websocket.handshake.ClientHandshakeBuilder;
 import org.junit.Test;
 
 import server.tokens.AuthenticationToken;
+import server.JSONReader;
 import server.TokenHandler;
 import server.DBManager;
 
@@ -29,7 +30,6 @@ public class TokenHandlerTest {
 	WebSocket connection;
 	@Test
 	public void tesTokenHandling() {
-	//	DBManager dbm = Mockito.mock(DBManager.class);
 		
 		try {
 			connection = Mockito.mock(WebSocket.class);
@@ -50,10 +50,6 @@ public class TokenHandlerTest {
 		catch (Exception e) {
 
 		}	
-
-		
-		
-		//fail("Not yet implemented");
 	}
 
 
