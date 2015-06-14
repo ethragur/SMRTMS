@@ -10,7 +10,7 @@ public class JoinEventToken extends Token
     String EventName;
     public JoinEventToken(String EventName)
     {
-        super("JoinEvent", LoginUser.getInstance().getID());
+        super("AttendEvent", LoginUser.getInstance().getID());
         this.EventName = EventName;
     }
 

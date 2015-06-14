@@ -44,12 +44,12 @@ public class LoginUser extends User
 
     public LoginUser(String Username, String ID, Context Context)
     {
-        super(Username, ID, new Double(0), new Double(0));
+        super(Username, ID, 0.0, 0.0);
         isLogin = false;
         mContext = Context;
-        friendList = new ArrayList<User>();
-        eventList = new ArrayList<Event>();
-        pendingFriendReq = new LinkedList<FriendReqToken>();
+        friendList = new ArrayList<>();
+        eventList = new ArrayList<>();
+        pendingFriendReq = new LinkedList<>();
         serverTask = new ServerTask(Context);
     }
 
@@ -64,12 +64,6 @@ public class LoginUser extends User
 
     public static LoginUser getInstance()
     {
-        if(inst == null)
-        {
-            //ToDo: throw exception when Singleton not Initialized
-            //throw new NullPointerException();
-        }
-
         return inst;
     }
     // get current GPS Data and send it to the server
