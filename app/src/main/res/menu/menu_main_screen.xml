@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="client.smrtms.com.smrtms_client.activity.MainScreen">
+
+    <item
+        android:id="@+id/refresh"
+        android:title="Refresh">
+    </item>
+    <item
+        android:id="@+id/logout"
+        android:title="Logout">
+    </item>
+    <item
+        android:id="@+id/addFriend"
+        android:title="Add Friend">
+    </item>
+    <item
+        android:id="@+id/addEvent"
+        android:title="New Event">
+    </item>
+</menu>
