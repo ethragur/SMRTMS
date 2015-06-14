@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 import javax.sound.sampled.ReverbType;
 
-import jooqdb.tables.Event;
-import jooqdb.tables.FriendRequestStash;
-import jooqdb.tables.UserFriends;
+import  jooqdb.tables.Event;
+import  jooqdb.tables.FriendRequestStash;
+import  jooqdb.tables.UserFriends;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -430,15 +430,15 @@ public class DBManager {
 		}
 	}
 	
-	public ArrayList<ServerClasses.Event> getEvents( String UserID ) {
+	public ArrayList<server.ServerClasses.Event> getEvents( String UserID ) {
 		synchronized (DBManager.class) {
-			ArrayList<ServerClasses.Event> events = new ArrayList<ServerClasses.Event>();
+			ArrayList<server.ServerClasses.Event> events = new ArrayList<server.ServerClasses.Event>();
 
 			Result<Record> result = create.select().from(EVENT).fetch();
 
 			System.out.println(("Grabbing all the events and packing em up....."));
 			for (Record r : result) {
-				ServerClasses.Event newevent = new ServerClasses.Event();
+				server.ServerClasses.Event newevent = new server.ServerClasses.Event();
 				newevent.setName(r.getValue(EVENT.NAME));
 				newevent.setDescription(r.getValue(EVENT.DESCRIPTION));
 				newevent.setEndDate(r.getValue(EVENT.TIME));

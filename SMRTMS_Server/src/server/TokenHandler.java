@@ -196,7 +196,7 @@ public class TokenHandler implements Runnable {
     }
 	
 	private void HandleEvenListToken( FriendListToken flt, WebSocket connection ) {
-		ArrayList<ServerClasses.Event> events = dbm.getEvents( flt.id );
+		ArrayList<server.ServerClasses.Event> events = dbm.getEvents( flt.id );
 		
 		EventListToken elt = new EventListToken(flt.id);
 		elt.eventList = events;
