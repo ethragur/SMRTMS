@@ -9,7 +9,7 @@ sourceSets {
     main {
         java {
             srcDirs = ["."]
-            exclude "./src/test/java*"
+            exclude "./src/test/java/*"
         }
     }
     test {
