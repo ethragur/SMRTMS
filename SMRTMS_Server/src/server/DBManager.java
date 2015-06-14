@@ -371,6 +371,7 @@ public class DBManager {
 					.set(EVENT.TIME, aet.toEnd)
 					.set(EVENT.LATITUDE, aet.Latitude)
 					.set(EVENT.LONGITUDE, aet.Longitude)
+					.set(EVENT.ATTENDEES, 0)
 					.execute();
 
 			System.out.println("==== Event added to the DB! ====");
