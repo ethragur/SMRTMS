@@ -21,9 +21,11 @@ import org.junit.Test;
 import server.DBManager;
 import server.tokens.AddEventToken;
 import server.tokens.RegistrationToken;
+import server.tokens.UserUpdateToken;
 import static jooqdb.Tables.USER;
 import static jooqdb.Tables.USER_FRIENDS;
 import static jooqdb.Tables.FRIEND_REQUEST_STASH;
+import static jooqdb.Tables.EVENT;
 
 
 public class DBManagerTest {
@@ -65,6 +67,10 @@ public class DBManagerTest {
 	        	mock[0] = new MockResult(1, create.newResult(USER));
 	        }
 	        
+	        else if (sql.toUpperCase().startsWith("DELETE")) {
+	        	mock[0] = new MockResult(1, create.newResult(USER));
+	        }
+	        
 	        // You can detect batch statements easily
 	        else if (ctx.batch()) {
 	            // [...]
@@ -92,11 +98,14 @@ public class DBManagerTest {
 	@Test
 	public void testUpdateUser() {
 		
-		// Execute queries transparently, with the above DSLContext:
-		Result<Record> result = create.select().from(USER).fetch();
+		UserUpdateToken t = new UserUpdateToken(16.23534, 11.23454);
+		t.id = "1";
 		
-		//fail("Not yet implemented");
-		assertTrue(true);
+		create.update(USER)
+			.set(USER.LONGITUDE, t.Longitude)
+			.set(USER.LATITUDE, t.Latitude)
+			.where(USER.ID.equal(Integer.parseInt(t.id)))
+			.execute();
 	}
 	
 	@Test
@@ -122,17 +131,12 @@ public class DBManagerTest {
 	}
 	
 	@Test
-	public void testDeletetUser() {
-		
-	}
-	
-	@Test
 	public void testUpdateEvent() {
 		
 		String Eventname = "Test Event";
 		
 		create.update(EVENT)
-		.set(EVENT.ATTENDEES, r.getValue(EVENT.ATTENDEES) + 1)
+		.set(EVENT.ATTENDEES, 2)
 		.where(EVENT.NAME.equal(Eventname))
 		.execute();
 
@@ -158,21 +162,70 @@ public class DBManagerTest {
 	
 	@Test
 	public void testDeletetEvent() {
+		String Eventname = "Test Event";
 		
+		create.delete(EVENT)
+			.where(EVENT.NAME.equal(Eventname))
+			.execute();
 	}
 	
 	@Test
 	public void testCreateFriends() {
 		
+		int friender_ID = 78;
+		int friendee_ID = 87;
+		
+		byte nope = 0;
+		
+		create.insertInto(USER_FRIENDS)
+			.set(USER_FRIENDS.FRIENDER_ID, friender_ID)
+			.set(USER_FRIENDS.FRIENDEE_ID, friendee_ID)
+			.set(USER_FRIENDS.TRACKING_FLAG, nope)
+			.execute();
+	}
+	
+	@Test
+	public void testDeleteFriends() {
+		
+		int exfriend_id = 5;
+		int your_id = 19;
+		
+		// Delete the friend relation
+		create.delete(USER_FRIENDS)
+				.where(USER_FRIENDS.FRIENDEE_ID.equal(exfriend_id))
+				.and(USER_FRIENDS.FRIENDER_ID.equal(your_id))
+				.execute();
+		
+		create.delete(USER_FRIENDS)
+				.where(USER_FRIENDS.FRIENDEE_ID.equal(your_id))
+				.and(USER_FRIENDS.FRIENDER_ID.equal(exfriend_id))
+		.		execute();
 	}
 	
 	@Test
 	public void testInsertFriendStash() {
-		
+		// Get User_ID from friender
+		int friender_ID = 8;
+		// Get User_ID from friendee
+		int friendee_ID = 18;
+
+		create.insertInto(FRIEND_REQUEST_STASH)
+				.set(FRIEND_REQUEST_STASH.FRIENDER_ID, friender_ID)
+				.set(FRIEND_REQUEST_STASH.FRIENDEE_ID, friendee_ID)
+				.execute();
+
 	}
 	
 	@Test
 	public void testDeletetFriendStash() {
+		
+		int friend_id = 4;
+		int your_id = 293;
+		
+		create.delete(FRIEND_REQUEST_STASH)
+		.where(FRIEND_REQUEST_STASH.FRIENDER_ID.equal(your_id))
+		.and(FRIEND_REQUEST_STASH.FRIENDEE_ID.equal(friend_id))
+		.execute();
 		
 	}
 	

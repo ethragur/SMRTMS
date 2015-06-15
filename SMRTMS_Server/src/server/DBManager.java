@@ -35,7 +35,7 @@ import server.tokens.UserUpdateToken;
 
 public class DBManager {
 	String userName = "root";
-	String password = ""; //"sepmLoot";
+	String password = "sepmLoot";
 	String url = "jdbc:mysql://localhost:3306/SMRTMS";
 	
 	Connection conn = null;
