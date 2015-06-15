@@ -18,6 +18,8 @@ import org.jooq.tools.jdbc.MockResult;
 import org.junit.Before;
 import org.junit.Test;
 
+import server.DBManager;
+import server.tokens.AddEventToken;
 import server.tokens.RegistrationToken;
 import static jooqdb.Tables.USER;
 import static jooqdb.Tables.USER_FRIENDS;
@@ -56,6 +58,10 @@ public class DBManagerTest {
 	        }
 	        
 	        else if (sql.toUpperCase().startsWith("INSERT")) {
+	        	mock[0] = new MockResult(1, create.newResult(USER));
+	        }
+	        
+	        else if (sql.toUpperCase().startsWith("UPDATE")) {
 	        	mock[0] = new MockResult(1, create.newResult(USER));
 	        }
 	        
@@ -107,7 +113,7 @@ public class DBManagerTest {
 				//.set(USER.ID, Integer.parseInt(t.sId))
 				.set(USER.USERNAME, t.username)
 				.set(USER.EMAIL, t.email)
-				.set(USER.PASSWORD, /*hashpw*/ t.password)
+				.set(USER.PASSWORD, t.password)
 				.set(USER.AVATAR, "nicolascage.png")
 				.set(USER.ISONLINE, nope)
 				.execute();
@@ -122,11 +128,31 @@ public class DBManagerTest {
 	
 	@Test
 	public void testUpdateEvent() {
+		
+		String Eventname = "Test Event";
+		
+		create.update(EVENT)
+		.set(EVENT.ATTENDEES, r.getValue(EVENT.ATTENDEES) + 1)
+		.where(EVENT.NAME.equal(Eventname))
+		.execute();
 
 	}
 	
 	@Test
 	public void testInsertEvent() {
+		
+		AddEventToken aet = new AddEventToken("Test Event", "This is a test event", 100, 14.22445, 18.23553);
+
+		create.insertInto(EVENT)
+			.set(EVENT.DESCRIPTION, aet.description)
+			.set(EVENT.NAME, aet.name)
+			.set(EVENT.TIME, aet.toEnd)
+			.set(EVENT.LATITUDE, aet.Latitude)
+			.set(EVENT.LONGITUDE, aet.Longitude)
+			.set(EVENT.ATTENDEES, 0)
+			.execute();
+
+		System.out.println("New Event created!");
 		
 	}
 	
@@ -148,6 +174,14 @@ public class DBManagerTest {
 	@Test
 	public void testDeletetFriendStash() {
 		
+	}
+	
+	@Test
+	public void testCalculateDistance() {
+		DBManager dbm = new DBManager();
+		
+		 assertTrue(dbm.calculateDistance(47.266667, 11.383333, 47.273333, 11.241389) > 10 &&
+	                dbm.calculateDistance(47.266667, 11.383333, 47.273333, 11.241389) < 12);
 	}
 	
 
